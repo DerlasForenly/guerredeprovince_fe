@@ -1,5 +1,5 @@
-import axios from "axios"
-import Cookies from "js-cookie"
+import axios from "axios";
+import Cookies from "js-cookie";
 import { SHOW_LOADER, HIDE_LOADER, SIGN_IN, SHOW_ERROR_MESSAGE, HIDE_ERROR_MESSAGE, ME } from "./types";
 
 export function showLoader() {
