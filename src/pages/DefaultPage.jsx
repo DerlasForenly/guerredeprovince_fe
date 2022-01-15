@@ -31,7 +31,7 @@ function DefaultPage(props) {
 			props.hideLoader()
 			navigate('/sign-in')
 		})
-	}, [navigate])
+	}, [props, navigate])
 
   return props.loading ? <div></div> : 
 	<Col>
