@@ -49,12 +49,14 @@ const SignIn = (props) => {
 
 	return <Form onSubmit={submitHandler}>
 		<Input
+			required
 			type="email"
 			placeholder="email"
 			name="email"
 			onChange={changeInputHandler}
 		></Input>
 		<Input
+			required
 			type="password"
 			placeholder="password"
 			name="password"
