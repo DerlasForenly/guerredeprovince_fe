@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 import ErrorMessage from "./ErrorMessage";
 import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from "../redux/actions";
-import { Button, Form, Input, Label, Row } from "../components/Styles";
+import { Button, Form, Input, Row } from "../components/Styles";
 
 function StartWorkForm(props) {
 	const [state, setState] = useState({
