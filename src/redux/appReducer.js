@@ -2,6 +2,7 @@ import { HIDE_LOADER, SHOW_LOADER } from "./types"
 
 const initialState = {
 	loading: false,
+	stability: true,
 }
 
 export const appReducer = (state = initialState, action) => {

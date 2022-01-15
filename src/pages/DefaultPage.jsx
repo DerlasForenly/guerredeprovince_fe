@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-//import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import { me, hideLoader, showLoader } from "../redux/actions";
 
@@ -11,11 +11,11 @@ import LeftNavigationPanel from "../components/LeftNavigationPanel"
 import UpperNavigationPanel from "../components/UpperNavigationPanel"
 import { connect } from "react-redux";
 
-function DefaultPage(props) {
-	//const navigate = useNavigate()
+function DefaultPage({showLoader, hideLoader, me, loading, element}) {
+	const navigate = useNavigate()
 
 	useEffect(() => {
-		props.showLoader()
+		showLoader()
 		axios({
 			method: 'get',
 			url: `${process.env.REACT_APP_API}/api/auth/me`,
@@ -25,15 +25,15 @@ function DefaultPage(props) {
 		}).then((response) => {
 			console.log(response.data)
 			
-			props.me(response.data)
-			props.hideLoader()
+			me(response.data)
+			hideLoader()
 		}).catch((error) => {
-			props.hideLoader()
-			//navigate('/sign-in')
+			hideLoader()
+			navigate('/sign-in')
 		})
-	}, [props])
+	}, [me, hideLoader, showLoader, navigate])
 
-  return props.loading ? <div></div> : 
+  return loading ? <div></div> : 
 	<Col>
 		<UpperRow>
 			<UserPanel></UserPanel>
@@ -41,7 +41,7 @@ function DefaultPage(props) {
 		</UpperRow>
 		<BottomRow>
 			<LeftNavigationPanel></LeftNavigationPanel>
-			<Element>{props.element}</Element>
+			<Element>{element}</Element>
 		</BottomRow>
 	</Col>
 }
@@ -54,7 +54,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
 	return {
-		loading: state.app.loading
+		loading: state.app.loading,
+		stability: state.app.stability
 	}
 }
 
