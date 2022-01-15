@@ -25,7 +25,7 @@ function StartWorkForm(props) {
 
 		axios({
 			method: 'POST',
-			url: "http://localhost:8000/api/actions/work",
+			url: `${process.env.REACT_APP_API}/api/actions/work`,
 			data: {
 				time: state.minutes
 			},

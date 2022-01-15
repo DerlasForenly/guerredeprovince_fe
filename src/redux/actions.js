@@ -34,7 +34,7 @@ export function signIn(credentials) {
 
 		axios({
 			method: 'POST',
-			url: "http://localhost:8000/api/auth/login",
+			url: `${process.env.REACT_APP_API}/api/auth/login`,
 			data: credentials
 		}).then((response) => {
 			console.log(response.data)
@@ -71,7 +71,7 @@ export function meAsync(action) {
 
 		axios({
 			method: 'get',
-			url: "http://localhost:8000/api/auth/me",
+			url: `${process.env.REACT_APP_API}/api/auth/me`,
 			headers: {
 				Authorization: `Bearer` + Cookies.get('access_token')
 			}

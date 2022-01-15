@@ -18,7 +18,7 @@ function DefaultPage(props) {
 		props.showLoader()
 		axios({
 			method: 'get',
-			url: "http://localhost:8000/api/auth/me",
+			url: `${process.env.REACT_APP_API}/api/auth/me`,
 			headers: {
 				Authorization: `Bearer` + Cookies.get('access_token')
 			}
@@ -33,7 +33,8 @@ function DefaultPage(props) {
 		})
 	}, [props, navigate])
 
-  return <Col>
+  return props.loading ? <div></div> : 
+	<Col>
 		<UpperRow>
 			<UserPanel></UserPanel>
 			<UpperNavigationPanel></UpperNavigationPanel>
@@ -51,7 +52,13 @@ const mapDispatchToProps = {
 	me,
 }
 
-export default connect(null, mapDispatchToProps)(DefaultPage)
+const mapStateToProps = state => {
+	return {
+		loading: state.app.loading
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultPage)
 
 const Col = styled.div`
 	display: flex;

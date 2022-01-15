@@ -30,7 +30,7 @@ const SignIn = (props) => {
 
 		axios({
 			method: 'POST',
-			url: "http://localhost:8000/api/auth/login",
+			url: `${process.env.REACT_APP_API}/api/auth/login`,
 			data: {
 				email: state.email,
 				password: state.password,
