@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 import { me, hideLoader, showLoader } from "../redux/actions";
 
@@ -12,7 +12,7 @@ import UpperNavigationPanel from "../components/UpperNavigationPanel"
 import { connect } from "react-redux";
 
 function DefaultPage(props) {
-	const navigate = useNavigate()
+	//const navigate = useNavigate()
 
 	useEffect(() => {
 		props.showLoader()
@@ -29,9 +29,9 @@ function DefaultPage(props) {
 			props.hideLoader()
 		}).catch((error) => {
 			props.hideLoader()
-			navigate('/sign-in')
+			//navigate('/sign-in')
 		})
-	}, [props, navigate])
+	}, [props])
 
   return props.loading ? <div></div> : 
 	<Col>
