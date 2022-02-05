@@ -12,8 +12,7 @@ import WorldMapPage from "./pages/WorldMapPage";
 import ProfilePage from "./pages/ProfilePage";
 import RedirectPage from "./pages/RedirectPage";
 import JobPage from "./pages/JobPage";
-import UserPanel from "./components/UserPanel"
-import UpperNavigationPanel from "./components/UpperNavigationPanel"
+import Headers from "./components/Headers";
 
 /*
   DefaultRoute has auth guard implemented in useEffect
@@ -22,11 +21,7 @@ import UpperNavigationPanel from "./components/UpperNavigationPanel"
 function App() {
   return <div className="App">
     <BrowserRouter>
-      <div className="navigation row">
-        <div className="logo-container"></div>
-        <UpperNavigationPanel></UpperNavigationPanel>
-        <UserPanel></UserPanel>
-      </div>
+      <Headers></Headers>
       <Routes>
         <Route path="/sign-in" exact element={<SignIn></SignIn>}></Route>
         <Route path="/sign-up" exact element={<SignUp></SignUp>}></Route>
