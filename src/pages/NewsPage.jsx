@@ -1,9 +1,8 @@
 import { connect } from "react-redux";
-import { MainContainer } from "../components/PageMainContainerCss";
 
 const NewsPage = (props) => {
-	return <MainContainer>
-	</MainContainer>
+	return <div>
+	</div>
 }
 
 export default connect(null, null)(NewsPage)

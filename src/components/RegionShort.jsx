@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
-import styled from "styled-components"
 
 const RegionShort = (props) => {
-  return <MainContainer>
+  return <div>
 		<div>Region ID: {props.regionId}</div>
-	</MainContainer>
+	</div>
 }
 
 const mapStateToProps = (state) => {
@@ -14,11 +13,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, null)(RegionShort);
-
-const MainContainer = styled.div`
-	height: fit-content;
-	width: 400px;
-	color: white;
-	background: #282828;
-	padding: 10px;
-`

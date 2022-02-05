@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 
 import ErrorMessage from "./ErrorMessage";
 import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from "../redux/actions";
-import { Button, Form, Label, Col } from "../components/Styles";
 
 function GetSalaryForm(props) {
 	const [state, setState] = useState({
@@ -58,20 +57,20 @@ function GetSalaryForm(props) {
 
 	return state.loading ? <div></div> :
 		state.minutesLeft === 0 ? 
-		<Form onSubmit={submitFullTimeHandler}>
-			<Col>
-				<Label>You worked for {props.action.time} minutes</Label>
+		<form onSubmit={submitFullTimeHandler}>
+			<div>
+				<label>You worked for {props.action.time} minutes</label>
 				{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
-				<Button type="submit">Get salary</Button>
-			</Col>
-		</Form> :
-		<Form onSubmit={submitPartTimeHandler}>
-			<Col>
-				<Label>{state.minutesLeft} minutes left until the end of the work</Label>
+				<button type="submit">Get salary</button>
+			</div>
+		</form> :
+		<form onSubmit={submitPartTimeHandler}>
+			<div>
+				<label>{state.minutesLeft} minutes left until the end of the work</label>
 				{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
-				<Button type="submit" disabled>Pick up early</Button>
-			</Col>
-		</Form>
+				<button type="submit" disabled>Pick up early</button>
+			</div>
+		</form>
 }
 
 const mapStateToProps = (state) => {

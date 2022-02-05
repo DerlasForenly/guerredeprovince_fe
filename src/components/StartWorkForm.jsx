@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 
 import ErrorMessage from "./ErrorMessage";
 import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from "../redux/actions";
-import { Button, Form, Input, Row } from "../components/Styles";
 
 function StartWorkForm(props) {
 	const [state, setState] = useState({
@@ -41,9 +40,9 @@ function StartWorkForm(props) {
 		})
 	}
 
-  return <Form onSubmit={submitHandler}>
-		<Row>
-			<Input
+  return <form onSubmit={submitHandler} className="start-work-form-container">
+		<div>
+			<input
 				required
 				type="number"
 				min="10"
@@ -51,11 +50,11 @@ function StartWorkForm(props) {
 				placeholder="minutes"
 				name="minutes"
 				onChange={changeInputHandler}
-			></Input>
-			<Button type="sumbit">Work</Button>
-		</Row>
+			></input>
+			<button type="sumbit">Work</button>
+		</div>
 		{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
-	</Form>
+	</form>
 }
 
 const mapDispatchToProps = {

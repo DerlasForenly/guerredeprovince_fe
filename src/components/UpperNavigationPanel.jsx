@@ -1,17 +1,17 @@
 import { connect } from "react-redux"
-import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-const LeftNavigationPanel = (props) => {
-  return <MainContainer>
-
-	</MainContainer>
+const UpperNavigationPanel = (props) => {
+  return <div className="upper-navigation-container">
+	  <Link to="/home"><button className="navigation-button vertical-center">Overview</button></Link>
+		<Link to="/news"><button className="navigation-button vertical-center">News</button></Link>
+		<Link to="/world"><button className="navigation-button vertical-center">World</button></Link>
+		<Link to="/region"><button className="navigation-button vertical-center">Region</button></Link>
+		<Link to="/news"><button className="navigation-button vertical-center">Market</button></Link>
+		<Link to="/world"><button className="navigation-button vertical-center">Party</button></Link>
+		<Link to="/job"><button className="navigation-button vertical-center">Job</button></Link>
+		<Link to="/wars"><button className="navigation-button vertical-center">Wars</button></Link>
+	</div>
 }
 
-export default connect(null, null)(LeftNavigationPanel)
-
-const MainContainer = styled.div`
-	color: whitesmoke;
-	width: 100%;
-	padding: 10px;
-	background: #222222;
-`;
+export default connect(null, null)(UpperNavigationPanel)

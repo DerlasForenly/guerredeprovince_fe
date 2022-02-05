@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { connect } from "react-redux";
 import axios from "axios";
 import Cookies from "js-cookie";
-import styled from 'styled-components';
 import { signInSync, hideErrorMessage, hideLoader, showErrorMessage, showLoader } from "../redux/actions";
 import ErrorMessage from "./ErrorMessage";
 
@@ -47,24 +46,24 @@ const SignIn = (props) => {
 		})
 	}
 
-	return <Form onSubmit={submitHandler}>
-		<Input
+	return <form onSubmit={submitHandler}>
+		<input
 			required
 			type="email"
 			placeholder="email"
 			name="email"
 			onChange={changeInputHandler}
-		></Input>
-		<Input
+		></input>
+		<input
 			required
 			type="password"
 			placeholder="password"
 			name="password"
 			onChange={changeInputHandler}
-		></Input>
+		></input>
 		{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
-		<Button type="submit">Sign In</Button>
-	</Form>
+		<button type="submit">Sign In</button>
+	</form>
 }
 
 const mapDispatchToProps = {
@@ -80,49 +79,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
-
-const Form = styled.form`
-  display: flex;
-	flex-direction: column;
-	width: 350px;
-	background: #282828;
-	box-shadow: 0px 4px 13px #000000;
-	padding: 20px 70px;
-	margin: 50px auto;
-	border-radius: 4px;
-`;
-
-const Button = styled.button`
-	width: 180px;
-	background: #25ADE8;
-	box-shadow: 0px 4px 11px rgba(23, 213, 255, 0.26);
-	border-radius: 4px;
-	height: 50px;
-	font-size: 18px;
-	color: whitesmoke;
-	margin: auto;
-	margin-top: 15px;
-	border: none;
-	outline: none;
-`;
-
-const Input = styled.input`
-	margin: 5px;
-	padding: 13px;
-	background: none;
-	color: whitesmoke;
-	border: none;
-	border-bottom: 1px solid gray;
-	outline: none;
-	&:-webkit-autofill,
-	&:-webkit-autofill:hover, 
-	&:-webkit-autofill:focus {
-		-webkit-text-fill-color: whitesmoke;  // Цвет текста
-		box-shadow: 0 0 0px 1000px #282828 inset;  // Тенью во внутрь делаем BG и вместо #000 выбираем цвет BG
-		transition: background-color 6000s ease-in-out 0s; // Так-как напрямую с BGC взаимодействовать нельзя, делаем его замену очень медленной, и как-бы отменяем его замену. (хотя через 1.5 часа он таки поменяет цвет)
-	}
-	&:hover {
-		border-bottom: 1px solid #25ADE8;
-		box-shadow: 5px 7px 11px #25ADE8(23, 213, 255, 0.26);
-	}
-`;

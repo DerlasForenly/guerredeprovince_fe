@@ -1,5 +1,166 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #393939;
+    background: whitesmoke;
 }
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-center {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.navigation {
+    background: white;
+    white-space: nowrap;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+
+    .logo-container {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .upper-navigation-container {
+        height: 80px;
+        margin: 0 50px;
+        display: inline-block;
+
+        .navigation-button {
+            margin: 0 5px;
+            height: 50px;
+            width: 120px;
+            font-size: 18px;
+            color: gray;
+            text-align: center;
+            background: none;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .navigation-button:hover {
+            // background: #62c256;
+            background: rgb(240, 240, 240);
+        }
+    }
+
+    .user-panel-container {
+        width: 100%;
+        float: right;
+        padding: 0 30px;
+
+        .user-panel-avatar {
+            height: 50px;
+            width: 50px;
+            border-radius: 60px;
+        }
+    }
+}
+
+.page {
+    width: 880px;
+    margin: auto;
+    padding: 10px;
+    height: fit-content;
+
+    .factory-card-container {
+        margin: 10px;
+        height: fit-content;
+        width: 230px;
+        background: white;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 20px;
+
+        .factory-avatar-in-card {
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.205);
+        }
+
+        .type-icon-in-factory-card {
+            height: 35px;
+            width: 35px;
+            filter: invert(1);
+        }
+
+        .factory-name {
+            min-height: 30px;
+            text-align: center;
+            color: gray;
+            font-weight: bold;
+            font-size: 18px;
+            align-items: center;
+        }
+
+        .factory-lvl, .factory-salary-type, .factory-salary-amount {
+            height: 30px;
+            color: gray;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        .factory-salary-amount {
+            text-align: right;
+        }
+
+        .resource-type-marker {
+            margin: 5px 0;
+            align-items: center;
+            vertical-align: middle;
+            min-height: 20px;
+            min-width: 20px;
+            width: 20px;
+            max-width: 20px;
+            max-height: 20px;
+            background: yellow;
+            border-radius: 100%;
+        }
+    }
+}
+
+.start-work-form-container {
+    margin-top: 20px;
+    display: inline-block;
+    white-space: nowrap;
+
+    button {
+        float: right;
+        height: 35px;
+        width: 70px;
+        font-size: 15px;
+        margin-left: 10px;
+        background: #25ADE8;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(23, 213, 255, 0.26);
+    }
+
+    input {
+        padding: 10px;
+        border: none;
+        width: 50%;
+        height: 15px;
+        border-bottom: 1px solid lightgray;
+        outline: none;
+        color: gray;
+    }
+}
+

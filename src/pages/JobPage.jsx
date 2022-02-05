@@ -1,16 +1,12 @@
 import { connect } from "react-redux";
-import { MainContainer } from "../components/PageMainContainerCss";
 import StartWorkForm from "../components/StartWorkForm";
 import GetSalaryForm from "../components/GetSalaryForm";
+import FactoryCard from "../components/FactoryCard";
 
 const JobPage = (props) => {
-	return <MainContainer>
-	{
-		props.busy ? 
-		<GetSalaryForm></GetSalaryForm> :
-		<StartWorkForm></StartWorkForm>
-	}
-	</MainContainer>
+	return <div>
+		<FactoryCard></FactoryCard>
+	</div>
 }
 
 const mapStateToProps = (state) => {

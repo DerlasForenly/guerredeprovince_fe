@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
-import { MainContainer } from "../components/PageMainContainerCss";
 import RegionShort from "../components/RegionShort";
 
 const HomePage = (props) => {
-	return <MainContainer>
+	return <div>
 		<RegionShort/>
-	</MainContainer>
+	</div>
 }
 
 export default connect(null, null)(HomePage)
