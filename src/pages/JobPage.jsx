@@ -1,6 +1,4 @@
 import { connect } from "react-redux";
-import StartWorkForm from "../components/StartWorkForm";
-import GetSalaryForm from "../components/GetSalaryForm";
 import FactoryCard from "../components/FactoryCard";
 
 const JobPage = (props) => {
