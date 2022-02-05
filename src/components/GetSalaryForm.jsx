@@ -37,7 +37,7 @@ function GetSalaryForm(props) {
 
 		axios({
 			method: 'POST',
-			url: "http://localhost:8000/api/actions/salary",
+			url: `${process.env.REACT_APP_API}/api/actions/salary`,
 			headers: {
 				Authorization: `Bearer` + Cookies.get('access_token')
 			}
@@ -57,16 +57,16 @@ function GetSalaryForm(props) {
 
 	return state.loading ? <div></div> :
 		state.minutesLeft === 0 ? 
-		<form onSubmit={submitFullTimeHandler}>
-			<div>
+		<form onSubmit={submitFullTimeHandler} className="get-salary-form-container">
+			<div className="col">
 				<label>You worked for {props.action.time} minutes</label>
 				{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
 				<button type="submit">Get salary</button>
 			</div>
 		</form> :
-		<form onSubmit={submitPartTimeHandler}>
-			<div>
-				<label>{state.minutesLeft} minutes left until the end of the work</label>
+		<form onSubmit={submitPartTimeHandler} className="get-salary-form-container">
+			<div className="col">
+				<label className="">{state.minutesLeft} minutes left until the end of the work</label>
 				{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
 				<button type="submit" disabled>Pick up early</button>
 			</div>

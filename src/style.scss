@@ -14,6 +14,11 @@ body {
     flex-direction: row;
 }
 
+.error-message {
+    color: red;
+    font-size: 15px;
+}
+
 .vertical-center {
     position: relative;
     top: 50%;
@@ -107,7 +112,6 @@ body {
         }
 
         .factory-lvl, .factory-salary-type, .factory-salary-amount {
-            height: 30px;
             color: gray;
             width: 100%;
             display: flex;
@@ -115,8 +119,13 @@ body {
             font-size: 15px;
         }
 
+        .factory-lvl {
+            height: 35px;
+        }
+
         .factory-salary-amount {
             text-align: right;
+            height: 30px;
         }
 
         .resource-type-marker {
@@ -161,6 +170,32 @@ body {
         border-bottom: 1px solid lightgray;
         outline: none;
         color: gray;
+    }
+}
+
+.get-salary-form-container {
+    label {
+        display: flex;
+        color: gray;
+        height: 30px;
+        text-align: center;
+        font-size: 12px;
+        align-items: center;
+        width: 100%;
+    }
+
+    button {
+        margin: auto;
+        margin-top: 5px;
+        height: 35px;
+        width: 120px;
+        font-size: 15px;
+        background: #25ADE8;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(23, 213, 255, 0.26);
     }
 }
 
