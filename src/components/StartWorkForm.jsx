@@ -6,6 +6,9 @@ import Cookies from "js-cookie";
 import ErrorMessage from "./ErrorMessage";
 import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from "../redux/actions";
 
+const MIN_WORK_TIME = 10;
+const MAX_WORK_TIME = 300;
+
 function StartWorkForm(props) {
 	const [state, setState] = useState({
 		minutes: 0,
@@ -45,8 +48,8 @@ function StartWorkForm(props) {
 			<input
 				required
 				type="number"
-				min="10"
-				max="300"
+				min={MIN_WORK_TIME}
+				max={MAX_WORK_TIME}
 				placeholder="minutes"
 				name="minutes"
 				onChange={changeInputHandler}

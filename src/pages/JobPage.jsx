@@ -3,13 +3,13 @@ import FactoryCard from "../components/FactoryCard";
 
 const JobPage = (props) => {
 	return <div>
-		<FactoryCard></FactoryCard>
+		{ props.user.job ? <FactoryCard></FactoryCard> : <div></div> }
 	</div>
 }
 
 const mapStateToProps = (state) => {
 	return {
-		busy: state.auth.user.busy,
+		user: state.auth.user,
 	}
 }
 
