@@ -13,8 +13,6 @@ function Headers(props) {
 
 const mapStateToProps = state => {
 	return {
-		loading: state.app.loading,
-		stability: state.app.stability,
 		user: state.auth.user,
 	}
 }

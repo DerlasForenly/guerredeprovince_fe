@@ -25,12 +25,11 @@ function GuardedPage({showLoader, hideLoader, me, loading, element}) {
 			hideLoader()
 		}).catch((error) => {
 			hideLoader()
-			me(null)
 			navigate('/sign-in')
 		})
 	}, [me, hideLoader, showLoader, navigate])
 
-  return loading ? <div></div> : 
+  return loading ? <div>Loading</div> : 
 	<div className="page">{element}</div>
 }
 
