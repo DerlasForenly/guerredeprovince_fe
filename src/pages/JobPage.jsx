@@ -1,9 +1,12 @@
 import { connect } from "react-redux";
+
 import FactoryCard from "../components/FactoryCard";
+import ShortStorage from "../components/ShortStorage";
 
 const JobPage = (props) => {
-	return <div>
+	return <div className="row">
 		{ props.user.job ? <FactoryCard></FactoryCard> : <div></div> }
+		<ShortStorage></ShortStorage>
 	</div>
 }
 

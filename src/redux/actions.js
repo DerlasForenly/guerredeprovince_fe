@@ -1,6 +1,6 @@
 import axios from "axios"
 import Cookies from "js-cookie"
-import { SHOW_LOADER, HIDE_LOADER, SIGN_IN, SHOW_ERROR_MESSAGE, HIDE_ERROR_MESSAGE, ME } from "./types";
+import { SHOW_LOADER, HIDE_LOADER, SIGN_IN, SHOW_ERROR_MESSAGE, HIDE_ERROR_MESSAGE, ME, CLEAR_USER } from "./types";
 
 export function showLoader() {
 	return {
@@ -83,5 +83,11 @@ export function meAsync(action) {
 		}).catch((error) => {
 			dispatch(hideLoader())
 		})
+	}
+}
+
+export function clearUser() {
+	return { 
+		type: CLEAR_USER,
 	}
 }

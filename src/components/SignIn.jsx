@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { connect } from "react-redux";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom"
+
 import { signInSync, hideErrorMessage, hideLoader, showErrorMessage, showLoader } from "../redux/actions";
 import ErrorMessage from "./ErrorMessage";
 
@@ -46,7 +48,7 @@ const SignIn = (props) => {
 		})
 	}
 
-	return <form onSubmit={submitHandler}>
+	return <form onSubmit={submitHandler} className="auth-form col">
 		<input
 			required
 			type="email"
@@ -63,6 +65,7 @@ const SignIn = (props) => {
 		></input>
 		{ props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div> }
 		<button type="submit">Sign In</button>
+		<label>Or create a new account <Link to="/sign-up">here</Link></label>
 	</form>
 }
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import factoryImg from "../assets/default_avatar.jpg"
 import typeImg from "../assets/SolarPanel1.png"
@@ -8,21 +9,21 @@ import GetSalaryForm from "./GetSalaryForm";
 import StartWorkForm from "./StartWorkForm";
 
 function FactoryCard(props) {
-	const [job, setJob] = useState({
-		id: 1,
-		name: "Some fucking corporation",
-		lvl: 532,
-		salary: "153 462",
-		salaryType: "100%",
-		avatar: null,
-		typeImg: null,
-	})
+	const [job, setJob] = useState(false)
 
 	useEffect(() => {
-		setJob(prev => ({...prev}))
+		axios({
+			method: 'GET',
+			url: `${process.env.REACT_APP_API}/api/businesses/${props.job_id}`,
+		}).then((response) => {
+			console.log(response.data)
+			setJob(parseBusinessResponceData(response.data))
+		}).catch((error) => {
+			console.log(error.message)
+		})
 	}, [props])
 
-  return <div className="factory-card-container col">
+  return job ? <div className="factory-card-container col">
 		<img src={factoryImg} alt="avatar" className="factory-avatar-in-card"></img>
 		<label className="factory-name">{job.name}</label>
 		<div className="row">
@@ -35,13 +36,24 @@ function FactoryCard(props) {
 			<div className="resource-type-marker"></div>
 		</div>
 		{props.busy ? <GetSalaryForm></GetSalaryForm> : <StartWorkForm></StartWorkForm>}
-	</div>
+	</div> : <div className="factory-card-container col"></div>
 }
 
 const mapStateToProps = (state) => {
 	return {
 		busy: state.auth.user.busy,
+		job_id: state.auth.user.job.id
 	}
 }
 
 export default connect(mapStateToProps, null)(FactoryCard)
+
+function parseBusinessResponceData(data) {
+	return {
+		name: data.name,
+		lvl: 567,
+		user_id: data.user_id,
+		salaryType: "100%",
+		salary: "135 341",
+	}
+}

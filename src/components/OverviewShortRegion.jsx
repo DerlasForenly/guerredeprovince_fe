@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
-const RegionShort = (props) => {
-  return <div>
+function OverviewShortRegion(props) {
+  return <div className="overview-short-region-container">
 		<div>Region ID: {props.regionId}</div>
 	</div>
 }
@@ -12,4 +12,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, null)(RegionShort);
+export default connect(mapStateToProps, null)(OverviewShortRegion)

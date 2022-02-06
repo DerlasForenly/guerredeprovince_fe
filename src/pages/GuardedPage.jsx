@@ -3,11 +3,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 
-import { me, hideLoader, showLoader } from "../redux/actions";
+import { me, hideLoader, showLoader, clearUser } from "../redux/actions";
 
 import { connect } from "react-redux";
 
-function GuardedPage({showLoader, hideLoader, me, loading, element}) {
+function GuardedPage({showLoader, hideLoader, me, loading, element, clearUser}) {
 	const navigate = useNavigate()
 
 	useEffect(() => {
@@ -25,9 +25,10 @@ function GuardedPage({showLoader, hideLoader, me, loading, element}) {
 			hideLoader()
 		}).catch((error) => {
 			hideLoader()
+			clearUser()
 			navigate('/sign-in')
 		})
-	}, [me, hideLoader, showLoader, navigate])
+	}, [me, hideLoader, showLoader, navigate, clearUser])
 
   return loading ? <div>Loading</div> : 
 	<div className="page">{element}</div>
@@ -37,6 +38,7 @@ const mapDispatchToProps = {
 	hideLoader,
 	showLoader,
 	me,
+	clearUser,
 }
 
 const mapStateToProps = state => {

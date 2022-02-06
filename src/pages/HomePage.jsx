@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import RegionShort from "../components/RegionShort";
+import OverviewShortRegion from "../components/OverviewShortRegion";
 
 const HomePage = (props) => {
 	return <div>
-		<RegionShort/>
+		<OverviewShortRegion/>
 	</div>
 }
 
