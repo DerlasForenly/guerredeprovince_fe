@@ -10,7 +10,7 @@ const UserPanel = (props) => {
 		<Link to="/profile"><img src={avatarImg} alt="avatar" className="user-panel-avatar"></img></Link>
 
 		<div className="user-panel-balance col">
-			<label>124 531 543 310 UAH</label>
+			<label>152 325 452 UAH</label>
 			<label>135 234 D</label>
 		</div>
 		<SignOut></SignOut>

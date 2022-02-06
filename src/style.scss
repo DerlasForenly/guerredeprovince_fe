@@ -30,7 +30,7 @@ body {
 .navigation {
     background: white;
     white-space: nowrap;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
     .logo-container {
         width: 200px;
@@ -125,7 +125,7 @@ body {
     height: fit-content;
     background: white;
     white-space: nowrap;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 
     input {
@@ -169,7 +169,7 @@ body {
 }
 
 .page {
-    width: 880px;
+    width: 1300px;
     margin: auto;
     padding: 10px;
     height: fit-content;
@@ -177,11 +177,81 @@ body {
     .overview-short-region-container {
         margin: 10px;
         height: fit-content;
-        width: 230px;
+        width: 360px;
         background: white;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 20px;
+
+        img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .title-panel {
+            margin-left: 10px;
+
+            .region-name {
+                font-size: 18px;
+                color: gray;
+            }
+    
+            .region-country {
+                margin-top: 5px;
+                font-size: 15px;
+                color: gray;
+            }
+        }
+
+        .navigation-container {
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            margin-top: 15px;
+
+            label {
+                font-size: 12px;
+                color: gray;
+            }
+
+            .navigation-indicators-container {
+                justify-content: space-between;
+                width: 50px;
+    
+                .point {
+                    margin: 0 5px;
+                    height: 5px;
+                    width: 5px;
+                    background: gray;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+
+    .chat-container {
+        width: 360px;
+        height: 400px;
+        margin: 10px;
+        background: white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 20px;
+
+        .language-info {
+            justify-content: space-between;
+            align-items: center;
+
+            label {
+                font-size: 12px;
+                color: gray;
+            }
+    
+            img {
+                height: 10px;
+                width: 17px;
+            }
+        }
     }
 
     .short-storage-container {
@@ -189,7 +259,7 @@ body {
         height: fit-content;
         width: 350px;
         background: white;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 10px 20px;
 
@@ -234,7 +304,7 @@ body {
         height: fit-content;
         width: 230px;
         background: white;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 20px;
 
