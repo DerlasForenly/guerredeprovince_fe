@@ -1,15 +1,15 @@
-import { useEffect } from "react"
-import { useNavigate } from "react-router"
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
-function RedirectPage(props) {
-	const navigate = useNavigate()
+function RedirectPage (props) {
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		console.error('Incorrect route')
-		navigate('/home')
-	}, [props, navigate])
+  useEffect(() => {
+    console.error('Incorrect route');
+    navigate('/home');
+  }, [props, navigate]);
 
-	return <div></div>
+  return <div></div>;
 }
 
-export default RedirectPage
+export default RedirectPage;

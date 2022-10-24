@@ -1,3 +1,3 @@
-export function getAuthorized() {
-    
+export function getAuthorized () {
+
 }

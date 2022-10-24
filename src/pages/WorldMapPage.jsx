@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 const WorldMapPage = (props) => {
-	return <div>
-	</div>
-}
+  return <div>
+  </div>;
+};
 
-export default connect(null, null)(WorldMapPage)
+export default connect(null, null)(WorldMapPage);

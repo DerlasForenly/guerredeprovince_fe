@@ -1,8 +1,8 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 const ProfilePage = (props) => {
-	return <div>
-	</div>
-}
+  return <div>
+  </div>;
+};
 
-export default connect(null, null)(ProfilePage)
+export default connect(null, null)(ProfilePage);
