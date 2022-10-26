@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
 const ProfilePage = (props) => {
-  return <div>
+  return <div className="profile-page">
+    <label className="soon">Soon</label>
   </div>;
 };
 

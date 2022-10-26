@@ -1,0 +1,12 @@
+@import "base";
+
+.job-page {
+  @extend .page;
+
+  .soon {
+    line-height: 95px;
+    font-size: 60px;
+    color: gray;
+    font-weight: bold
+  }
+}

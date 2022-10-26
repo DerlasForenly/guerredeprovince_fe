@@ -7,6 +7,8 @@ import { me, hideLoader, showLoader, clearUser } from '../redux/actions';
 
 import { connect } from 'react-redux';
 
+import loadingGif from '../assets/loading.gif';
+
 function GuardedPage ({ showLoader, hideLoader, me, loading, element, clearUser }) {
   const navigate = useNavigate();
 
@@ -30,8 +32,8 @@ function GuardedPage ({ showLoader, hideLoader, me, loading, element, clearUser 
     });
   }, [me, hideLoader, showLoader, navigate, clearUser]);
 
-  return loading ? <div>Loading</div> :
-    <div className="page">{element}</div>;
+  return loading ? <div className="page"><img src={loadingGif} alt="loading-gif"/></div> :
+    <div>{element}</div>;
 }
 
 const mapDispatchToProps = {

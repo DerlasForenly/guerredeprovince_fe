@@ -13,6 +13,8 @@ import ProfilePage from './pages/ProfilePage';
 import RedirectPage from './pages/RedirectPage';
 import JobPage from './pages/JobPage';
 import Headers from './components/Headers';
+import RegionPage from './pages/RegionPage';
+import MarketPage from './pages/MarketPage';
 
 /*
  DefaultRoute has auth guard implemented in useEffect
@@ -29,10 +31,12 @@ function App () {
         <Route path="/world" exact
                element={<GuardedPage element={<WorldMapPage></WorldMapPage>}></GuardedPage>}></Route>
         <Route path="/home" exact element={<GuardedPage element={<HomePage></HomePage>}></GuardedPage>}></Route>
-        <Route path="/wars" exact element={<GuardedPage element={<HomePage></HomePage>}></GuardedPage>}></Route>
+        <Route path="/wars" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
         <Route path="/profile" exact
                element={<GuardedPage element={<ProfilePage></ProfilePage>}></GuardedPage>}></Route>
-        <Route path="/region" exact element={<GuardedPage element={<NewsPage></NewsPage>}></GuardedPage>}></Route>
+        <Route path="/region" exact element={<GuardedPage element={<RegionPage></RegionPage>}></GuardedPage>}></Route>
+        <Route path="/market" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
+        <Route path="/party" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
         <Route path="/job" exact element={<GuardedPage element={<JobPage></JobPage>}></GuardedPage>}></Route>
         <Route path="*" exact element={<RedirectPage></RedirectPage>}></Route>
       </Routes>

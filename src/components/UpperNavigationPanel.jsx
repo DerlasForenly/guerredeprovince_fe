@@ -15,10 +15,10 @@ const UpperNavigationPanel = (props) => {
     <Link to="/region">
       <button className="navigation-button vertical-center">Region</button>
     </Link>
-    <Link to="/news">
+    <Link to="/market">
       <button className="navigation-button vertical-center">Market</button>
     </Link>
-    <Link to="/world">
+    <Link to="/party">
       <button className="navigation-button vertical-center">Party</button>
     </Link>
     <Link to="/job">

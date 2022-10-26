@@ -1,0 +1,90 @@
+.navigation {
+  background: white;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .logo-container {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .upper-navigation-container {
+    height: 80px;
+    margin: 0 50px;
+    display: inline-block;
+
+    .navigation-button {
+      margin: 0 5px;
+      height: 45px;
+      width: 100px;
+      font-size: 18px;
+      color: gray;
+      text-align: center;
+      background: none;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .navigation-button:hover {
+      // background: #62c256;
+      background: rgb(240, 240, 240);
+    }
+  }
+
+  .user-panel-container {
+    width: 100%;
+    float: right;
+    padding: 0 30px;
+    align-items: center;
+
+    .navigation-button {
+      margin: 0 20px;
+      height: 30px;
+      width: 80px;
+      font-size: 15px;
+      color: gray;
+      text-align: center;
+      background: none;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .navigation-button:hover {
+      // background: #62c256;
+      background: rgb(240, 240, 240);
+    }
+
+    .user-panel-avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 60px;
+    }
+
+    .push-notifications-container {
+      color: white;
+      background: red;
+      font-size: 10px;
+      padding: 5px;
+      margin: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      border-radius: 5px;
+    }
+
+    .user-panel-balance {
+      margin-left: 10px;
+      height: 40px;
+
+      label {
+        line-height: 20px;
+        font-size: 15px;
+        color: gray;
+        vertical-align: middle;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.auth-form {
+  padding: 20px 30px;
+  margin: 60px auto;
+  width: 400px;
+  height: fit-content;
+  background: white;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
+  input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    background: none !important;
+    color: gray !important;
+    outline: none;
+    appearance: none !important;
+  }
+
+  button {
+    margin: 10px auto auto;
+    height: 40px;
+    width: 100px;
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    // background: #62c256;
+    background: rgb(240, 240, 240);
+  }
+
+  label {
+    margin-top: 10px;
+    color: gray;
+    text-align: center;
+    width: 100%;
+    font-size: 15px;
+  }
+}

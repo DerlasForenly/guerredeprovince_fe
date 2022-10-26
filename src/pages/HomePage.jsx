@@ -8,7 +8,7 @@ import avatarImg from '../assets/default_avatar.jpg';
 import flagImg from '../assets/flag-of-ukraine.jpg';
 
 const HomePage = (props) => {
-  return <div className="row">
+  return <div className="home-page row">
     <div className="col">
       <OverviewShortRegion />
       <Chat></Chat>
@@ -55,6 +55,5 @@ function TopArticle (props) {
 
 function Details (props) {
   return <div className="details-container">
-
   </div>;
 }

@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: whitesmoke;
+  // background: no-repeat center center fixed url(https://wikiway.com/upload/hl-photo/6c1/6f2/cherkassy_86.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.page {
+  width: fit-content;
+  margin: auto;
+  padding: 10px;
+  height: fit-content;
+}
+
+.container {
+  margin: 10px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.pagination {
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  font-size: 16px;
+  color: gray;
+
+  button {
+    border: none;
+    background: none;
+    color: gray;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  button:hover {
+    color: black;
+  }
+
+  label {
+    margin: 35px;
+  }
+}
+
+.page-loading-state {
+
+}
