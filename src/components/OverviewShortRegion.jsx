@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import regionImg from '../assets/default_region_avatar.png';
 
 function OverviewShortRegion (props) {
-  const [currentPage, setCurrentPage] = useState(<Region></Region>);
+  const [currentPage] = useState(<Region></Region>);
+  //const [currentPage, setCurrentPage] = useState(<Region></Region>);
 
   const pageNames = [
     'Region',
@@ -12,15 +13,15 @@ function OverviewShortRegion (props) {
     'World',
   ];
 
-  const pageComponents = [
-    <Region></Region>,
-    <Country></Country>,
-    <World></World>
-  ];
+  // const pageComponents = [
+  //   <Region></Region>,
+  //   <Country></Country>,
+  //   <World></World>
+  // ];
 
-  const onLeft = e => {
-
-  };
+  // const onLeft = e => {
+  //
+  // };
 
   const onRight = e => {
 
@@ -58,22 +59,22 @@ function Region () {
   </div>;
 }
 
-function Country () {
-  return <div className="row">
-    <img src={regionImg} alt="region"></img>
-    <div className="title-panel col">
-      <label className="region-name">Черкасська область</label>
-      <label className="region-country">Holy Ukrainian Reich</label>
-    </div>
-  </div>;
-}
+// function Country () {
+//   return <div className="row">
+//     <img src={regionImg} alt="region"></img>
+//     <div className="title-panel col">
+//       <label className="region-name">Черкасська область</label>
+//       <label className="region-country">Holy Ukrainian Reich</label>
+//     </div>
+//   </div>;
+// }
 
-function World () {
-  return <div className="row">
-    <img src={regionImg} alt="region"></img>
-    <div className="title-panel col">
-      <label className="region-name">Черкасська область</label>
-      <label className="region-country">Holy Ukrainian Reich</label>
-    </div>
-  </div>;
-}
+// function World () {
+//   return <div className="row">
+//     <img src={regionImg} alt="region"></img>
+//     <div className="title-panel col">
+//       <label className="region-name">Черкасська область</label>
+//       <label className="region-country">Holy Ukrainian Reich</label>
+//     </div>
+//   </div>;
+// }
