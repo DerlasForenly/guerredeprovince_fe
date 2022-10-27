@@ -137,6 +137,11 @@ export function loadPromotedArticle (data) {
   };
 }
 
+/**
+ * Using this creates warning in useEffect
+ *
+ * @returns {(function(*): void)|*}
+ */
 export function loadPromotedArticleAsync () {
   return dispatch => {
     axios({

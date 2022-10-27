@@ -20,8 +20,6 @@ function GuardedPage ({ showLoader, hideLoader, me, loading, element, clearUser 
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-      console.log(response.data);
-
       me(response.data);
       hideLoader();
     }).catch((error) => {

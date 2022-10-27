@@ -1,12 +1,24 @@
 import { connect } from 'react-redux';
 import Article from './Article';
 import { useEffect } from 'react';
-import { loadPromotedArticleAsync } from '../redux/actions';
+import { loadPromotedArticle } from '../redux/actions';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-function PromotedArticle ({ loadPromotedArticleAsync, article }) {
+function PromotedArticle ({ loadPromotedArticle, article }) {
   useEffect(() => {
-    loadPromotedArticleAsync();
-  }, []);
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/articles/promoted`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      loadPromotedArticle(response.data);
+    }).catch((error) => {
+
+    });
+  }, [loadPromotedArticle]);
 
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
@@ -17,7 +29,7 @@ function PromotedArticle ({ loadPromotedArticleAsync, article }) {
 }
 
 const mapDispatchToProps = {
-  loadPromotedArticleAsync,
+  loadPromotedArticle,
 };
 
 const mapStateToProps = state => {

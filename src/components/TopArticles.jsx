@@ -3,15 +3,27 @@ import { useEffect } from 'react';
 
 import flagImg from '../assets/flag-of-ukraine.jpg';
 
-import { loadTopArticlesAsync } from '../redux/actions';
+import { loadTopArticles } from '../redux/actions';
 
 import ArticlesList from './ArticlesList';
 import Pagination from './Pagination';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-const TopArticles = ({ loadTopArticlesAsync, articles }) => {
+const TopArticles = ({ loadTopArticles, articles }) => {
   useEffect(() => {
-    loadTopArticlesAsync();
-  }, []);
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/articles/top`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      loadTopArticles(response.data);
+    }).catch((error) => {
+
+    });
+  }, [loadTopArticles]);
 
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
@@ -31,7 +43,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  loadTopArticlesAsync,
+  loadTopArticles,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopArticles);
