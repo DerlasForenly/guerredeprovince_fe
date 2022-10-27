@@ -5,7 +5,14 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 
-import { signInSync, hideErrorMessage, hideLoader, showErrorMessage, showLoader } from '../redux/actions';
+import {
+  signInSync,
+  hideErrorMessage,
+  hideLoader,
+  showErrorMessage,
+  showLoader
+} from '../redux/actions';
+
 import ErrorMessage from './ErrorMessage';
 
 const SignIn = (props) => {

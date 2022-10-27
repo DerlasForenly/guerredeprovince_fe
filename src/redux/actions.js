@@ -1,6 +1,14 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { SHOW_LOADER, HIDE_LOADER, SIGN_IN, SHOW_ERROR_MESSAGE, HIDE_ERROR_MESSAGE, ME, CLEAR_USER } from './types';
+import {
+  SHOW_LOADER,
+  HIDE_LOADER,
+  SIGN_IN,
+  SHOW_ERROR_MESSAGE,
+  HIDE_ERROR_MESSAGE,
+  ME,
+  CLEAR_USER
+} from './types';
 
 export function showLoader () {
   return {
@@ -90,4 +98,21 @@ export function clearUser () {
   return {
     type: CLEAR_USER,
   };
+}
+
+export function loadRecommendedArticles () {
+
+}
+
+export function loadTopArticles () {
+  axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API}/api/articles/me`,
+    headers: {
+      Authorization: `Bearer` + Cookies.get('access_token')
+    }
+  }).then((response) => {
+    console.log(response.data);
+  }).catch((error) => {
+  });
 }
