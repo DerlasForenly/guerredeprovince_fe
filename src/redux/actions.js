@@ -7,7 +7,8 @@ import {
   SHOW_ERROR_MESSAGE,
   HIDE_ERROR_MESSAGE,
   ME,
-  CLEAR_USER
+  CLEAR_USER,
+  LOAD_TOP_ARTICLES, LOAD_PROMOTED_ARTICLE
 } from './types';
 
 export function showLoader () {
@@ -104,15 +105,52 @@ export function loadRecommendedArticles () {
 
 }
 
-export function loadTopArticles () {
-  axios({
-    method: 'get',
-    url: `${process.env.REACT_APP_API}/api/articles/me`,
-    headers: {
-      Authorization: `Bearer` + Cookies.get('access_token')
-    }
-  }).then((response) => {
-    console.log(response.data);
-  }).catch((error) => {
-  });
+export function loadTopArticles (data) {
+  return {
+    type: LOAD_TOP_ARTICLES,
+    payload: data
+  };
+}
+
+export function loadTopArticlesAsync () {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/articles/top`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      console.log(response.data);
+
+      dispatch(loadTopArticles(response.data));
+    }).catch((error) => {
+
+    });
+  }
+}
+
+export function loadPromotedArticle (data) {
+  return {
+    type: LOAD_PROMOTED_ARTICLE,
+    payload: data
+  };
+}
+
+export function loadPromotedArticleAsync () {
+  return dispatch => {
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/articles/promoted`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      console.log(response.data);
+
+      dispatch(loadPromotedArticle(response.data));
+    }).catch((error) => {
+
+    });
+  }
 }

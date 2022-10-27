@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import { connect } from 'react-redux';
 
 import { me, hideLoader, showLoader, clearUser } from '../redux/actions';
-
-import { connect } from 'react-redux';
 
 import loadingGif from '../assets/loading.gif';
 

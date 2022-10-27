@@ -4,7 +4,13 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import ErrorMessage from './ErrorMessage';
-import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from '../redux/actions';
+import {
+  hideErrorMessage,
+  hideLoader,
+  showErrorMessage,
+  showLoader,
+  meAsync
+} from '../redux/actions';
 
 const MIN_WORK_TIME = 10;
 const MAX_WORK_TIME = 300;

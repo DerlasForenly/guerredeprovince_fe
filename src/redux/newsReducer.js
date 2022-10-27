@@ -24,10 +24,12 @@ export const newsReducer = (state = initialState, action) => {
     case LOAD_TOP_ARTICLES:
       return {
         ...state,
+        topArticles: action.payload,
       };
     case LOAD_PROMOTED_ARTICLE:
       return {
         ...state,
+        promotedArticle: action.payload,
       };
     case LOAD_SUBSCRIPTION_ARTICLES:
       return {

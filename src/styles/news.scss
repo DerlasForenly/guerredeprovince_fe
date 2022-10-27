@@ -41,9 +41,11 @@
       padding-bottom: 5px;
       margin-top: 5px;
       margin-bottom: 10px;
+      justify-content: space-between;
 
       .space-between {
         justify-content: space-between;
+        width: 100%;
 
         .title {
           width: 100%;
@@ -52,17 +54,21 @@
           color: gray;
         }
 
-        .author {
-          width: 100%;
-          margin: 0 auto;
-          font-size: 15px;
-          color: gray;
-        }
+        .author-and-rating {
+          justify-content: space-between;
 
-        .rating {
-          font-size: 15px;
-          font-weight: bold;
-          color: forestgreen;
+          .author {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 15px;
+            color: gray;
+          }
+
+          .rating {
+            font-size: 15px;
+            font-weight: bold;
+            color: forestgreen;
+          }
         }
       }
 
