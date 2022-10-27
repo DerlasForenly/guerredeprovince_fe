@@ -41,13 +41,7 @@ function OverviewShortRegion (props) {
   </div>;
 }
 
-const mapStateToProps = (state) => {
-  return {
-    regionId: state.auth.user.current_region_id
-  };
-};
-
-export default connect(mapStateToProps, null)(OverviewShortRegion);
+export default connect(null, null)(OverviewShortRegion);
 
 function Region () {
   return <div className="row">
