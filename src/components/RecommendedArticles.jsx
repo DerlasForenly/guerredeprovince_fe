@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { loadRecommendedArticles } from '../redux/actions';
 
@@ -11,7 +11,9 @@ import loadingGif from '../assets/loading.gif'
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
   const [loading, setLoading] = useState(true);
 
-  setLoading(true);
+  useEffect(() => {
+    setLoading(true);
+  }, [loadSubscriptionArticles])
 
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
