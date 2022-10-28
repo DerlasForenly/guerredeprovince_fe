@@ -34,6 +34,7 @@ export const newsReducer = (state = initialState, action) => {
     case LOAD_SUBSCRIPTION_ARTICLES:
       return {
         ...state,
+        subscriptionArticles: action.payload,
       };
     case LOAD_MY_NEWSPAPER:
       return {

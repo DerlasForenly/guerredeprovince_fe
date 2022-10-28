@@ -8,7 +8,9 @@ import {
   HIDE_ERROR_MESSAGE,
   ME,
   CLEAR_USER,
-  LOAD_TOP_ARTICLES, LOAD_PROMOTED_ARTICLE
+  LOAD_TOP_ARTICLES,
+  LOAD_PROMOTED_ARTICLE,
+  LOAD_SUBSCRIPTION_ARTICLES
 } from './types';
 
 export function showLoader () {
@@ -36,30 +38,7 @@ export const showErrorMessage = (message) => {
   };
 };
 
-export function signIn (credentials) {
-  return dispatch => {
-    dispatch(hideErrorMessage());
-    dispatch(showLoader());
-
-    axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/auth/login`,
-      data: credentials
-    }).then((response) => {
-      console.log(response.data);
-      Cookies.set('access_token', response.data.access_token);
-      dispatch({
-        type: SIGN_IN,
-        payload: response.data
-      });
-      dispatch(hideLoader());
-    }).catch((error) => {
-      dispatch(showErrorMessage(error.message));
-    });
-  };
-}
-
-export function signInSync (data) {
+export function signIn (data) {
   return {
     type: SIGN_IN,
     payload: data
@@ -112,22 +91,11 @@ export function loadTopArticles (data) {
   };
 }
 
-export function loadTopArticlesAsync () {
-  return dispatch => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API}/api/articles/top`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      console.log(response.data);
-
-      dispatch(loadTopArticles(response.data));
-    }).catch((error) => {
-
-    });
-  }
+export function loadSubscriptionArticles (data) {
+  return {
+    type: LOAD_SUBSCRIPTION_ARTICLES,
+    payload: data
+  };
 }
 
 export function loadPromotedArticle (data) {

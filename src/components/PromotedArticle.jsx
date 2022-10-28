@@ -1,12 +1,20 @@
 import { connect } from 'react-redux';
-import Article from './Article';
-import { useEffect } from 'react';
-import { loadPromotedArticle } from '../redux/actions';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+
+import Article from './Article';
+
+import { loadPromotedArticle } from '../redux/actions';
+
+import loadingGif from '../assets/loading.gif';
 
 function PromotedArticle ({ loadPromotedArticle, article }) {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
+
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API}/api/articles/promoted`,
@@ -15,8 +23,9 @@ function PromotedArticle ({ loadPromotedArticle, article }) {
       }
     }).then((response) => {
       loadPromotedArticle(response.data);
+      setLoading(false);
     }).catch((error) => {
-
+      setLoading(false);
     });
   }, [loadPromotedArticle]);
 
@@ -24,7 +33,7 @@ function PromotedArticle ({ loadPromotedArticle, article }) {
     <div className="articles-list__title-container row">
       <label className="articles-list__header">Promoted article</label>
     </div>
-    <Article article={article}></Article>
+    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <Article article={article}></Article>}
   </div>;
 }
 

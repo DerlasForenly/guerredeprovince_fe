@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 
 import {
-  signInSync,
+  signIn,
   hideErrorMessage,
   hideLoader,
   showErrorMessage,
@@ -46,7 +46,7 @@ const SignIn = (props) => {
     }).then((response) => {
       console.log(response.data);
       Cookies.set('access_token', response.data.access_token);
-      props.signInSync(response.data);
+      props.signIn(response.data);
       props.hideLoader();
 
       navigate('/home');
@@ -77,7 +77,7 @@ const SignIn = (props) => {
 };
 
 const mapDispatchToProps = {
-  signInSync,
+  signIn,
   hideErrorMessage,
   showErrorMessage,
   hideLoader,
