@@ -11,6 +11,8 @@ import loadingGif from '../assets/loading.gif'
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
   const [loading, setLoading] = useState(true);
 
+  setLoading(true);
+
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <label className="articles-list__header">Recommended for you</label>
