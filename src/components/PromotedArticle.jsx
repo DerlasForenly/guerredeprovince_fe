@@ -32,6 +32,7 @@ function PromotedArticle ({ loadPromotedArticle, article }) {
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <label className="articles-list__header">Promoted article</label>
+      <button>Promote my article</button>
     </div>
     {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <Article article={article}></Article>}
   </div>;

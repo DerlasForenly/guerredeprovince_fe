@@ -9,8 +9,10 @@ import {
   ME,
   CLEAR_USER,
   LOAD_TOP_ARTICLES,
+  LOAD_LAST_ARTICLES,
   LOAD_PROMOTED_ARTICLE,
-  LOAD_SUBSCRIPTION_ARTICLES
+  LOAD_SUBSCRIPTION_ARTICLES,
+  GET_LAST_ARTICLES_PAGE, GET_SUBSCRIPTION_ARTICLES_PAGE, LOAD_ARTICLE, UPDATE_ARTICLE_RATING,
 } from './types';
 
 export function showLoader () {
@@ -102,6 +104,41 @@ export function loadPromotedArticle (data) {
   return {
     type: LOAD_PROMOTED_ARTICLE,
     payload: data
+  };
+}
+
+export function loadLastArticles (data) {
+  return {
+    type: LOAD_LAST_ARTICLES,
+    payload: data,
+  };
+}
+
+export function setLastArticlesPage (data) {
+  return {
+    type: GET_LAST_ARTICLES_PAGE,
+    payload: data,
+  };
+}
+
+export function setSubscriptionArticlesPage (data) {
+  return {
+    type: GET_SUBSCRIPTION_ARTICLES_PAGE,
+    payload: data,
+  };
+}
+
+export function loadArticle (data) {
+  return {
+    type: LOAD_ARTICLE,
+    payload: data,
+  };
+}
+
+export function updateArticleRating (data) {
+  return {
+    type: UPDATE_ARTICLE_RATING,
+    payload: data,
   };
 }
 

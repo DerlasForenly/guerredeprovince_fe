@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadTopArticles } from '../redux/actions';
+import { loadLastArticles, setLastArticlesPage } from '../redux/actions';
 
 import ArticlesList from './ArticlesList';
 import Pagination from './Pagination';
@@ -11,8 +11,9 @@ import Pagination from './Pagination';
 import loadingGif from '../assets/loading.gif';
 import flagImg from '../assets/flag-of-ukraine.jpg';
 import refreshIcon from '../assets/refresh.png';
+import { useParams } from 'react-router';
 
-const TopArticles = ({ loadTopArticles, articles }) => {
+const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setLastArticlesPage }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,22 +21,22 @@ const TopArticles = ({ loadTopArticles, articles }) => {
 
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API}/api/articles/top`,
+      url: `${process.env.REACT_APP_API}/api/articles/last?page=${currentPage}`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-      loadTopArticles(response.data);
+      loadLastArticles(response.data);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
     });
-  }, [loadTopArticles]);
+  }, [loadLastArticles, currentPage]);
 
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <div className="articles-list__title-container row">
-        <label className="articles-list__header">Top Article in</label>
+        <label className="articles-list__header">New Articles in</label>
         <img src={flagImg} alt="flag" className="articles-list__flag"></img>
       </div>
       <div className="articles-list__title-container row">
@@ -43,19 +44,22 @@ const TopArticles = ({ loadTopArticles, articles }) => {
         <img className="refresh-icon" src={refreshIcon} alt="refresh-icon" />
       </div>
     </div>
-    <ArticlesList articles={articles} loading={loading}></ArticlesList>
-    <Pagination></Pagination>
+    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <ArticlesList articles={articles}></ArticlesList>}
+    <Pagination currentPage={currentPage} pagesMeta={pagesMeta} setPageFunction={setLastArticlesPage}></Pagination>
   </div>;
 };
 
 const mapStateToProps = state => {
   return {
-    articles: state.news.topArticles,
+    articles: state.news.lastArticles.articles,
+    pagesMeta: state.news.lastArticles.meta,
+    currentPage: state.news.lastArticles.meta.currentPage,
   };
 };
 
 const mapDispatchToProps = {
-  loadTopArticles,
+  loadLastArticles,
+  setLastArticlesPage,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopArticles);
+export default connect(mapStateToProps, mapDispatchToProps)(LastArticles);

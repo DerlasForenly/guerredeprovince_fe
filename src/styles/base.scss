@@ -7,7 +7,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow-y: hidden; /* Hide vertical scrollbar */
+  //overflow-y: hidden; /* Hide vertical scrollbar */
 }
 
 .col {
@@ -78,4 +78,22 @@ body {
 
 .page-loading-state {
 
+}
+
+.ok-container {
+  @extend .container;
+
+  height: 200px;
+  width: 300px;
+
+  img {
+    margin: auto;
+    height: 90px;
+    width: 90px;
+  }
+
+  label {
+    margin: auto;
+    color: gray;
+  }
 }

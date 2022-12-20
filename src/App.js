@@ -15,6 +15,8 @@ import JobPage from './pages/JobPage';
 import Headers from './components/Headers';
 import RegionPage from './pages/RegionPage';
 import MarketPage from './pages/MarketPage';
+import CreateArticlePage from './pages/CreateArticlePage';
+import ArticlePage from './pages/ArticlePage';
 
 /*
  DefaultRoute has auth guard implemented in useEffect
@@ -25,11 +27,67 @@ function App () {
     <BrowserRouter>
       <Headers></Headers>
       <Routes>
-        <Route path="/sign-in" exact element={<SignIn></SignIn>}></Route>
-        <Route path="/sign-up" exact element={<SignUp></SignUp>}></Route>
-        <Route path="/news" exact element={<GuardedPage element={<NewsPage></NewsPage>}></GuardedPage>}></Route>
-        <Route path="/world" exact
-               element={<GuardedPage element={<WorldMapPage></WorldMapPage>}></GuardedPage>}></Route>
+        <Route
+          path="/sign-in"
+          exact
+          element={
+            <SignIn></SignIn>
+          }>
+        </Route>
+        <Route
+          path="/sign-up"
+          exact
+          element={
+            <SignUp></SignUp>
+          }>
+        </Route>
+        <Route
+          path="/news"
+          exact
+          element={
+            <GuardedPage
+              hiddenLoader={true}
+              element={
+                <NewsPage></NewsPage>
+              }>
+            </GuardedPage>
+          }>
+
+        </Route>
+        <Route
+          path="/news/article/:id"
+          exact
+          element={
+            <GuardedPage
+              hiddenLoader={true}
+              element={
+                <ArticlePage></ArticlePage>
+              }>
+            </GuardedPage>
+          }>
+        </Route>
+        <Route
+          path="/news/article/create"
+          exact
+          element={
+            <GuardedPage
+              hiddenLoader={true}
+              element={
+                <CreateArticlePage></CreateArticlePage>
+              }>
+            </GuardedPage>
+          }>
+        </Route>
+        <Route
+          path="/world"
+          exact
+          element={
+            <GuardedPage
+              element={
+                <WorldMapPage></WorldMapPage>
+              }>
+            </GuardedPage>
+          }></Route>
         <Route path="/home" exact element={<GuardedPage element={<HomePage></HomePage>}></GuardedPage>}></Route>
         <Route path="/wars" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
         <Route path="/profile" exact

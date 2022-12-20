@@ -11,6 +11,20 @@
     .articles-list__title-container {
       align-items: center;
       margin-bottom: 10px;
+      justify-content: space-between;
+
+      .refresh-icon {
+        height: 13px;
+        width: 13px;
+        -webkit-filter: contrast(0.15);
+        filter: contrast(0.15);
+        cursor: pointer;
+      }
+
+      .refresh-icon:hover {
+        -webkit-filter: contrast(1);
+        filter: contrast(1);
+      }
 
       .articles-list__header {
         width: auto;
@@ -38,6 +52,7 @@
     }
 
     .article {
+      text-decoration: none; /* no underline */
       padding-bottom: 5px;
       margin-top: 5px;
       margin-bottom: 10px;
@@ -56,15 +71,25 @@
 
         .author-and-rating {
           justify-content: space-between;
+          display: flex;
+
+          .date {
+            font-size: 10px;
+            color: gray;
+            white-space: nowrap;
+            height: fit-content;
+            align-self: flex-end;
+            margin-left: 25px;
+          }
 
           .author {
-            width: 100%;
-            margin: 0 auto;
+            width: 160px;
             font-size: 15px;
             color: gray;
           }
 
           .rating {
+            white-space: nowrap;
             font-size: 15px;
             font-weight: bold;
             color: forestgreen;
@@ -74,14 +99,14 @@
 
       .avatar {
         border-radius: 100%;
-        height: 60px;
-        width: 60px;
+        height: 50px;
+        width: 50px;
         margin-left: 10px;
       }
     }
 
     .article:hover {
-      .title, .author {
+      .title, .author-and-rating .author, .author-and-rating .date {
         color: black;
       }
 

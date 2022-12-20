@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadSubscriptionArticles } from '../redux/actions';
+import { loadSubscriptionArticles, setSubscriptionArticlesPage, } from '../redux/actions';
 
 import ArticlesList from './ArticlesList';
 import Pagination from './Pagination';
 
-import loadingGif from '../assets/loading.gif'
+import refreshIcon from '../assets/refresh.png';
 
-const SubscriptionArticles = ({ articles, loadSubscriptionArticles }) => {
+const SubscriptionArticles = ({ articles, loadSubscriptionArticles, currentPage, pagesMeta, setSubscriptionArticlesPage }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const SubscriptionArticles = ({ articles, loadSubscriptionArticles }) => {
 
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API}/api/articles/subscriptions`,
+      url: `${process.env.REACT_APP_API}/api/articles/subscriptions?page=${currentPage}`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
@@ -28,25 +28,29 @@ const SubscriptionArticles = ({ articles, loadSubscriptionArticles }) => {
     }).catch((error) => {
       setLoading(false);
     });
-  }, [loadSubscriptionArticles]);
+  }, [loadSubscriptionArticles, currentPage]);
 
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <label className="articles-list__header">Your subscriptions</label>
+      <img className="refresh-icon" src={refreshIcon} alt="refresh-icon" />
     </div>
-    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <ArticlesList articles={articles}></ArticlesList>}
-    <Pagination></Pagination>
+    <ArticlesList articles={articles} loading={loading}></ArticlesList>
+    <Pagination currentPage={currentPage} pagesMeta={pagesMeta} setPageFunction={setSubscriptionArticlesPage}></Pagination>
   </div>;
 };
 
 const mapStateToProps = state => {
   return {
-    articles: state.news.subscriptionArticles,
+    articles: state.news.subscriptionArticles.articles,
+    pagesMeta: state.news.subscriptionArticles.meta,
+    currentPage: state.news.subscriptionArticles.meta.currentPage,
   };
 };
 
 const mapDispatchToProps = {
   loadSubscriptionArticles,
+  setSubscriptionArticlesPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionArticles);
