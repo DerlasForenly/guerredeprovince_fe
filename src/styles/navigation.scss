@@ -2,10 +2,31 @@
   background: white;
   white-space: nowrap;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 
   .logo-container {
     width: 200px;
     min-width: 200px;
+  }
+
+  .sign-out-button {
+    margin: 0 5px;
+    height: 45px;
+    width: 100px;
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    transition: 0.2s;
+  }
+
+  .sign-out-button:hover {
+    // background: #62c256;
+    background: rgb(240, 240, 240);
   }
 
   .upper-navigation-container {
@@ -14,54 +35,29 @@
     display: inline-block;
 
     .navigation-button {
-      margin: 0 5px;
-      height: 45px;
-      width: 100px;
-      font-size: 18px;
-      color: gray;
-      text-align: center;
-      background: none;
-      border: none;
-      outline: none;
-      border-radius: 10px;
-      transition: 0.2s;
+      @extend .sign-out-button;
     }
 
     .navigation-button:hover {
-      // background: #62c256;
-      background: rgb(240, 240, 240);
+      @extend .sign-out-button, :hover;
     }
   }
 
   .user-panel-container {
-    width: 100%;
+    width: 300px;
     float: right;
-    padding: 0 30px;
     align-items: center;
+    height: 50px;
 
-    .navigation-button {
-      margin: 0 20px;
-      height: 30px;
-      width: 80px;
-      font-size: 15px;
-      color: gray;
-      text-align: center;
-      background: none;
-      border: none;
-      outline: none;
-      border-radius: 10px;
-      transition: 0.2s;
-    }
-
-    .navigation-button:hover {
-      // background: #62c256;
-      background: rgb(240, 240, 240);
-    }
-
-    .user-panel-avatar {
+    a {
       height: 50px;
-      width: 50px;
-      border-radius: 60px;
+      text-decoration: none;
+
+      .user-panel-avatar {
+        height: 50px;
+        width: 50px;
+        border-radius: 100%;
+      }
     }
 
     .push-notifications-container {

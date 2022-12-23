@@ -3,24 +3,12 @@ import {
   LOAD_TOP_ARTICLES,
   LOAD_PROMOTED_ARTICLE,
   LOAD_SUBSCRIPTION_ARTICLES,
-  LOAD_MY_NEWSPAPER,
   LOAD_LAST_ARTICLES,
   GET_LAST_ARTICLES_PAGE,
-  GET_SUBSCRIPTION_ARTICLES_PAGE, LOAD_ARTICLE, UPDATE_ARTICLE_RATING,
+  GET_SUBSCRIPTION_ARTICLES_PAGE,
 } from './types';
 
 const initialState = {
-  article: {
-    id: null,
-    title: null,
-    content: null,
-    commentsCount: null,
-    author: null,
-    newspaper: null,
-    createdAt: null,
-    voted: null,
-    rating: null,
-  },
   loading: false,
   recommendedArticles: [],
   topArticles: {
@@ -75,7 +63,6 @@ const initialState = {
     },
     articles: [],
   },
-  newspaper: {},
 };
 
 export const newsReducer = (state = initialState, action) => {
@@ -104,15 +91,6 @@ export const newsReducer = (state = initialState, action) => {
           links: links,
         },
       };
-    case UPDATE_ARTICLE_RATING:
-      return {
-        ...state,
-        article: {
-          ...state.article,
-          rating: action.payload.actual_rating,
-          voted: action.payload.voted,
-        },
-      };
     case GET_LAST_ARTICLES_PAGE:
       console.log(state.lastArticles);
       return {
@@ -126,7 +104,6 @@ export const newsReducer = (state = initialState, action) => {
         }
       };
     case GET_SUBSCRIPTION_ARTICLES_PAGE:
-      console.log(state.lastArticles);
       return {
         ...state,
         subscriptionArticles: {
@@ -173,15 +150,6 @@ export const newsReducer = (state = initialState, action) => {
           },
           links: links,
         },
-      };
-    case LOAD_MY_NEWSPAPER:
-      return {
-        ...state,
-      };
-    case LOAD_ARTICLE:
-      return {
-        ...state,
-        article: action.payload,
       };
     default:
       return state;

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ErrorMessage from '../components/ErrorMessage';
 import axios from 'axios';
-import { hideErrorMessage, hideLoader, showErrorMessage, showLoader } from '../redux/actions';
+
+import { hideLoader, showLoader } from '../redux/app/actions';
+import { hideErrorMessage, showErrorMessage } from '../redux/auth/actions';
 
 import okGif from '../assets/ok2.gif';
 

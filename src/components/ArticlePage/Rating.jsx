@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { updateArticleRating } from '../../redux/actions';
+import { updateArticleRating } from '../../redux/article/actions';
 import loadingGif from '../../assets/reload-cat.gif';
 
 function Rating ({ article, updateArticleRating }) {
@@ -77,7 +77,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
   return {
-    article: state.news.article,
+    article: state.article.article,
   };
 };
 

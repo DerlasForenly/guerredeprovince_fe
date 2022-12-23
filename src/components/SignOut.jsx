@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 
-import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, clearUser } from '../redux/actions';
+import { hideLoader, showLoader } from '../redux/app/actions';
+import { hideErrorMessage, showErrorMessage, clearUser } from '../redux/auth/actions';
 
 function SignOut (props) {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function SignOut (props) {
   };
 
   return <form onSubmit={submitHandler}>
-    <button type="submit" className="navigation-button">Sign Out</button>
+    <button type="submit" className="sign-out-button">Sign Out</button>
   </form>;
 }
 

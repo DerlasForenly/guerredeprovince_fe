@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadTopArticles } from '../redux/actions';
+import { loadTopArticles } from '../redux/news/actions';
 
 import ArticlesList from './ArticlesList';
 import Pagination from './Pagination';

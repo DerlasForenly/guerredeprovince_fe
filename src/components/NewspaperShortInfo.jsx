@@ -1,27 +1,100 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import avatarImg from '../assets/default_avatar.jpg';
+import newspaperSign from '../assets/newspaper.png';
+import loadingGif from '../assets/loading.gif';
 
-const NewspaperShortInfo = () => {
-  return <div className="newspaper-and-navigation-container row">
-    <div className="newspaper-short-info-container row">
-      <img src={avatarImg} alt="newspaper-avatar" />
-      <div className="text-info col">
-        <div className="col">
-          <label className="newspaper-name">Газета доброї волі на кожен день</label>
-          <label>Your position: moderator</label>
-        </div>
-        <label className="rating">+855</label>
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import Newspaper from '../components/Newspaper';
+import { loadNewspaper } from '../redux/newspaper/actions';
+
+const NewspaperShortInfo = ({ user = false, newspaper, loadNewspaper }) => {
+  const [newspaperNotFound, setNewspaperNotFound] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+
+    if (user === false) {
+      return;
+    }
+
+    if (user.newspaper_id === null) {
+      setLoading(false);
+      setNewspaperNotFound(true);
+      return;
+    }
+
+    setLoading(true);
+
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/newspapers/${user.newspaper_id}`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      loadNewspaper(response.data);
+      setNewspaperNotFound(false);
+      setLoading(false);
+    }).catch((error) => {
+      setNewspaperNotFound(true);
+      setLoading(false);
+    });
+
+  }, [loadNewspaper, user]);
+
+  if (loading) {
+    return <div className="newspaper-and-navigation-container row">
+      <div className="newspaper-short-info-container row">
+        <img src={loadingGif} className="newspaper-avatar" alt="newspaper-avatar" />
       </div>
-    </div>
-    <div>
-      <Link to="/news/article/create">
-        <button>Create an article</button>
-      </Link>
-      <button>My subscriptions</button>
-    </div>
-  </div>;
+      <Actions></Actions>
+    </div>;
+  } else {
+    return <div className="newspaper-and-navigation-container row">
+      {newspaperNotFound ? <Free></Free> : newspaper ? <Newspaper></Newspaper> : <div></div>}
+      <Actions></Actions>
+    </div>;
+  }
 };
 
-export default connect(null, null)(NewspaperShortInfo);
+const mapDispatchToProps = {
+  loadNewspaper
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    newspaper: state.newspaper.newspaper,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewspaperShortInfo);
+
+function Actions () {
+  return <div>
+    <Link to="/news/article/create">
+      <button>Create an article</button>
+    </Link>
+    <Link to="/news/subscriptions">
+      <button>My subscriptions</button>
+    </Link>
+  </div>;
+}
+
+function Free () {
+  return <div className="newspaper-short-info-container row">
+    {/*<img src={newspaperSign} className="newspaper-icon" />*/}
+    {/*<div className="help-text col">*/}
+    {/*  <label>You do not have any position at any newspaper.</label>*/}
+    {/*  <button>Create a newspaper</button>*/}
+    {/*</div>*/}
+    <img src={newspaperSign} className="newspaper-icon" alt="newspaper-icon" />
+    <Link to="/newspaper/create">
+      <button>Create a newspaper</button>
+    </Link>
+  </div>;
+}

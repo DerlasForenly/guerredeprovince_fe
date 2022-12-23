@@ -1,12 +1,4 @@
-import {
-  SIGN_IN,
-  SIGN_UP,
-  SIGN_OUT,
-  SHOW_ERROR_MESSAGE,
-  HIDE_ERROR_MESSAGE,
-  ME,
-  CLEAR_USER
-} from './types';
+import { CLEAR_USER, HIDE_ERROR_MESSAGE, ME, SHOW_ERROR_MESSAGE, SIGN_IN, SIGN_OUT, SIGN_UP } from './types';
 
 const initialState = {
   user: false,

@@ -8,10 +8,13 @@ import { Link } from 'react-router-dom';
 import {
   signIn,
   hideErrorMessage,
-  hideLoader,
   showErrorMessage,
+} from '../redux/auth/actions';
+
+import {
+  hideLoader,
   showLoader
-} from '../redux/actions';
+} from '../redux/app/actions';
 
 import ErrorMessage from './ErrorMessage';
 

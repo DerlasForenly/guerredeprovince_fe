@@ -1,0 +1,61 @@
+@import "base";
+
+.subscriptions-page {
+  @extend .page;
+
+  .subscriptions-container {
+    @extend .container;
+
+    width: 650px;
+
+    .title {
+      width: 100%;
+      color: gray;
+      font-weight: bold;
+      font-size: 20px;
+      margin: auto auto 10px;
+    }
+
+    .newspaper {
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      img {
+        height: 70px;
+        margin-right: 10px;
+      }
+
+      .name-nickname {
+        color: gray;
+        //justify-content: space-between;
+
+        .name {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+      }
+
+      button {
+        padding: 10px;
+        margin: 0 5px;
+        height: fit-content;
+        width: fit-content;
+        font-size: 18px;
+        color: gray;
+        text-align: center;
+        background: none;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: rgb(240, 240, 240);
+      }
+    }
+  }
+
+
+}

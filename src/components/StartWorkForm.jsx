@@ -10,7 +10,7 @@ import {
   showErrorMessage,
   showLoader,
   meAsync
-} from '../redux/actions';
+} from '../redux/news/actions';
 
 const MIN_WORK_TIME = 10;
 const MAX_WORK_TIME = 300;

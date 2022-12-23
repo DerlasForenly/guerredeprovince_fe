@@ -17,6 +17,9 @@ import RegionPage from './pages/RegionPage';
 import MarketPage from './pages/MarketPage';
 import CreateArticlePage from './pages/CreateArticlePage';
 import ArticlePage from './pages/ArticlePage';
+import CreateNewspaperPage from './pages/CreateNewspaperPage';
+import NewspaperPage from './pages/NewspaperPage';
+import SubscriptionsPage from './pages/SubscriptionsPage';
 
 /*
  DefaultRoute has auth guard implemented in useEffect
@@ -46,20 +49,50 @@ function App () {
           exact
           element={
             <GuardedPage
-              hiddenLoader={true}
               element={
                 <NewsPage></NewsPage>
               }>
             </GuardedPage>
           }>
-
+        </Route>
+        <Route
+          path="/news/subscriptions"
+          exact
+          element={
+            <GuardedPage
+              element={
+                <SubscriptionsPage></SubscriptionsPage>
+              }>
+            </GuardedPage>
+          }>
+        </Route>
+        <Route
+          path="/newspaper/:id"
+          exact
+          element={
+            <GuardedPage
+              element={
+                <NewspaperPage></NewspaperPage>
+              }>
+            </GuardedPage>
+          }>
+        </Route>
+        <Route
+          path="/newspaper/create"
+          exact
+          element={
+            <GuardedPage
+              element={
+                <CreateNewspaperPage></CreateNewspaperPage>
+              }>
+            </GuardedPage>
+          }>
         </Route>
         <Route
           path="/news/article/:id"
           exact
           element={
             <GuardedPage
-              hiddenLoader={true}
               element={
                 <ArticlePage></ArticlePage>
               }>
@@ -71,7 +104,6 @@ function App () {
           exact
           element={
             <GuardedPage
-              hiddenLoader={true}
               element={
                 <CreateArticlePage></CreateArticlePage>
               }>
@@ -103,3 +135,13 @@ function App () {
 }
 
 export default connect(null, null)(App);
+
+function SignInRoute () {
+  return <Route
+    path="/sign-in"
+    exact
+    element={
+      <SignIn></SignIn>
+    }>
+  </Route>;
+}

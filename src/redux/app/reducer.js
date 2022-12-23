@@ -1,9 +1,8 @@
 import { HIDE_LOADER, SHOW_LOADER } from './types';
 
 const initialState = {
-  loading: true,
-  stability: true,
-};
+  loading: false,
+}
 
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {

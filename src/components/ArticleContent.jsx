@@ -5,20 +5,19 @@ import Cookies from 'js-cookie';
 
 import loadingGif from '../assets/loading.gif';
 import moreIcon from '../assets/more.png';
-import avatarImg from '../assets/default_avatar.jpg';
 import { useEffect, useState } from 'react';
-import { loadArticle, loadPromotedArticle } from '../redux/actions';
+import { loadArticle } from '../redux/article/actions';
 import { Link } from 'react-router-dom';
 
 import Rating from '../components/ArticlePage/Rating';
 
 function ArticleContent ({ article, loadArticle }) {
-  const [contentLoading, setContentLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
 
   useEffect(() => {
-    setContentLoading(true);
+    setLoading(true);
 
     axios({
       method: 'get',
@@ -28,27 +27,36 @@ function ArticleContent ({ article, loadArticle }) {
       }
     }).then((response) => {
       loadArticle(response.data);
-      setContentLoading(false);
+      setLoading(false);
     }).catch((error) => {
-      setContentLoading(false);
+      setLoading(false);
     });
-  }, [id]);
 
-  if (contentLoading) {
+  }, [id, loadArticle]);
+
+  if (loading) {
     return <div className="article-content-container">
       <img className="loading-gif" src={loadingGif} alt="loading-gif" />
     </div>;
   } else {
     return <div className="article-content-container col">
-      <ArticlePageNavigation></ArticlePageNavigation>
+      {/*<ArticlePageNavigation></ArticlePageNavigation>*/}
       <div className="title">{article?.title}</div>
       <div className="content">{article?.content}</div>
       <div className="meta row">
         <div className="row">
-          <img src={avatarImg} alt="avatar" className="avatar"></img>
+          <img
+            src={`${process.env.REACT_APP_API}/${article?.avatar}`}
+            alt="avatar"
+            className="avatar"
+          />
           <div className="newspaper-author col">
-            <div className="newspaper">{article?.newspaper}</div>
-            <div className="author">{article?.newspaper ? 'Moderator:' : ''} {article?.author}</div>
+            <Link to={`/newspaper/${article?.newspaper.id}`}>
+              <div className="newspaper">{article?.newspaper.name}</div>
+            </Link>
+            <Link to={`/user/${article?.author.id}`}>
+              <div className="author">{article?.newspaper ? 'Moderator:' : ''} {article?.author.nickname}</div>
+            </Link>
           </div>
           {/*<button className="subscribe-button">Subscribe</button>*/}
         </div>
@@ -65,7 +73,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
   return {
-    article: state.news.article,
+    article: state.article.article,
   };
 };
 

@@ -2,13 +2,19 @@ import { connect } from 'react-redux';
 
 import UpperNavigationPanel from './UpperNavigationPanel';
 import UserPanel from './UserPanel';
+import SignOut from '../components/SignOut';
 
-function Headers (props) {
-  return props.user ? <div className="navigation row">
-    <div className="logo-container"></div>
-    <UpperNavigationPanel></UpperNavigationPanel>
-    <UserPanel></UserPanel>
-  </div> : <div></div>;
+function Headers ({ user }) {
+  if (user) {
+    return <div className="navigation row">
+      <div className="logo-container"></div>
+      <UpperNavigationPanel></UpperNavigationPanel>
+      <UserPanel></UserPanel>
+      <SignOut></SignOut>
+    </div>;
+  } else {
+    return <div></div>;
+  }
 }
 
 const mapStateToProps = state => {

@@ -1,8 +1,9 @@
 body {
+  min-height: 100%;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: whitesmoke;
-  //background: no-repeat center center fixed url(https://wikiway.com/upload/hl-photo/6c1/6f2/cherkassy_86.jpg);
+  background: no-repeat center center fixed url(http://127.0.0.1:8000/backgrounds/background.jpg);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -65,6 +66,7 @@ body {
     color: gray;
     font-size: 18px;
     font-weight: bold;
+    transition: 0.2s;
   }
 
   button:hover {

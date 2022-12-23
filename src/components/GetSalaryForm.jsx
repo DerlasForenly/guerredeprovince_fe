@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import ErrorMessage from './ErrorMessage';
-import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from '../redux/actions';
+// import { hideErrorMessage, hideLoader, showErrorMessage, showLoader, meAsync } from '../redux/actions';
 
 function GetSalaryForm (props) {
   const [state, setState] = useState({
@@ -81,11 +81,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  hideErrorMessage,
-  showErrorMessage,
-  hideLoader,
-  showLoader,
-  meAsync,
+  // hideErrorMessage,
+  // showErrorMessage,
+  // hideLoader,
+  // showLoader,
+  // meAsync,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GetSalaryForm);

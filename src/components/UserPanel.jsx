@@ -2,18 +2,21 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import avatarImg from '../assets/default_avatar.jpg';
-import SignOut from './SignOut';
 
-const UserPanel = (props) => {
+const UserPanel = ({ user }) => {
   return <div className="user-panel-container row">
     <div className="push-notifications-container">99+</div>
-    <Link to="/profile"><img src={avatarImg} alt="avatar" className="user-panel-avatar"></img></Link>
-
+    <Link to="/profile">
+      <img
+        src={`${process.env.REACT_APP_API}/${user?.avatar}`}
+        alt="avatar"
+        className="user-panel-avatar"
+      />
+    </Link>
     <div className="user-panel-balance col">
-      <label>152 325 452 UAH</label>
-      <label>135 234 D</label>
+      <label>{ user?.gold } G</label>
+      <label>{ user?.diamonds } D</label>
     </div>
-    <SignOut></SignOut>
   </div>;
 };
 

@@ -6,4 +6,14 @@ const ProfilePage = (props) => {
   </div>;
 };
 
-export default connect(null, null)(ProfilePage);
+const mapDispatchToProps = {
+
+};
+
+const mapStateToProps = state => {
+  return {
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import Article from './Article';
 
-import { loadPromotedArticle } from '../redux/actions';
+import { loadPromotedArticle } from '../redux/news/actions';
 
 import loadingGif from '../assets/loading.gif';
 

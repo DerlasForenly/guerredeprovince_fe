@@ -3,12 +3,12 @@ import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import ErrorMessage from '../components/ErrorMessage';
-
 import loadingGif from '../assets/ok.gif';
 import { Link } from 'react-router-dom';
+import InputText from '../components/InputText';
+import InputTextarea from '../components/InputTextarea';
 
-const CreateArticlePage = (props) => {
+const CreateArticlePage = ({ user }) => {
   const [state, setState] = useState({
     title: '',
     content: '',
@@ -66,11 +66,31 @@ const CreateArticlePage = (props) => {
   return <div className="create-article-page row">
     <form onSubmit={submitHandler} className="create-article-container col">
       <BackAndHelp></BackAndHelp>
-      <TextInput changeInputHandler={changeInputHandler} max={80}></TextInput>
-      <TextareaContent changeInputHandler={changeInputHandler} max={4000}></TextareaContent>
+      <InputText
+        changeInputHandler={changeInputHandler}
+        max={80}
+        label={'Title'}
+        name='title'
+      />
+      <InputTextarea
+        changeInputHandler={changeInputHandler}
+        max={4000}
+        label={'Content'}
+        name='content'
+      />
       <div className="settings row">
         <div className="col">
-          <Author></Author>
+          <div className="author col">
+            <label className="select-label">On behalf of the</label>
+            <select
+              name="newspaperId"
+              defaultValue={0}
+              onChange={changeInputHandler}
+            >
+              <option value={0}>Me</option>
+              <option value={user?.newspaper_id}>Newspaper</option>
+            </select>
+          </div>
           <Language></Language>
         </div>
         <State></State>
@@ -80,35 +100,21 @@ const CreateArticlePage = (props) => {
   </div>
 };
 
-export default connect(null, null)(CreateArticlePage);
+const mapDispatchToProps = {};
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateArticlePage);
 
 function Loading ({ active }) {
   return active ? <div className="loading">
     <label>Wait...</label>
     <img src={loadingGif} alt="loading-gif"></img>
   </div> : <div></div>
-}
-
-function TextareaContent ({ changeInputHandler, max }) {
-  const [currentLength, setCurrentLength] = useState(0);
-
-  const onChange = e => {
-    setCurrentLength(e.target.value.length);
-    changeInputHandler(e)
-  }
-
-  return <div className="textarea-content col">
-    <label className="input-label">Content</label>
-    <div className="textarea-input col">
-      <textarea
-        required
-        name="content"
-        onChange={onChange}
-      >
-      </textarea>
-      <label className="size-indicator">{currentLength}/{max}</label>
-    </div>
-  </div>
 }
 
 function BackAndHelp () {
@@ -119,43 +125,6 @@ function BackAndHelp () {
     <Link to="/news">
       <button className="back-button">Help</button>
     </Link>
-  </div>
-}
-
-function TextInput ({ changeInputHandler, max }) {
-  const [currentLength, setCurrentLength] = useState(0);
-
-  const onChange = e => {
-    setCurrentLength(e.target.value.length);
-    changeInputHandler(e)
-  }
-
-  return <div className="text-input col">
-    <label className="input-label">Title</label>
-    <div className="input-indicator row">
-      <input
-        required
-        type="text"
-        name="title"
-        onChange={onChange}
-        max={max}
-      >
-      </input>
-      <label className="size-indicator">{currentLength}/{max}</label>
-    </div>
-  </div>
-}
-
-function Author () {
-  return <div className="author col">
-    <label className="select-label">On behalf of the</label>
-    <select
-      name="newspaperId"
-      defaultValue={0}
-    >
-      <option value={0}>Me</option>
-      <option value={1}>Газета доброї волі на кожен день</option>
-    </select>
   </div>
 }
 

@@ -9,20 +9,14 @@ import NewspaperShortInfo from '../components/NewspaperShortInfo';
 const NewsPage = () => {
   return <div className="news-page col">
     <div>
-      <div>
-        <NewspaperShortInfo></NewspaperShortInfo>
-      </div>
+      <NewspaperShortInfo></NewspaperShortInfo>
       <div className="row">
         <div className="col">
           <PromotedArticle></PromotedArticle>
           <RecommendedArticles></RecommendedArticles>
         </div>
-        <div className="col">
-          <SubscriptionArticles></SubscriptionArticles>
-        </div>
-        <div className="col">
-          <LastArticles></LastArticles>
-        </div>
+        <SubscriptionArticles></SubscriptionArticles>
+        <LastArticles></LastArticles>
       </div>
     </div>
   </div>;

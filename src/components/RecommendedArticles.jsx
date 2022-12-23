@@ -1,12 +1,7 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { loadRecommendedArticles } from '../redux/actions';
-
 import ArticlesList from './ArticlesList';
-import Pagination from './Pagination';
-
-import loadingGif from '../assets/loading.gif';
 import refreshIcon from '../assets/refresh.png';
 
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
@@ -32,7 +27,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  loadRecommendedArticles,
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecommendedArticles);
