@@ -3,12 +3,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadTopArticles } from '../redux/news/actions';
+import { loadTopArticles } from '../../redux/news/actions';
 
-import ArticlesList from './ArticlesList';
-import Pagination from './Pagination';
+import ArticlesList from '../ArticlesList';
+import Pagination from '../Pagination';
 
-import loadingGif from '../assets/loading.gif';
 import flagImg from '../assets/flag-of-ukraine.jpg';
 import refreshIcon from '../assets/refresh.png';
 

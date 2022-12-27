@@ -43,6 +43,7 @@
     }
 
     .name {
+      width: 100%;
       color: gray;
       font-size: 22px;
       font-weight: bold;
@@ -50,6 +51,7 @@
     }
 
     .description {
+      width: 100%;
       color: gray;
       font-size: 14px;
       margin: 0 0 15px;
@@ -66,7 +68,12 @@
       justify-content: space-between;
     }
 
+    .second-col {
+      width: 100%;
+    }
+
     .statistics {
+      width: 100%;
       margin-top: 10px;
 
       .section-label {

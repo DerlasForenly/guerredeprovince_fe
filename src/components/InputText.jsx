@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
-function TextInput ({ changeInputHandler, max, label = 'label', name='' }) {
+function TextInput ({ changeInputHandler, max, label = null, name = null }) {
   const [currentLength, setCurrentLength] = useState(0);
 
   const onChange = e => {

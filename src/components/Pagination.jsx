@@ -1,27 +1,30 @@
 import { connect } from 'react-redux';
 
-function Pagination ({ currentPage = 1, pagesMeta, setPageFunction }) {
-
+function Pagination ({ pagesMeta, setPageFunction }) {
   const next = e => {
-    if (currentPage === pagesMeta.lastPage) {
+    if (pagesMeta.currentPage === pagesMeta.lastPage) {
       return
     }
 
-    setPageFunction(++currentPage);
+    let newPage = pagesMeta.currentPage + 1;
+
+    setPageFunction(newPage);
   }
 
   const previous = e => {
-    if (currentPage === 1) {
+    if (pagesMeta.currentPage === 1) {
       return;
     }
 
-    setPageFunction(--currentPage)
+    let newPage = pagesMeta.currentPage - 1;
+
+    setPageFunction(newPage)
   }
 
   return <div className="pagination">
-    {currentPage === pagesMeta?.from ? <button>x</button> : <button onClick={previous}>-</button>}
-    <label>{currentPage}</label>
-    {currentPage === pagesMeta?.lastPage ? <button>x</button> : <button onClick={next}>+</button>}
+    {pagesMeta.currentPage === pagesMeta.from ? <button>x</button> : <button onClick={previous}>-</button>}
+    <label>{pagesMeta.currentPage}</label>
+    {pagesMeta.currentPage === pagesMeta.lastPage ? <button>x</button> : <button onClick={next}>+</button>}
   </div>;
 }
 export default connect(null, null)(Pagination);

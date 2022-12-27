@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ArticleContent from '../components/ArticleContent';
+import CommentsSection from '../components/ArticlePage/Comments/CommnetsSection';
 
 const ArticlePage = () => {
   return <div className="article-page col">
@@ -10,8 +11,3 @@ const ArticlePage = () => {
 
 export default connect(null, null)(ArticlePage);
 
-function CommentsSection () {
-  return <div className="comments-section-container">
-    <button>Show comments (1365)</button>
-  </div>;
-}

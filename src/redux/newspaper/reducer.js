@@ -25,7 +25,7 @@ export const newspaperReducer = (state = initialState, action) => {
         ...state,
         newspaper: {
           ...state.newspaper,
-          subscribed: action.payload,
+          subscribed: action.payload.subscribed,
         }
       };
     case LOAD_NEWSPAPER:

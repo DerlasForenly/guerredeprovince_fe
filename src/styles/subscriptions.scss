@@ -13,7 +13,7 @@
       color: gray;
       font-weight: bold;
       font-size: 20px;
-      margin: auto auto 10px;
+      margin: auto auto 20px;
     }
 
     .newspaper {
@@ -23,16 +23,27 @@
       img {
         height: 70px;
         margin-right: 10px;
+        transition: 0.2s;
       }
 
       .name-nickname {
         color: gray;
-        //justify-content: space-between;
 
-        .name {
-          font-size: 20px;
-          font-weight: bold;
+        a {
+          text-decoration: none;
+          color: gray;
           margin-bottom: 5px;
+
+          .nickname, .name {
+            cursor: pointer;
+            transition: 0.2s;
+          }
+
+          .name {
+            font-size: 20px;
+            font-weight: bold;
+
+          }
         }
       }
 
@@ -53,6 +64,20 @@
 
       button:hover {
         background: rgb(240, 240, 240);
+      }
+    }
+
+    .newspaper:hover {
+      img {
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .name-nickname {
+        a {
+          .nickname, .name {
+            color: black;
+          }
+        }
       }
     }
   }

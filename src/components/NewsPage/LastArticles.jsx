@@ -3,16 +3,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadLastArticles, setLastArticlesPage } from '../redux/news/actions';
+import { loadLastArticles, setLastArticlesPage } from '../../redux/news/actions';
 
-import ArticlesList from './ArticlesList';
-import Pagination from './Pagination';
+import ArticlesList from '../../components/ArticlesList';
+import Pagination from '../../components/Pagination';
 
-import loadingGif from '../assets/loading.gif';
-import flagImg from '../assets/flag-of-ukraine.jpg';
-import refreshIcon from '../assets/refresh.png';
+import loadingGif from '../../assets/loading.gif';
+import flagImg from '../../assets/flag-of-ukraine.jpg';
+import refreshIcon from '../../assets/refresh.png';
 
-const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setLastArticlesPage }) => {
+const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPage }) => {
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
 
@@ -21,7 +21,7 @@ const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setL
 
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API}/api/articles/last?page=${currentPage}`,
+      url: `${process.env.REACT_APP_API}/api/articles/last?page=${pagesMeta.currentPage}`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
@@ -31,7 +31,7 @@ const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setL
     }).catch((error) => {
       setLoading(false);
     });
-  }, [loadLastArticles, currentPage]);
+  }, [loadLastArticles, pagesMeta.currentPage]);
 
   const refreshOnClick = e => {
     setLoading(true);
@@ -40,7 +40,7 @@ const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setL
     setTimeout(() => {
       axios({
         method: 'get',
-        url: `${process.env.REACT_APP_API}/api/articles/last?page=${currentPage}`,
+        url: `${process.env.REACT_APP_API}/api/articles/last?page=${pagesMeta.currentPage}`,
         headers: {
           Authorization: `Bearer` + Cookies.get('access_token')
         }
@@ -71,8 +71,8 @@ const LastArticles = ({ loadLastArticles, articles, currentPage, pagesMeta, setL
         />
       </div>
     </div>
-    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <ArticlesList articles={articles}></ArticlesList>}
-    <Pagination currentPage={currentPage} pagesMeta={pagesMeta} setPageFunction={setLastArticlesPage}></Pagination>
+    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <ArticlesList articles={articles}/>}
+    <Pagination pagesMeta={pagesMeta} setPageFunction={setLastArticlesPage}/>
   </div>;
 };
 
@@ -80,7 +80,6 @@ const mapStateToProps = state => {
   return {
     articles: state.news.lastArticles.articles,
     pagesMeta: state.news.lastArticles.meta,
-    currentPage: state.news.lastArticles.meta.currentPage,
   };
 };
 

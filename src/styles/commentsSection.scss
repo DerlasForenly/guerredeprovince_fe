@@ -1,0 +1,168 @@
+@import "base";
+
+.comments-section-container {
+  @extend .container;
+
+  max-width: 900px;
+
+  text-align: center;
+
+  button {
+    border: none;
+    background: none;
+    margin: auto;
+    color: gray;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    color: black;
+    background: whitesmoke;
+  }
+
+  .comments-list {
+    .comment {
+      margin-bottom: 20px;
+      justify-content: space-between;
+      display: flex;
+      align-items: flex-end;
+
+      label, p {
+        color: gray;
+      }
+
+      img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+      }
+
+      .nick-more {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 850px;
+
+        label {
+          margin-right: 5px;
+          transition: 0.2s;
+        }
+
+        .nickname, .reply {
+          font-weight: bold;
+          cursor: pointer;
+        }
+
+        .nickname:hover, .reply:hover {
+          color: black;
+        }
+
+        .reply {
+          margin-left: 20px;
+        }
+
+        .more {
+          height: 15px;
+          width: 15px;
+          filter: contrast(0.1);
+        }
+      }
+
+      .content {
+        height: fit-content;
+        text-align: left;
+        max-width: 860px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .date-rating {
+        justify-content: space-between;
+        width: 100%;
+
+        .rating {
+          white-space: nowrap;
+          text-align: end;
+          display: flex;
+          align-items: center;
+          font-size: 13px;
+
+          button {
+            height: 20px;
+            width: 40px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+          }
+
+          button:hover {
+            background: none;
+          }
+
+          .down:hover, .down-active {
+            color: red;
+          }
+
+          .up:hover, .up-active {
+            color: lightgreen;
+          }
+
+          .loading {
+            height: 20px;
+            width: 20px;
+          }
+
+          label {
+            margin-left: 5px;
+            margin-right: 5px;
+          }
+
+          .negative-rating {
+            color: red;
+          }
+
+          .positive-rating {
+            color: forestgreen;
+          }
+        }
+
+        .date {
+          font-size: 13px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .create-comment {
+    display: flex;
+    justify-content: flex-end;
+
+    .textarea-input-container {
+      @extend .textarea-input-container;
+
+      margin-bottom: 0;
+      width: 100%;
+
+      .textarea-input textarea {
+        min-height: 0;
+        font-size: 15px;
+      }
+
+      .input-label {
+        @extend .input-label;
+
+        margin: 0;
+      }
+    }
+
+    button {
+      margin-left: 15px;
+      margin-bottom: 0;
+      padding: 10px;
+      border-radius: 10px;
+      height: fit-content;
+    }
+  }
+}

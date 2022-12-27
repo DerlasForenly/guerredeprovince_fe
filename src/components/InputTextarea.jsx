@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import TextareaAutosize from 'react-textarea-autosize';
 
-function InputTextarea ({ changeInputHandler, max, label = 'label', name = '' }) {
+function InputTextarea ({ changeInputHandler, max, label = null, name = null }) {
   const [currentLength, setCurrentLength] = useState(0);
 
   const onChange = e => {
@@ -9,15 +10,15 @@ function InputTextarea ({ changeInputHandler, max, label = 'label', name = '' })
     changeInputHandler(e)
   }
 
-  return <div className="textarea-content col">
-    <label className="input-label">{label}</label>
+  return <div className="textarea-input-container col">
+    <div className="input-label">{label}</div>
     <div className="textarea-input col">
-      <textarea
+      <TextareaAutosize
         required
         name={name}
         onChange={onChange}
       >
-      </textarea>
+      </TextareaAutosize>
       <label className="size-indicator">{currentLength}/{max}</label>
     </div>
   </div>

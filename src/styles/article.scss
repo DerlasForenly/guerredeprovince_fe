@@ -26,25 +26,6 @@
     }
   }
 
-  .comments-section-container {
-    @extend .container;
-
-    text-align: center;
-
-    button {
-      border: none;
-      background: none;
-      margin: auto;
-      color: gray;
-      font-size: 18px;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      color: black;
-    }
-  }
-
   .article-content-container {
     @extend .container;
     padding: 30px 40px 15px;
@@ -182,13 +163,21 @@
           font-weight: bold;
           color: forestgreen;
         }
+
+        .negative-rating {
+          color: red;
+        }
+
+        .positive-rating {
+          color: forestgreen;
+        }
       }
     }
 
     .content {
       display: flex;
       color: gray;
-      min-height: 400px;
+      min-height: 300px;
       margin: 0 0 45px 0;
       overflow-wrap: anywhere;
     }

@@ -6,6 +6,8 @@ import { subsReducer } from './subscriptions/reducer';
 import { newspaperReducer } from './newspaper/reducer';
 import { appReducer } from './app/reducer';
 import { articleReducer } from './article/reducer';
+import { commentsReducer } from './comments/reducer';
+import { userReducer } from './user/reducer';
 
 export const rootReducer = combineReducers({
   app: appReducer,
@@ -14,5 +16,7 @@ export const rootReducer = combineReducers({
   article: articleReducer,
   subscriptions: subsReducer,
   newspaper: newspaperReducer,
+  user: userReducer,
+  comments: commentsReducer,
   routing: routerReducer,
 });

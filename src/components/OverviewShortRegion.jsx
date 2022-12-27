@@ -5,7 +5,6 @@ import regionImg from '../assets/default_region_avatar.png';
 
 function OverviewShortRegion (props) {
   const [currentPage] = useState(<Region></Region>);
-  //const [currentPage, setCurrentPage] = useState(<Region></Region>);
 
   const pageNames = [
     'Region',

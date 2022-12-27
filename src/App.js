@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import './style.scss';
 
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import SignIn from './components/AuthPage/SignIn';
+import SignUp from './components/AuthPage/SignUp';
 import HomePage from './pages/HomePage';
 import GuardedPage from './pages/GuardedPage';
 import NewsPage from './pages/NewsPage';
@@ -12,7 +12,7 @@ import WorldMapPage from './pages/WorldMapPage';
 import ProfilePage from './pages/ProfilePage';
 import RedirectPage from './pages/RedirectPage';
 import JobPage from './pages/JobPage';
-import Headers from './components/Headers';
+import Headers from './components/BasePage/Headers';
 import RegionPage from './pages/RegionPage';
 import MarketPage from './pages/MarketPage';
 import CreateArticlePage from './pages/CreateArticlePage';
@@ -20,115 +20,108 @@ import ArticlePage from './pages/ArticlePage';
 import CreateNewspaperPage from './pages/CreateNewspaperPage';
 import NewspaperPage from './pages/NewspaperPage';
 import SubscriptionsPage from './pages/SubscriptionsPage';
-
-/*
- DefaultRoute has auth guard implemented in useEffect
- */
+import UserPage from './pages/UserPage';
+import NewspaperStaffPage from './pages/NewspaperStaffPage';
 
 function App () {
   return <div className="App">
     <BrowserRouter>
-      <Headers></Headers>
+      <Headers/>
       <Routes>
         <Route
           path="/sign-in"
           exact
-          element={
-            <SignIn></SignIn>
-          }>
-        </Route>
+          element={<SignIn />}
+        />
         <Route
           path="/sign-up"
           exact
-          element={
-            <SignUp></SignUp>
-          }>
-        </Route>
+          element={<SignUp />} />
         <Route
           path="/news"
           exact
-          element={
-            <GuardedPage
-              element={
-                <NewsPage></NewsPage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<NewsPage />} />}
+        />
         <Route
           path="/news/subscriptions"
           exact
-          element={
-            <GuardedPage
-              element={
-                <SubscriptionsPage></SubscriptionsPage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<SubscriptionsPage />} />}
+        />
         <Route
           path="/newspaper/:id"
           exact
-          element={
-            <GuardedPage
-              element={
-                <NewspaperPage></NewspaperPage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<NewspaperPage />} />}
+        />
+        <Route
+          path="/newspaper/:id/staff"
+          exact
+          element={<GuardedPage element={<NewspaperStaffPage />} />}
+        />
         <Route
           path="/newspaper/create"
           exact
-          element={
-            <GuardedPage
-              element={
-                <CreateNewspaperPage></CreateNewspaperPage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<CreateNewspaperPage />} />}
+        />
         <Route
           path="/news/article/:id"
           exact
-          element={
-            <GuardedPage
-              element={
-                <ArticlePage></ArticlePage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<ArticlePage />} />}
+        />
         <Route
           path="/news/article/create"
           exact
-          element={
-            <GuardedPage
-              element={
-                <CreateArticlePage></CreateArticlePage>
-              }>
-            </GuardedPage>
-          }>
-        </Route>
+          element={<GuardedPage element={<CreateArticlePage />} />}
+        />
         <Route
           path="/world"
           exact
-          element={
-            <GuardedPage
-              element={
-                <WorldMapPage></WorldMapPage>
-              }>
-            </GuardedPage>
-          }></Route>
-        <Route path="/home" exact element={<GuardedPage element={<HomePage></HomePage>}></GuardedPage>}></Route>
-        <Route path="/wars" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
-        <Route path="/profile" exact
-               element={<GuardedPage element={<ProfilePage></ProfilePage>}></GuardedPage>}></Route>
-        <Route path="/region" exact element={<GuardedPage element={<RegionPage></RegionPage>}></GuardedPage>}></Route>
-        <Route path="/market" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
-        <Route path="/party" exact element={<GuardedPage element={<MarketPage></MarketPage>}></GuardedPage>}></Route>
-        <Route path="/job" exact element={<GuardedPage element={<JobPage></JobPage>}></GuardedPage>}></Route>
-        <Route path="*" exact element={<RedirectPage></RedirectPage>}></Route>
+          element={<GuardedPage element={<WorldMapPage />} />}
+        />
+        <Route
+          path="/home"
+          exact
+          element={<GuardedPage element={<HomePage />} />}
+        />
+        <Route
+          path="/wars"
+          exact
+          element={<GuardedPage element={<MarketPage />} />}
+        />
+        <Route
+          path="/profile"
+          exact
+          element={<GuardedPage element={<ProfilePage />} />}
+        />
+        <Route
+          path="/user/:id"
+          exact
+          element={<GuardedPage element={<UserPage />} />}
+        />
+        <Route
+          path="/region"
+          exact
+          element={<GuardedPage element={<RegionPage />} />}
+        />
+        <Route
+          path="/market"
+          exact
+          element={<GuardedPage element={<MarketPage />} />}
+        />
+        <Route
+          path="/party"
+          exact
+          element={<GuardedPage element={<MarketPage />} />}
+        />
+        <Route
+          path="/job"
+          exact
+          element={<GuardedPage element={<JobPage />} />}
+        />
+        <Route
+          path="*"
+          exact
+          element={<RedirectPage />}
+        />
       </Routes>
     </BrowserRouter>
   </div>;

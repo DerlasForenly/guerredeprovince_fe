@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import PromotedArticle from '../components/PromotedArticle';
-import LastArticles from '../components/LastArticles';
-import SubscriptionArticles from '../components/SubscriptionArticles';
-import RecommendedArticles from '../components/RecommendedArticles';
-import NewspaperShortInfo from '../components/NewspaperShortInfo';
+import PromotedArticle from '../components/NewsPage/PromotedArticle';
+import LastArticles from '../components/NewsPage/LastArticles';
+import SubscriptionArticles from '../components/NewsPage/SubscriptionArticles';
+import RecommendedArticles from '../components/NewsPage/RecommendedArticles';
+import NewspaperShortInfo from '../components/NewsPage/NewspaperShortInfo';
 
 const NewsPage = () => {
   return <div className="news-page col">

@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { loadSubscriptionArticles, setSubscriptionArticlesPage, } from '../redux/news/actions';
+import { loadSubscriptionArticles, setSubscriptionArticlesPage, } from '../../redux/news/actions';
 
-import ArticlesList from './ArticlesList';
-import Pagination from './Pagination';
+import ArticlesList from '../../components/ArticlesList';
+import Pagination from '../../components/Pagination';
 
-import refreshIcon from '../assets/refresh.png';
+import refreshIcon from '../../assets/refresh.png';
 
 const SubscriptionArticles = ({ articles, loadSubscriptionArticles, currentPage, pagesMeta, setSubscriptionArticlesPage }) => {
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ const SubscriptionArticles = ({ articles, loadSubscriptionArticles, currentPage,
       />
     </div>
     <ArticlesList articles={articles} loading={loading}></ArticlesList>
-    <Pagination currentPage={currentPage} pagesMeta={pagesMeta} setPageFunction={setSubscriptionArticlesPage}></Pagination>
+    <Pagination pagesMeta={pagesMeta} setPageFunction={setSubscriptionArticlesPage}></Pagination>
   </div>;
 };
 

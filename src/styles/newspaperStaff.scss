@@ -1,0 +1,11 @@
+@import "base";
+
+.newspaper-staff-page {
+  @extend .page;
+
+  .newspaper-staff-container {
+    @extend .container;
+
+
+  }
+}

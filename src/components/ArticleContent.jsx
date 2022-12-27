@@ -6,12 +6,11 @@ import Cookies from 'js-cookie';
 import loadingGif from '../assets/loading.gif';
 import moreIcon from '../assets/more.png';
 import { useEffect, useState } from 'react';
-import { loadArticle } from '../redux/article/actions';
+import { loadArticle, updateArticleRating } from '../redux/article/actions';
 import { Link } from 'react-router-dom';
+import Rating from '../components/Rating';
 
-import Rating from '../components/ArticlePage/Rating';
-
-function ArticleContent ({ article, loadArticle }) {
+function ArticleContent ({ article, loadArticle, updateArticleRating }) {
   const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
@@ -60,7 +59,11 @@ function ArticleContent ({ article, loadArticle }) {
           </div>
           {/*<button className="subscribe-button">Subscribe</button>*/}
         </div>
-        <Rating></Rating>
+        <Rating
+          item={article}
+          voteUrl={`${process.env.REACT_APP_API}/api/articles/${article.id}/vote`}
+          updateItemFunction={updateArticleRating}
+        />
       </div>
       <div className="date-time">{article?.created_at}</div>
     </div>;
@@ -69,6 +72,7 @@ function ArticleContent ({ article, loadArticle }) {
 
 const mapDispatchToProps = {
   loadArticle,
+  updateArticleRating,
 };
 
 const mapStateToProps = state => {

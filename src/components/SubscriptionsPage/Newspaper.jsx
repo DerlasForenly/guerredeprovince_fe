@@ -1,28 +1,37 @@
 import { connect } from 'react-redux';
-import UnsubscriptionButton from './UnsubscriptionButton';
-import SubscriptionButton from './SubscriptionButton';
+import { Link } from 'react-router-dom';
+import SubscribeButton from '../../components/NewspaperPage/SubscribeButton';
+import { updateSubscription } from '../../redux/subscriptions/actions';
 
-function Newspaper ({ newspaper, key, subscribed }) {
+function Newspaper ({ newspaper, key, subscribed, updateSubscription }) {
   return <div className="newspaper row">
     <div className="row">
-      <img
-        src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
-        alt="newspaper-avatar"
-      />
+      <Link to={`/newspaper/${newspaper.id}`}>
+        <img
+          src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
+          alt="newspaper-avatar"
+        />
+      </Link>
       <div className="name-nickname col">
-        <label className="name">{newspaper.name}</label>
-        <label className="nickname">{newspaper.owner.nickname}</label>
+        <Link to={`/newspaper/${newspaper.id}`}>
+          <label className="name">{newspaper.name}</label>
+        </Link>
+        <Link to={`/user/${newspaper.owner.id}`}>
+          <label className="nickname">Owner: {newspaper.owner.nickname}</label>
+        </Link>
       </div>
     </div>
-    {
-      subscribed ?
-        <UnsubscriptionButton newspaperId={newspaper.id} /> :
-        <SubscriptionButton newspaperId={newspaper.id} />
-    }
+    <SubscribeButton
+      newspaperId={newspaper.id}
+      isSubscribed={subscribed}
+      updateStateFunction={updateSubscription}
+    />
   </div>;
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  updateSubscription,
+};
 
 const mapStateToProps = state => {
   return {};

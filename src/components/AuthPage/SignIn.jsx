@@ -9,14 +9,14 @@ import {
   signIn,
   hideErrorMessage,
   showErrorMessage,
-} from '../redux/auth/actions';
+} from '../../redux/auth/actions';
 
 import {
   hideLoader,
   showLoader
-} from '../redux/app/actions';
+} from '../../redux/app/actions';
 
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../../components/ErrorMessage';
 
 const SignIn = (props) => {
   const [state, setState] = useState({

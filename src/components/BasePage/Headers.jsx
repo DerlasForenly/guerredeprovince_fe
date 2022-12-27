@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 
 import UpperNavigationPanel from './UpperNavigationPanel';
 import UserPanel from './UserPanel';
-import SignOut from '../components/SignOut';
 
 function Headers ({ user }) {
   if (user) {
@@ -10,7 +9,6 @@ function Headers ({ user }) {
       <div className="logo-container"></div>
       <UpperNavigationPanel></UpperNavigationPanel>
       <UserPanel></UserPanel>
-      <SignOut></SignOut>
     </div>;
   } else {
     return <div></div>;

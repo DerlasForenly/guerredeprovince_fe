@@ -50,7 +50,7 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
             />
             <Actions></Actions>
           </div>
-          <div className="col">
+          <div className="second-col col">
             <label className="name">{newspaper.name}</label>
             <p className="description">{newspaper.description}</p>
             <StatisticsRow

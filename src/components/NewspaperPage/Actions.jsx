@@ -1,23 +1,28 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import SubscriptionButton from '../Newspaper/SubscriptionButton';
-import UnsubscriptionButton from '../Newspaper/UnsubscriptionButton';
+import StaffButton from './StaffButton';
+import EditButton from './EditButton';
+import DeleteButton from './DeleteButton';
+import SubscribeButton from './SubscribeButton';
+import { updateSubscription } from '../../redux/newspaper/actions';
 
-function Actions ({ user, newspaper }) {
+function Actions ({ user, newspaper, updateSubscription }) {
+  const isOwner = user.id === newspaper.owner.id;
 
   return <div className="actions">
-    { newspaper.subscribed ? <UnsubscriptionButton newspaperId={newspaper.id}/> : <SubscriptionButton newspaperId={newspaper.id}/> }
-    <Edit
-      hide={user.id !== newspaper.owner.id}
+    <SubscribeButton
+      newspaperId={newspaper.id}
+      isSubscribed={newspaper.subscribed}
+      updateStateFunction={updateSubscription}
     />
-    <Staff
-      hide={user.id !== newspaper.owner.id}
-    />
-    <Delete
-      hide={user.id !== newspaper.owner.id}
-    />
+    {isOwner ? <EditButton /> : <></>}
+    {isOwner ? <StaffButton /> : <></>}
+    {isOwner ? <DeleteButton /> : <></>}
   </div>;
 }
+
+const mapDispatchToProps = {
+  updateSubscription,
+};
 
 const mapStateToProps = state => {
   return {
@@ -26,20 +31,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Actions);
-
-function Edit ({ hide }) {
-  return hide ? <div></div> : <Link to={'/home'}><button>Edit</button></Link>
-}
-
-function Staff ({ hide }) {
-  return hide ? <div></div> : <Link to={'/home'}><button>Staff</button></Link>
-}
-
-function Delete ({ hide }) {
-  const onClickHandler = e => {
-
-  }
-
-  return hide ? <div></div> : <button className="delete-button" onClick={onClickHandler}>Delete</button>
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Actions);

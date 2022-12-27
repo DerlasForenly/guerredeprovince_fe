@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import ArticlesList from './ArticlesList';
-import refreshIcon from '../assets/refresh.png';
+import ArticlesList from '../../components/ArticlesList';
+import refreshIcon from '../../assets/refresh.png';
 
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
   const [loading, setLoading] = useState(true);

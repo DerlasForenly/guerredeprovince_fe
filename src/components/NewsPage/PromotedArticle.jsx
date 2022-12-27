@@ -3,11 +3,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-import Article from './Article';
+import Article from '../../components/Article';
 
-import { loadPromotedArticle } from '../redux/news/actions';
+import { loadPromotedArticle } from '../../redux/news/actions';
 
-import loadingGif from '../assets/loading.gif';
+import loadingGif from '../../assets/loading.gif';
 
 function PromotedArticle ({ loadPromotedArticle, article }) {
   const [loading, setLoading] = useState(true);
