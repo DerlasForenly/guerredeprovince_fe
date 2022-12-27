@@ -10,11 +10,10 @@ import Pagination from '../../components/Pagination';
 
 import loadingGif from '../../assets/loading.gif';
 import flagImg from '../../assets/flag-of-ukraine.jpg';
-import refreshIcon from '../../assets/refresh.png';
+import RefreshButton from './RefreshButton';
 
 const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPage }) => {
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -33,28 +32,6 @@ const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPa
     });
   }, [loadLastArticles, pagesMeta.currentPage]);
 
-  const refreshOnClick = e => {
-    setLoading(true);
-    setRefresh(true);
-
-    setTimeout(() => {
-      axios({
-        method: 'get',
-        url: `${process.env.REACT_APP_API}/api/articles/last?page=${pagesMeta.currentPage}`,
-        headers: {
-          Authorization: `Bearer` + Cookies.get('access_token')
-        }
-      }).then((response) => {
-        loadLastArticles(response.data);
-        setLoading(false);
-        setRefresh(false);
-      }).catch((error) => {
-        setLoading(false);
-        setRefresh(false);
-      });
-    }, 4000)
-  }
-
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <div className="articles-list__title-container row">
@@ -63,11 +40,9 @@ const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPa
       </div>
       <div className="articles-list__title-container row">
         <button>Change language</button>
-        <img
-          className={refresh ? 'refresh-icon-rotating' : 'refresh-icon'}
-          src={refreshIcon}
-          alt="refresh-icon"
-          onClick={refreshOnClick}
+        <RefreshButton
+          url={`${process.env.REACT_APP_API}/api/articles/last?page=${pagesMeta.currentPage}`}
+          updateStateFunction={loadLastArticles}
         />
       </div>
     </div>

@@ -1,5 +1,3 @@
-@import "base";
-
 .article-page {
   @extend .page;
 
@@ -84,8 +82,9 @@
     .meta {
       justify-content: space-between;
       display: flex;
+      align-items: flex-end;
 
-      img {
+      .avatar {
         height: 50px;
         margin-right: 10px;
         border-radius: 5px;
@@ -126,50 +125,6 @@
 
         .author:hover, .newspaper:hover {
           color: black;
-        }
-      }
-
-      .rating {
-        height: fit-content;
-        vertical-align: middle;
-        align-self: flex-end;
-
-        .loading {
-          height: 25px;
-        }
-
-        button {
-          height: 40px;
-          width: 40px;
-          border: none;
-          background: none;
-          color: gray;
-          font-size: 28px;
-          font-weight: bold;
-          border-radius: 10px;
-        }
-
-        .down:hover, .down-active {
-          color: red;
-        }
-
-        .up:hover, .up-active {
-          color: lightgreen;
-        }
-
-        label {
-          margin: 10px;
-          font-size: 28px;
-          font-weight: bold;
-          color: forestgreen;
-        }
-
-        .negative-rating {
-          color: red;
-        }
-
-        .positive-rating {
-          color: forestgreen;
         }
       }
     }

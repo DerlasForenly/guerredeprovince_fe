@@ -70,13 +70,14 @@ const CreateArticlePage = ({ user }) => {
         changeInputHandler={changeInputHandler}
         max={80}
         label={'Title'}
-        name='title'
+        name="title"
       />
       <InputTextarea
         changeInputHandler={changeInputHandler}
         max={4000}
         label={'Content'}
-        name='content'
+        name="content"
+        className="content-input"
       />
       <div className="settings row">
         <div className="col">
@@ -97,7 +98,7 @@ const CreateArticlePage = ({ user }) => {
         <button type="submit" disabled={loading}>Create</button>
       </div>
     </form>
-  </div>
+  </div>;
 };
 
 const mapDispatchToProps = {};
@@ -114,7 +115,7 @@ function Loading ({ active }) {
   return active ? <div className="loading">
     <label>Wait...</label>
     <img src={loadingGif} alt="loading-gif"></img>
-  </div> : <div></div>
+  </div> : <div></div>;
 }
 
 function BackAndHelp () {
@@ -125,7 +126,7 @@ function BackAndHelp () {
     <Link to="/news">
       <button className="back-button">Help</button>
     </Link>
-  </div>
+  </div>;
 }
 
 function Language () {
@@ -139,7 +140,7 @@ function Language () {
       <option value={1}>English</option>
       <option value={1}>Japanese</option>
     </select>
-  </div>
+  </div>;
 }
 
 function State () {
@@ -147,5 +148,5 @@ function State () {
     {/*{errorMessage ? <ErrorMessage message={errorMessage}></ErrorMessage> : <div></div>}*/}
     {/*{success ? <ErrorMessage message="good job, man"></ErrorMessage> : <div></div>}*/}
     {/*<Loading active={loading}></Loading>*/}
-  </div>
+  </div>;
 }

@@ -105,7 +105,7 @@ const CreateNewspaperPage = (props) => {
       <BackAndHelp></BackAndHelp>
       <div className="avatar-name row">
         <div className="avatar-load col">
-          <img src={selectedFile ? preview : picturePlaceholder} alt="avatar-placeholder" name="avatar"/>
+          <img src={selectedFile ? preview : picturePlaceholder} alt="avatar-placeholder" name="avatar" />
         </div>
         <div className="avatar-name col">
           <InputText
@@ -128,6 +128,7 @@ const CreateNewspaperPage = (props) => {
         max={500}
         label="Description"
         name="description"
+        className="description-input"
       />
       <div className="settings row">
         <label>It is free now, but it is going to be 50G later ;)</label>

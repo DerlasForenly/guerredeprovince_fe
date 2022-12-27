@@ -50,11 +50,12 @@ function CreateComment ({ article, loadComments }) {
     });
   }
 
-  return <form className="create-comment row" onSubmit={onSubmit}>
+  return <form className="create-comment-form" onSubmit={onSubmit}>
     <InputTextarea
       name={"content"}
       max={300}
       changeInputHandler={changeInputHandler}
+      className={"content-input"}
     />
     <button type="submit">Send</button>
   </form>

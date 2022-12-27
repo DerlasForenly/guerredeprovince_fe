@@ -1,16 +1,13 @@
-@import "base";
-
 .comments-section-container {
   @extend .container;
 
-  max-width: 900px;
+  max-width: 940px;
 
   text-align: center;
 
   button {
     border: none;
     background: none;
-    margin: auto;
     color: gray;
     font-size: 18px;
     transition: 0.2s;
@@ -28,7 +25,7 @@
       display: flex;
       align-items: flex-end;
 
-      label, p {
+      p {
         color: gray;
       }
 
@@ -39,10 +36,11 @@
       }
 
       .nick-more {
+        color: gray;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 850px;
+        width: 890px;
 
         label {
           margin-right: 5px;
@@ -50,6 +48,7 @@
         }
 
         .nickname, .reply {
+          color: gray;
           font-weight: bold;
           cursor: pointer;
         }
@@ -60,12 +59,6 @@
 
         .reply {
           margin-left: 20px;
-        }
-
-        .more {
-          height: 15px;
-          width: 15px;
-          filter: contrast(0.1);
         }
       }
 
@@ -81,88 +74,31 @@
         justify-content: space-between;
         width: 100%;
 
-        .rating {
-          white-space: nowrap;
-          text-align: end;
-          display: flex;
-          align-items: center;
-          font-size: 13px;
-
-          button {
-            height: 20px;
-            width: 40px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-          }
-
-          button:hover {
-            background: none;
-          }
-
-          .down:hover, .down-active {
-            color: red;
-          }
-
-          .up:hover, .up-active {
-            color: lightgreen;
-          }
-
-          .loading {
-            height: 20px;
-            width: 20px;
-          }
-
-          label {
-            margin-left: 5px;
-            margin-right: 5px;
-          }
-
-          .negative-rating {
-            color: red;
-          }
-
-          .positive-rating {
-            color: forestgreen;
-          }
-        }
-
         .date {
+          color: gray;
           font-size: 13px;
           text-align: center;
         }
       }
     }
   }
+}
 
-  .create-comment {
-    display: flex;
-    justify-content: flex-end;
+.create-comment-form {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
 
-    .textarea-input-container {
-      @extend .textarea-input-container;
+  .content-input {
+    width: 100%;
+  }
 
-      margin-bottom: 0;
-      width: 100%;
-
-      .textarea-input textarea {
-        min-height: 0;
-        font-size: 15px;
-      }
-
-      .input-label {
-        @extend .input-label;
-
-        margin: 0;
-      }
-    }
-
-    button {
-      margin-left: 15px;
-      margin-bottom: 0;
-      padding: 10px;
-      border-radius: 10px;
-      height: fit-content;
-    }
+  button {
+    margin-top: auto;
+    margin-left: 15px;
+    margin-bottom: 0;
+    padding: 10px;
+    border-radius: 10px;
+    height: fit-content;
   }
 }

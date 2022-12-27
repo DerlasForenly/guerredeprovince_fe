@@ -3,8 +3,23 @@ import Rating from '../../Rating';
 import { connect } from 'react-redux';
 import { updateCommentRating } from '../../../redux/comments/actions';
 import { Link } from 'react-router-dom';
+import { Divider, IconButton } from '@mui/material';
+import { useState } from 'react';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Fade from '@mui/material/Fade';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
 function Comment ({ comment, updateCommentRating }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return <div className="comment col">
     <div className="row">
       <Link to={`/user/${comment.user.id}`}>
@@ -32,7 +47,31 @@ function Comment ({ comment, updateCommentRating }) {
             }
             <label className="reply">Reply</label>
           </div>
-          <img src={moreIcon} className="more" alt="more-icon" />
+          <IconButton
+            aria-label="more"
+            id="long-button"
+            aria-controls={open ? 'long-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+            onClick={handleClick}
+            size={'small'}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="fade-menu"
+            MenuListProps={{
+              'aria-labelledby': 'fade-button',
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            <MenuItem onClick={handleClose}>Edit</MenuItem>
+            <MenuItem onClick={handleClose}>Complain</MenuItem>
+            <MenuItem onClick={handleClose}>Delete</MenuItem>
+          </Menu>
         </div>
         <p className="content">{comment.content}</p>
         <div className="date-rating row">
@@ -41,6 +80,10 @@ function Comment ({ comment, updateCommentRating }) {
             item={comment}
             voteUrl={`${process.env.REACT_APP_API}/api/comments/${comment.id}/vote`}
             updateItemFunction={updateCommentRating}
+            fs={13}
+            iconH={8}
+            iconW={8}
+            padding={5}
           />
         </div>
       </div>

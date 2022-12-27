@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import RatingLabel from './RatingLabel';
 
 function Article ({ article }) {
   return <Link to={`/news/article/${article?.id}`} className="article row">
@@ -10,9 +11,7 @@ function Article ({ article }) {
           <label className="author">{article?.author}</label>
           {/*<label className="date">{article?.created_at}</label>*/}
         </div>
-        <label className={article?.rating >= 0 ? 'positive-rating' : 'negative-rating'}>
-          { article?.rating > 0 ? '+' + article?.rating : article?.rating }
-        </label>
+        <RatingLabel value={article?.rating}/>
       </div>
     </div>
     <img src={`${process.env.REACT_APP_API}/${article?.avatar}`} alt="avatar" className="avatar"></img>

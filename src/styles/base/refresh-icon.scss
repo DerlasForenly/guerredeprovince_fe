@@ -1,0 +1,29 @@
+.refresh-icon {
+  margin-left: 10px;
+  height: 13px;
+  width: 13px;
+  -webkit-filter: contrast(0.15);
+  filter: contrast(0.15);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.refresh-icon-rotating {
+  @extend .refresh-icon;
+
+  animation: rotating 4s linear infinite;
+}
+
+@keyframes rotating {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.refresh-icon:hover, .refresh-icon-rotating:hover{
+  -webkit-filter: contrast(1);
+  filter: contrast(1);
+}

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import ArticlesList from '../../components/ArticlesList';
-import refreshIcon from '../../assets/refresh.png';
+import RefreshButton from '../../components/NewsPage/RefreshButton';
 
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
   return <div className="articles-list col">
     <div className="articles-list__title-container row">
       <label className="articles-list__header">Recommended for you</label>
-      <img className="refresh-icon" src={refreshIcon} alt="refresh-icon" />
+      <RefreshButton />
     </div>
     <ArticlesList articles={articles} loading={loading}></ArticlesList>
   </div>;

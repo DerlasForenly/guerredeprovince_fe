@@ -1,0 +1,41 @@
+.rating-container {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  align-items: center;
+
+  .rating-arrow {
+    display: block;
+    margin: auto;
+    filter: contrast(0.1);
+  }
+
+  .loading {
+    height: 35px;
+    width: 35px;
+  }
+
+  .up {
+    transform: rotate(-90deg);
+    margin: 0;
+  }
+
+  .down {
+    transform: rotate(+90deg);
+    margin: 0;
+  }
+
+  .arrow-container {
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    border-radius: 100%;
+    margin: 0 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .arrow-container:hover {
+    background: whitesmoke;
+  }
+}
