@@ -18,13 +18,25 @@ function Rating ({
   const [loading, setLoading] = useState(false);
 
   const up = e => {
+    const newValue = 1;
+
+    if (item.voted === newValue || loading) {
+      return;
+    }
+
     setLoading(true);
-    post(1);
+    post(newValue);
   };
 
   const down = e => {
+    const newValue = -1;
+
+    if (item.voted === newValue || loading) {
+      return;
+    }
+
     setLoading(true);
-    post(-1);
+    post(newValue);
   };
 
   const post = (value) => {
@@ -45,14 +57,14 @@ function Rating ({
 
   return <div className="rating-container">
     <div
-      className="arrow-container"
+      className={item.voted === -1 ? "arrow-container-activated" : "arrow-container"}
       style={{ height: iconH, width: iconW, padding: padding }}
+      onClick={down}
     >
       <img
         src={ratingArrowIcon}
         alt="rating-arrow"
         className="rating-arrow down"
-        onClick={down}
         style={{ height: iconH, width: iconW }}
       />
     </div>
@@ -74,14 +86,14 @@ function Rating ({
         />
     }
     <div
-      className="arrow-container"
+      className={item.voted === 1 ? "arrow-container-activated" : "arrow-container"}
       style={{ height: iconH, width: iconW, padding: padding }}
+      onClick={up}
     >
       <img
         src={ratingArrowIcon}
         alt="rating-arrow"
         className="rating-arrow up"
-        onClick={up}
         style={{ height: iconH, width: iconW }}
       />
     </div>

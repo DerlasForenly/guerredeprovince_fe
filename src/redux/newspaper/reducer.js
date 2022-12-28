@@ -1,6 +1,6 @@
 import {
   UPDATE_SUBSCRIPTION,
-  LOAD_NEWSPAPER
+  LOAD_NEWSPAPER, LOAD_STAFF
 } from './types';
 
 const initialState = {
@@ -16,6 +16,7 @@ const initialState = {
       nickname: null,
     },
   },
+  staff: [],
 }
 
 export const newspaperReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ export const newspaperReducer = (state = initialState, action) => {
       return {
         ...state,
         newspaper: action.payload,
+      }
+    case LOAD_STAFF:
+      return {
+        ...state,
+        staff: action.payload,
       }
     default:
       return state;

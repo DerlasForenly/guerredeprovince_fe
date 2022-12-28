@@ -35,7 +35,21 @@
     cursor: pointer;
   }
 
+  .arrow-container-activated {
+    @extend .arrow-container;
+
+    background: whitesmoke;
+
+    .rating-arrow {
+      filter: none;
+    }
+  }
+
   .arrow-container:hover {
     background: whitesmoke;
+
+    .rating-arrow {
+      filter: none;
+    }
   }
 }

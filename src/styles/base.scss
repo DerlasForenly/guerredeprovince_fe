@@ -3,6 +3,8 @@
 @import "base/rating-label";
 @import "base/rating-container";
 @import "base/input-textarea";
+@import "base/input-search";
+@import "base/input-text";
 
 body {
   min-height: 100%;
@@ -45,14 +47,27 @@ body::-webkit-scrollbar{
   margin: auto;
   padding: 10px;
   height: fit-content;
-}
 
-.container {
-  margin: 10px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 20px;
+  .container {
+    margin: 10px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+
+    .container-header {
+      align-items: center;
+      justify-content: space-between;
+      height: fit-content;
+      font-size: 20px;
+      font-weight: bold;
+      margin: auto auto 10px;
+
+      .text-label {
+        margin: auto;
+      }
+    }
+  }
 }
 
 .space-between {
@@ -61,49 +76,6 @@ body::-webkit-scrollbar{
 
 .align-items-center {
   align-items: center;
-}
-
-.text-input {
-  margin-bottom: 25px;
-
-  .input-indicator {
-    border: 1px solid lightgray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.2s;
-
-    .size-indicator {
-      padding: 5px;
-      display: inline-block;
-      align-self: flex-end;
-      font-size: 13px;
-      color: gray !important;
-    }
-
-    input {
-      border: none;
-      width: 100%;
-      padding: 10px;
-      background: none !important;
-      color: gray !important;
-      outline: none;
-      appearance: none !important;
-      font-size: 18px;
-    }
-  }
-
-  .input-indicator:hover {
-    border: 1px solid black;
-  }
-
-  .input-label {
-    margin-bottom: 5px;
-    width: 100%;
-    color: gray !important;
-    font-size: 22px;
-    font-weight: bold;
-  }
 }
 
 a {

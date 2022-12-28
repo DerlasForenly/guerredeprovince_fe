@@ -9,16 +9,36 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Fade from '@mui/material/Fade';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function Comment ({ comment, updateCommentRating }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleDelete = () => {
+    setAnchorEl(null);
+
+    axios({
+      method: 'delete',
+      url: `${process.env.REACT_APP_API}/api/comments/${comment.id}`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
 
   return <div className="comment col">
     <div className="row">
@@ -70,7 +90,7 @@ function Comment ({ comment, updateCommentRating }) {
           >
             <MenuItem onClick={handleClose}>Edit</MenuItem>
             <MenuItem onClick={handleClose}>Complain</MenuItem>
-            <MenuItem onClick={handleClose}>Delete</MenuItem>
+            <MenuItem onClick={handleDelete}>Delete</MenuItem>
           </Menu>
         </div>
         <p className="content">{comment.content}</p>
