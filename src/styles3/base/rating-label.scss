@@ -1,0 +1,19 @@
+.rating-label-container {
+  white-space: nowrap;
+  color: gray;
+  transition: 0.2s;
+
+  label {
+    white-space: nowrap;
+    color: gray;
+    transition: 0.2s;
+  }
+
+  .positive {
+    color: forestgreen;
+  }
+
+  .negative {
+    color: red;
+  }
+}

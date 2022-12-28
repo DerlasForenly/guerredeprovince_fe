@@ -1,0 +1,25 @@
+@import "base/body";
+@import "base/buttons";
+@import "base/page";
+@import "base/avatars";
+@import "base/containers";
+@import "base/inputs";
+@import "base/icons";
+@import "base/pagination";
+@import "base/flags";
+@import "base/rating-label";
+@import "base/labels";
+
+.MuiMenu-root, .MuiMenu-paper, .MuiMenu-list {
+  color: gray;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}

@@ -1,11 +1,19 @@
 import { connect } from 'react-redux';
-
-import refreshIcon from '../../assets/refresh.png';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 
-function RefreshButton ({ url, updateStateFunction }) {
+import refreshIcon from '../../assets/refresh.png';
+
+function RefreshButton ({
+                          url,
+                          updateStateFunction,
+                          alt = "refresh-icon",
+                          mr = 0,
+                          ml = 0,
+                          mt = 0,
+                          mb = 0,
+                        }) {
   const [refreshing, setRefreshing] = useState(false);
 
   const refreshOnClick = e => {
@@ -28,15 +36,16 @@ function RefreshButton ({ url, updateStateFunction }) {
       }).catch((error) => {
         setRefreshing(false);
       });
-    }, 4000)
-  }
+    }, 4000);
+  };
 
   return <img
     className={refreshing ? 'refresh-icon-rotating' : 'refresh-icon'}
     src={refreshIcon}
-    alt="refresh-icon"
+    alt={alt}
+    style={{ marginBottom: mb, marginTop: mt, marginLeft: ml, marginRight: mr }}
     onClick={refreshOnClick}
-  />
+  />;
 }
 
 const mapStateToProps = state => {

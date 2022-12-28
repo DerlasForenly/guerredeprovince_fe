@@ -7,17 +7,15 @@ import RecommendedArticles from '../components/NewsPage/RecommendedArticles';
 import NewspaperShortInfo from '../components/NewsPage/NewspaperShortInfo';
 
 const NewsPage = () => {
-  return <div className="news-page col">
-    <div>
-      <NewspaperShortInfo></NewspaperShortInfo>
-      <div className="row">
-        <div className="col">
-          <PromotedArticle></PromotedArticle>
-          <RecommendedArticles></RecommendedArticles>
-        </div>
-        <SubscriptionArticles></SubscriptionArticles>
-        <LastArticles></LastArticles>
+  return <div className="page">
+    <NewspaperShortInfo/>
+    <div className="row">
+      <div className="col">
+        <PromotedArticle/>
+        <RecommendedArticles/>
       </div>
+      <SubscriptionArticles/>
+      <LastArticles/>
     </div>
   </div>;
 };

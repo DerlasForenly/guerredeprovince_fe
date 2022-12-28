@@ -1,0 +1,13 @@
+@import "inputs/input-text";
+@import "inputs/input-textarea";
+@import "inputs/input-search";
+
+.simplified-text-input {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  background: none;
+  color: gray;
+  outline: none;
+  appearance: none;
+}

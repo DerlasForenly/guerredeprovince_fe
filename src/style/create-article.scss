@@ -1,0 +1,13 @@
+.create-article-container {
+  @extend .container;
+
+  width: 800px;
+
+  .title, .content {
+    margin-bottom: 20px;
+  }
+
+  .content {
+    height: 300px;
+  }
+}

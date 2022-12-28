@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function EditButton ({ user, newspaper }) {
+function EditButton ({ user, newspaper, className }) {
   return <Link to={`/newspaper/${newspaper.id}/edit`}>
-    <button>Edit</button>
+    <button className={className}>Edit</button>
   </Link>;
 }
 

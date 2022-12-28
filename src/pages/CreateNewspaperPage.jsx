@@ -5,13 +5,13 @@ import convert from 'image-file-resize';
 import { getImageSize } from 'react-image-size';
 
 import picturePlaceholder from '../assets/picture-placeholder.jpg';
-import InputText from '../components/InputText';
-import InputTextarea from '../components/InputTextarea';
+import InputText from '../components/baseComponents/InputText';
+import InputTextarea from '../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 
-const CreateNewspaperPage = (props) => {
+const CreateNewspaperPage = () => {
   const [state, setState] = useState({
     name: '',
     description: '',

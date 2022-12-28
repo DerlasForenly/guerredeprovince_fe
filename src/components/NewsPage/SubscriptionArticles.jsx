@@ -8,8 +8,8 @@ import {
   setSubscriptionArticlesPage
 } from '../../redux/news/actions';
 
-import ArticlesList from '../../components/ArticlesList';
-import Pagination from '../../components/Pagination';
+import ArticlesList from './ArticlesList';
+import Pagination from '../../components/baseComponents/Pagination';
 
 import RefreshButton from './RefreshButton';
 
@@ -39,9 +39,9 @@ const SubscriptionArticles = ({
     });
   }, [loadSubscriptionArticles, currentPage]);
 
-  return <div className="articles-list col">
-    <div className="articles-list__title-container row">
-      <label className="articles-list__header">Your subscriptions</label>
+  return <div className="articles-list">
+    <div className="container-header">
+      <label className="container-header-title">Your subscriptions</label>
       <RefreshButton
         url={`${process.env.REACT_APP_API}/api/articles/subscriptions?page=${currentPage}`}
         updateStateFunction={loadSubscriptionArticles}

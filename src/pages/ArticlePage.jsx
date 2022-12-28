@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import ArticleContent from '../components/ArticleContent';
+import ArticleContent from '../components/ArticlePage/ArticleContent';
 import CommentsSection from '../components/ArticlePage/Comments/CommnetsSection';
 
 const ArticlePage = () => {

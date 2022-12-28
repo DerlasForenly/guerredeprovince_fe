@@ -5,8 +5,8 @@ import Cookies from 'js-cookie';
 
 import loadingGif from '../assets/ok.gif';
 import { Link } from 'react-router-dom';
-import InputText from '../components/InputText';
-import InputTextarea from '../components/InputTextarea';
+import InputText from '../components/baseComponents/InputText';
+import InputTextarea from '../components/baseComponents/InputTextarea';
 
 const CreateArticlePage = ({ user }) => {
   const [state, setState] = useState({
@@ -63,21 +63,21 @@ const CreateArticlePage = ({ user }) => {
     });
   };
 
-  return <div className="create-article-page row">
+  return <div className="page row">
     <form onSubmit={submitHandler} className="create-article-container col">
-      <BackAndHelp></BackAndHelp>
       <InputText
         changeInputHandler={changeInputHandler}
         max={80}
         label={'Title'}
         name="title"
+        className={"title"}
       />
       <InputTextarea
         changeInputHandler={changeInputHandler}
         max={4000}
         label={'Content'}
         name="content"
-        className="content-input"
+        className={"content"}
       />
       <div className="settings row">
         <div className="col">

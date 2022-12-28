@@ -1,25 +1,13 @@
 import { connect } from 'react-redux';
-import OverviewShortRegion from '../components/OverviewShortRegion';
-import Chat from '../components/Chat';
 
 import country1Img from '../assets/country1.jpg';
 import country2Img from '../assets/country2.jpg';
 import avatarImg from '../assets/default_avatar.jpg';
 import flagImg from '../assets/flag-of-ukraine.jpg';
 
-const HomePage = (props) => {
-  return <div className="home-page row">
-    <div className="col">
-      <OverviewShortRegion />
-      <Chat></Chat>
-    </div>
-    <div className="col">
-      <Details></Details>
-    </div>
-    <div className="col">
-      <TopWar></TopWar>
-      <TopArticle></TopArticle>
-    </div>
+const HomePage = () => {
+  return <div className="home-page">
+
   </div>;
 };
 

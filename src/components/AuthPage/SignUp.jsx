@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import ErrorMessage from '../../components/ErrorMessage';
 import axios from 'axios';
 
 import { hideLoader, showLoader } from '../../redux/app/actions';
@@ -51,15 +50,14 @@ const SignUp = (props) => {
     });
   };
 
-  return <form onSubmit={submitHandler} className="auth-form col">
-    {/*<label>You can't create an account now, so go <Link to="/sign-in">back</Link></label>*/}
+  return <form onSubmit={submitHandler} className="auth-form">
     {success ?
       <div className="col">
         <img src={okGif} alt="ok-gif"/>
         <label>User has been created.</label>
         <label>Go to <Link to="/sign-in">sign in</Link> page and use this credentials.</label>
       </div> :
-      <div className="col">
+      <div className="input-section">
         <input
           required
           type="nickname"
@@ -88,7 +86,6 @@ const SignUp = (props) => {
           name="password_confirmation"
           onChange={changeInputHandler}
         ></input>
-        {props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div>}
         <button type="submit">Sign Up</button>
         <label>Or use an account <Link to="/sign-in">here</Link></label>
       </div>

@@ -1,0 +1,35 @@
+.avatar-small {
+  height: 50px;
+  width: 50px;
+  transition: 0.2s;
+}
+
+.avatar-medium {
+  height: 100px;
+  width: 100px;
+  transition: 0.2s;
+}
+
+.avatar-huge {
+  height: 150px;
+  width: 150px;
+  transition: 0.2s;
+}
+
+.round-avatar-small {
+  @extend .avatar-small;
+
+  border-radius: 100%;
+}
+
+.round-avatar-medium {
+  @extend .avatar-medium;
+
+  border-radius: 100%;
+}
+
+.round-avatar-huge {
+  @extend .avatar-huge;
+
+  border-radius: 100%;
+}

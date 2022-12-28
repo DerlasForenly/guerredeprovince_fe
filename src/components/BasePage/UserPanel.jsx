@@ -34,19 +34,19 @@ const UserPanel = ({ user, clearUser }) => {
     }).catch((error) => {
 
     });
-  }
+  };
 
   const handleProfile = () => {
     navigate('/profile');
     setAnchorEl(null);
-  }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  return <div className="user-panel-container row">
-    <div className="push-notifications-container">99+</div>
+  return <div className="user-panel-container">
+    <NotificationIndicator />
     <IconButton
       onClick={handleClick}
       size="small"
@@ -74,10 +74,7 @@ const UserPanel = ({ user, clearUser }) => {
       <Divider />
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
-    <div className="user-panel-balance col">
-      <label>{user?.gold} G</label>
-      <label>{user?.diamonds} D</label>
-    </div>
+    <UserBalance user={user} />
   </div>;
 };
 
@@ -90,3 +87,20 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
+
+function NotificationIndicator () {
+  return <div className="notification-indicator-container">99+</div>;
+}
+
+function UserBalance ({ user = { gold: 0, diamonds: 0 } }) {
+  return <div className="user-panel-balance col">
+    <div className={'gold-container'}>
+      <label>{user.gold}</label>
+      <label className={'currency'}>G</label>
+    </div>
+    <div className={'diamonds-container'}>
+      <label>{user.diamonds}</label>
+      <label className={'currency'}>D</label>
+    </div>
+  </div>;
+}

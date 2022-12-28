@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/baseComponents/Pagination';
 
 import { useEffect } from 'react';
 import axios from 'axios';

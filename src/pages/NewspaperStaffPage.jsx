@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadStaff } from '../redux/newspaper/actions';
 import StaffList from '../components/StaffPage/StaffList';
-import InputSearch from '../components/InputSearch';
+import InputSearch from '../components/baseComponents/InputSearch';
 
 const NewspaperStaffPage = ({ user, loadStaff }) => {
   const [loading, setLoading] = useState(false);

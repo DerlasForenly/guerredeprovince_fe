@@ -1,21 +1,9 @@
-@import "styles/base";
-@import "styles/navigation";
-@import "styles/signUpIn";
-@import "styles/news";
-@import "styles/overview";
-@import "styles/job";
-@import "styles/world";
-@import "styles/profile";
-@import "styles/createArticle";
-@import "styles/article";
-@import "styles/createNewspaper";
-@import "styles/newspaper";
-@import "styles/subscriptions";
-@import "styles/commentsSection";
-@import "styles/newspaperStaff";
+@import "style/base";
+@import "style/auth";
+@import "style/navigation";
+@import "style/news/article";
+@import "style/news/newspaper-short-info";
+@import "style/newspaper";
+@import "style/create-article";
 
-.error-message {
-  color: red;
-  font-size: 15px;
-}
 

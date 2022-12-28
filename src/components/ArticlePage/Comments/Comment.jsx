@@ -1,5 +1,4 @@
-import moreIcon from '../../../assets/more.png';
-import Rating from '../../Rating';
+import Rating from '../../baseComponents/Rating';
 import { connect } from 'react-redux';
 import { updateCommentRating } from '../../../redux/comments/actions';
 import { Link } from 'react-router-dom';

@@ -1,16 +1,13 @@
-import Pagination from 'src/components/Pagination';
+import { connect } from 'react-redux';
 
-function ArticlesList ({ pagination = false, articles, children }) {
-  return <div>
-    <Header />
-    {pagination ? <Pagination /> : <div />}
-  </div>;
-}
+import Article from './Article';
 
-export default ArticlesList;
+const ArticlesList = ({ articles = [] }) => {
+  return <div>{
+    articles.map((item, index) => {
+      return <Article article={item} key={index}></Article>;
+    })
+  }</div>;
+};
 
-function Header () {
-  return <div>
-
-  </div>;
-}
+export default connect(null, null)(ArticlesList);

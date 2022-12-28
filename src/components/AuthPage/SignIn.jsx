@@ -16,8 +16,6 @@ import {
   showLoader
 } from '../../redux/app/actions';
 
-import ErrorMessage from '../../components/ErrorMessage';
-
 const SignIn = (props) => {
   const [state, setState] = useState({
     password: '',
@@ -58,7 +56,7 @@ const SignIn = (props) => {
     });
   };
 
-  return <form onSubmit={submitHandler} className="auth-form col">
+  return <form onSubmit={submitHandler} className="auth-form">
     <input
       required
       type="email"
@@ -73,7 +71,6 @@ const SignIn = (props) => {
       name="password"
       onChange={changeInputHandler}
     ></input>
-    {props.errorMessage ? <ErrorMessage message={props.errorMessage}></ErrorMessage> : <div></div>}
     <button type="submit">Sign In</button>
     <label>Or create a new account <Link to="/sign-up">here</Link></label>
   </form>;

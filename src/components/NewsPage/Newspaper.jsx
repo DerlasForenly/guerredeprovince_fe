@@ -1,17 +1,24 @@
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Avatar from '../baseComponents/Avatar';
+import RatingLabel from '../../components/baseComponents/RatingLabel';
 
 function Newspaper ({ newspaper }) {
   return <Link className="newspaper-short-info-container row" to={`/newspaper/${newspaper.id}`}>
-    <img src={`${process.env.REACT_APP_API}/${newspaper.avatar}`} alt="newspaper-avatar" className="newspaper-avatar" />
+    <Avatar
+      src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
+      size={'medium'}
+      mr={15}
+    />
     <div className="text-info col">
       <div className="col">
         <label className="newspaper-name">{newspaper?.name}</label>
         <label>Your position: {newspaper.position}</label>
       </div>
-      <label className={newspaper?.rating >= 0 ? 'positive-rating' : 'negative-rating'}>
-        {newspaper?.rating > 0 ? '+' + newspaper?.rating : newspaper.rating}
-      </label>
+      <RatingLabel
+        value={newspaper.rating}
+        fs={22}
+      />
     </div>
   </Link>;
 }

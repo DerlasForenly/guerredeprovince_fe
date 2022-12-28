@@ -5,10 +5,9 @@ import Cookies from 'js-cookie';
 
 import { loadLastArticles, setLastArticlesPage } from '../../redux/news/actions';
 
-import ArticlesList from '../../components/ArticlesList';
-import Pagination from '../../components/Pagination';
+import ArticlesList from './ArticlesList';
+import Pagination from '../../components/baseComponents/Pagination';
 
-import loadingGif from '../../assets/loading.gif';
 import flagImg from '../../assets/flag-of-ukraine.jpg';
 import RefreshButton from './RefreshButton';
 
@@ -32,22 +31,25 @@ const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPa
     });
   }, [loadLastArticles, pagesMeta.currentPage]);
 
-  return <div className="articles-list col">
-    <div className="articles-list__title-container row">
-      <div className="articles-list__title-container row">
-        <label className="articles-list__header">New Articles in</label>
-        <img src={flagImg} alt="flag" className="articles-list__flag"></img>
+  return <div className="articles-list">
+    <div className="container-header">
+      <div>
+        <label className="container-header-title">New Articles in</label>
+        <img src={flagImg} alt="flag" className="small-flag"></img>
       </div>
-      <div className="articles-list__title-container row">
-        <button>Change language</button>
+      <div>
+        <ChangeLanguageButton
+          mr={5}
+          ml={5}
+        />
         <RefreshButton
           url={`${process.env.REACT_APP_API}/api/articles/last?page=${pagesMeta.currentPage}`}
           updateStateFunction={loadLastArticles}
         />
       </div>
     </div>
-    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <ArticlesList articles={articles}/>}
-    <Pagination pagesMeta={pagesMeta} setPageFunction={setLastArticlesPage}/>
+    <ArticlesList articles={articles} />
+    <Pagination pagesMeta={pagesMeta} setPageFunction={setLastArticlesPage} />
   </div>;
 };
 
@@ -64,3 +66,12 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LastArticles);
+
+function ChangeLanguageButton ({ className = '', mr = 0, ml = 0 }) {
+  return <button
+    style={{ marginLeft: ml, marginRight: mr }}
+    className={`${className} small-no-style-button`}
+  >
+    Change language
+  </button>;
+}

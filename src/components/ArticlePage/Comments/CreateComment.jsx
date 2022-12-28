@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import InputTextarea from '../../../components/InputTextarea';
+import InputTextarea from '../../../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';

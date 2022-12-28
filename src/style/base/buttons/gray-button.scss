@@ -1,0 +1,22 @@
+.small-gray-button {
+  @extend .small-base-button;
+
+  color: gray;
+}
+
+.medium-gray-button {
+  @extend .medium-base-button;
+
+  color: gray;
+}
+
+.huge-gray-button {
+  @extend .huge-base-button;
+
+  color: gray;
+}
+
+.medium-gray-button:hover, .small-gray-button:hover, .huge-gray-button:hover {
+  background: whitesmoke;
+  color: black;
+}
