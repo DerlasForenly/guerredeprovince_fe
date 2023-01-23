@@ -128,13 +128,3 @@ function App () {
 }
 
 export default connect(null, null)(App);
-
-function SignInRoute () {
-  return <Route
-    path="/sign-in"
-    exact
-    element={
-      <SignIn></SignIn>
-    }>
-  </Route>;
-}

@@ -7,6 +7,7 @@ import StaffList from '../components/StaffPage/StaffList';
 import InputSearch from '../components/baseComponents/InputSearch';
 
 const NewspaperStaffPage = ({ user, loadStaff }) => {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

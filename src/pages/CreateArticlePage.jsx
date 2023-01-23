@@ -15,7 +15,9 @@ const CreateArticlePage = ({ user }) => {
     newspaperId: 0,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [errorMessage, setErrorMessage] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -111,6 +113,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateArticlePage);
 
+// eslint-disable-next-line no-unused-vars
 function Loading ({ active }) {
   return active ? <div className="loading">
     <label>Wait...</label>
@@ -118,6 +121,7 @@ function Loading ({ active }) {
   </div> : <div></div>;
 }
 
+// eslint-disable-next-line no-unused-vars
 function BackAndHelp () {
   return <div className="back-more row">
     <Link to="/news">

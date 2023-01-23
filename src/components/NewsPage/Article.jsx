@@ -27,8 +27,3 @@ function Article ({ article }) {
 }
 
 export default connect(null, null)(Article);
-
-function Title() {
-  return <div></div>
-}
-

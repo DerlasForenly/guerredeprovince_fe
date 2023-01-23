@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import convert from 'image-file-resize';
 import { getImageSize } from 'react-image-size';
 
@@ -150,15 +149,3 @@ const CreateNewspaperPage = () => {
 };
 
 export default connect(null, null)(CreateNewspaperPage);
-
-function BackAndHelp () {
-  return <div className="back-more row">
-    <Link to="/news">
-      <button className="back-button">Back</button>
-    </Link>
-    <Link to="/news">
-      <button className="back-button">Help</button>
-    </Link>
-  </div>;
-}
-

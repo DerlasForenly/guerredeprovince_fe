@@ -8,6 +8,7 @@ import Article from './Article';
 import { loadPromotedArticle } from '../../redux/news/actions';
 
 function PromotedArticle ({ loadPromotedArticle, article }) {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

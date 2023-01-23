@@ -13,6 +13,7 @@ const HomePage = () => {
 
 export default connect(null, null)(HomePage);
 
+// eslint-disable-next-line no-unused-vars
 function TopWar (props) {
   return <div className="top-war-container">
     <div className="countries-container row">
@@ -27,6 +28,7 @@ function TopWar (props) {
   </div>;
 }
 
+// eslint-disable-next-line no-unused-vars
 function TopArticle (props) {
   return <div className="top-article-container row">
     <div className="info-container col">
@@ -41,6 +43,7 @@ function TopArticle (props) {
   </div>;
 }
 
+// eslint-disable-next-line no-unused-vars
 function Details (props) {
   return <div className="details-container">
   </div>;

@@ -11,6 +11,7 @@ import {
 } from '../../redux/user/actions';
 
 function UpdateAvatar ({ user, selectedFile, previewFile, setPreviewAvatarFile, setSelectedAvatarFile }) {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const onChangeFileInput = e => {

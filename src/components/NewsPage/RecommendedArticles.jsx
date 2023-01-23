@@ -5,6 +5,7 @@ import ArticlesList from '../../components/NewsPage/ArticlesList';
 import RefreshButton from '../../components/NewsPage/RefreshButton';
 
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

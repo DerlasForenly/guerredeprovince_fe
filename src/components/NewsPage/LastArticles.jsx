@@ -12,6 +12,7 @@ import flagImg from '../../assets/flag-of-ukraine.jpg';
 import RefreshButton from './RefreshButton';
 
 const LastArticles = ({ loadLastArticles, articles, pagesMeta, setLastArticlesPage }) => {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

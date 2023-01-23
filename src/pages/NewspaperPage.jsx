@@ -10,6 +10,7 @@ import { loadNewspaper } from '../redux/newspaper/actions';
 import Avatar from '../components/baseComponents/Avatar';
 
 function NewspaperPage ({ newspaper, loadNewspaper }) {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
@@ -95,17 +96,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperPage);
-
-function BackAndHelp () {
-  return <div className="back-more row">
-    <Link to="/news">
-      <button className="back-button">Back</button>
-    </Link>
-    <Link to="/news">
-      <button className="back-button">Help</button>
-    </Link>
-  </div>;
-}
 
 function StatisticsRow ({ label, value, url = false }) {
   if (url) {

@@ -1,5 +1,3 @@
-const className = 'rating-label';
-
 export default function RatingLabel ({ value, fw = 'bold', fs = 15 }) {
   let className = value >= 0 ? 'positive' : 'negative';
   let signedValue = value > 0 ? '+' + value : value;

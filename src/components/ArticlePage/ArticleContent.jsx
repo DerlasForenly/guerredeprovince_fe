@@ -4,7 +4,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import loadingGif from '../../assets/loading.gif';
-import moreIcon from '../../assets/more.png';
 import { useEffect, useState } from 'react';
 import { loadArticle, updateArticleRating } from '../../redux/article/actions';
 import { Link } from 'react-router-dom';
@@ -82,15 +81,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleContent);
-
-function ArticlePageNavigation () {
-  return <div className="back-more row">
-    <Link to={'/news'}>
-      <button>Back</button>
-    </Link>
-    <img src={moreIcon} alt="more-icon" className="more-icon"></img>
-  </div>;
-}
-
-
-

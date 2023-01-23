@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import newspaperSign from '../../assets/newspaper.png';
-import loadingGif from '../../assets/loading.gif';
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
