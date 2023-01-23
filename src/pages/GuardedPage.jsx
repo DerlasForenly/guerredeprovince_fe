@@ -13,10 +13,6 @@ function GuardedPage ({ me, element, clearUser }) {
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API}/api/auth/me`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token'),
-        'Access-Control-Allow-Origin': '*',
-      }
     }).then((response) => {
       me(response.data);
     }).catch((error) => {
