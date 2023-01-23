@@ -2,7 +2,7 @@
   "name": "rr_front_react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://68e8-176-105-210-90.eu.ngrok.io",
+  "proxy": "https://13a9-176-105-210-90.eu.ngrok.io",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
