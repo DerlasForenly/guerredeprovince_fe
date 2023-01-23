@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 
-import UpperNavigationPanel from './UpperNavigationPanel';
+import NavigationButtons from './NavigationButtons';
 import UserPanel from './UserPanel';
 
 function Headers ({ user }) {
   if (user) {
-    return <div className="navigation row">
-      <div className="logo-container"></div>
-      <UpperNavigationPanel></UpperNavigationPanel>
-      <UserPanel></UserPanel>
+    return <div className="navigation">
+      <Logo/>
+      <NavigationButtons/>
+      <UserPanel/>
     </div>;
   } else {
-    return <div></div>;
+    return <div/>
   }
 }
 
@@ -22,3 +22,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, null)(Headers);
+
+function Logo () {
+  return <div></div>
+}

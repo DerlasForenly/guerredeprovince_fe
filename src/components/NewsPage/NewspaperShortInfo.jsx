@@ -47,18 +47,15 @@ const NewspaperShortInfo = ({ user = false, newspaper, loadNewspaper }) => {
   }, [loadNewspaper, user]);
 
   if (loading) {
-    return <div className="newspaper-and-navigation-container row">
-      <div className="newspaper-short-info-container row">
-        <img src={loadingGif} className="newspaper-avatar" alt="newspaper-avatar" />
-      </div>
-      <Actions></Actions>
-    </div>;
-  } else {
-    return <div className="newspaper-and-navigation-container row">
-      {newspaperNotFound ? <Free></Free> : newspaper ? <Newspaper></Newspaper> : <div></div>}
+    return <div className="container row">
       <Actions></Actions>
     </div>;
   }
+
+  return <div className="container row">
+    {newspaperNotFound ? <Free></Free> : newspaper ? <Newspaper></Newspaper> : <div></div>}
+    <Actions></Actions>
+  </div>;
 };
 
 const mapDispatchToProps = {
@@ -75,26 +72,21 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperShortInfo);
 
 function Actions () {
-  return <div>
+  return <div className={"row"}>
     <Link to="/news/article/create">
-      <button>Create an article</button>
+      <button className={"medium-gray-button"}>Create an article</button>
     </Link>
     <Link to="/news/subscriptions">
-      <button>My subscriptions</button>
+      <button className={"medium-gray-button"}>My subscriptions</button>
     </Link>
   </div>;
 }
 
 function Free () {
   return <div className="newspaper-short-info-container row">
-    {/*<img src={newspaperSign} className="newspaper-icon" />*/}
-    {/*<div className="help-text col">*/}
-    {/*  <label>You do not have any position at any newspaper.</label>*/}
-    {/*  <button>Create a newspaper</button>*/}
-    {/*</div>*/}
     <img src={newspaperSign} className="newspaper-icon" alt="newspaper-icon" />
     <Link to="/newspaper/create">
-      <button>Create a newspaper</button>
+      <button className={"medium-gray-button"}>Create a newspaper</button>
     </Link>
   </div>;
 }

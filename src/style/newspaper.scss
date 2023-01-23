@@ -1,0 +1,41 @@
+.newspaper-container {
+  @extend .container;
+
+  width: 600px;
+
+  .description {
+    min-height: 250px;
+  }
+
+  .statistics-row {
+    color: gray;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .statistics {
+    margin-top: 20px;
+  }
+
+  .text-data {
+    margin-left: 20px;
+  }
+
+  .actions {
+    margin: 0 auto;
+    width: 120px;
+
+    button {
+      @extend .small-gray-button;
+
+      margin: auto auto 10px;
+      width: 120px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: whitesmoke;
+    }
+  }
+}

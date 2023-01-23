@@ -1,0 +1,26 @@
+.refresh-icon {
+  @extend .base-icon;
+  
+  height: 14px;
+  width: 14px;
+}
+
+.refresh-icon-rotating {
+  @extend .refresh-icon;
+
+  animation: rotating 4s linear infinite;
+}
+
+@keyframes rotating {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.refresh-icon:hover, .refresh-icon-rotating:hover{
+  -webkit-filter: none;
+  filter: none;
+}

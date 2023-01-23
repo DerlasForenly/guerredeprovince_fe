@@ -5,13 +5,14 @@ import convert from 'image-file-resize';
 import { getImageSize } from 'react-image-size';
 
 import picturePlaceholder from '../assets/picture-placeholder.jpg';
-import InputText from '../components/InputText';
-import InputTextarea from '../components/InputTextarea';
+import InputText from '../components/baseComponents/InputText';
+import InputTextarea from '../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import Avatar from '../components/baseComponents/Avatar';
 
-const CreateNewspaperPage = (props) => {
+const CreateNewspaperPage = () => {
   const [state, setState] = useState({
     name: '',
     description: '',
@@ -100,19 +101,23 @@ const CreateNewspaperPage = (props) => {
     });
   };
 
-  return <div className="create-newspaper-page row">
+  return <div className="page">
     <form className="create-newspaper-container col" onSubmit={submitHandler}>
-      <BackAndHelp></BackAndHelp>
-      <div className="avatar-name row">
-        <div className="avatar-load col">
-          <img src={selectedFile ? preview : picturePlaceholder} alt="avatar-placeholder" name="avatar" />
-        </div>
+      <div className="row">
+        <Avatar
+          src={selectedFile ? preview : picturePlaceholder}
+          alt="avatar-placeholder"
+          className={'avatar-huge'}
+          mr={20}
+          mb={20}
+        />
         <div className="avatar-name col">
           <InputText
             changeInputHandler={changeInputHandler}
             max={50}
             label="Name"
             name="name"
+            className={"name-input"}
           />
           <input
             type="file"
@@ -131,8 +136,14 @@ const CreateNewspaperPage = (props) => {
         className="description-input"
       />
       <div className="settings row">
-        <label>It is free now, but it is going to be 50G later ;)</label>
-        <button type="submit" disabled={loading}>Create</button>
+        <label className={"small-content-p"}>It is free now, but it is going to be 50G later ;)</label>
+        <button
+          type="submit"
+          disabled={loading}
+          className={"medium-gray-button"}
+        >
+          Create
+        </button>
       </div>
     </form>
   </div>;

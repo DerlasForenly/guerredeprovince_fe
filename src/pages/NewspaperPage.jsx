@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+
 import Actions from '../components/NewspaperPage/Actions';
 import { loadNewspaper } from '../redux/newspaper/actions';
+import Avatar from '../components/baseComponents/Avatar';
 
 function NewspaperPage ({ newspaper, loadNewspaper }) {
   const [loading, setLoading] = useState(false);
@@ -29,67 +30,57 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
       setLoading(false);
     });
 
-  }, [id, loadNewspaper])
+  }, [id, loadNewspaper]);
 
-  if (loading || !newspaper.avatar ) {
-    return <div className="newspaper-page">
-      <div className="newspaper-container">
-        Loading...
-      </div>
-    </div>
-  } else {
-    return <div className="newspaper-page">
-      <div className="newspaper-container">
-        <BackAndHelp></BackAndHelp>
-        <div className="row">
-          <div className="newspaper-actions col">
-            <img
-              src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
-              className="newspaper-avatar"
-              alt="newspaper-avatar"
-            />
-            <Actions></Actions>
-          </div>
-          <div className="second-col col">
-            <label className="name">{newspaper.name}</label>
-            <p className="description">{newspaper.description}</p>
+  return <div className="page">
+    <div className="newspaper-container">
+      <div className="row">
+        <div className="col">
+          <Avatar
+            src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
+            size={'huge'}
+            mb={15}
+          />
+          <Actions></Actions>
+        </div>
+        <div className="text-data col">
+          <label className="huge-name-label">{newspaper.name}</label>
+          <p className="description small-content-p">{newspaper.description}</p>
+          <StatisticsRow
+            label="Owner:"
+            value={newspaper.owner.nickname}
+          />
+          <div className="statistics col">
+            <label className="medium-name-label">Statistics:</label>
             <StatisticsRow
-              label="Owner:"
-              value={newspaper.owner.nickname}
+              label="Best article:"
+              value={newspaper.best_article?.title}
             />
-            <div className="statistics col">
-              <label className="section-label">Statistics:</label>
-              <StatisticsRow
-                label="Best article:"
-                value={newspaper.best_article?.title}
-              />
-              <StatisticsRow
-                label="Worst article:"
-                value={newspaper.worst_article?.title}
-              />
-              <StatisticsRow
-                label="Count articles:"
-                value={newspaper?.total_articles}
-              />
-              <StatisticsRow
-                label="Total rating:"
-                value={newspaper?.rating}
-              />
-              <StatisticsRow
-                label="Personal:"
-                value={newspaper?.count_staff}
-              />
-              <StatisticsRow
-                label="Founded:"
-                value={newspaper?.created_at}
-              />
-            </div>
+            <StatisticsRow
+              label="Worst article:"
+              value={newspaper.worst_article?.title}
+            />
+            <StatisticsRow
+              label="Count articles:"
+              value={newspaper?.total_articles}
+            />
+            <StatisticsRow
+              label="Total rating:"
+              value={newspaper?.rating}
+            />
+            <StatisticsRow
+              label="Personal:"
+              value={newspaper?.count_staff}
+            />
+            <StatisticsRow
+              label="Founded:"
+              value={newspaper?.created_at}
+            />
           </div>
         </div>
-        <div className="col"></div>
       </div>
-    </div>;
-  }
+    </div>
+  </div>;
 }
 
 const mapDispatchToProps = {
@@ -121,11 +112,11 @@ function StatisticsRow ({ label, value, url = false }) {
     return <div className="statistics-row row">
       <label>{label}</label>
       <Link to={`/home`}><label>{value}</label></Link>
-    </div>
+    </div>;
   } else {
     return <div className="statistics-row row">
       <label>{label}</label>
       <label>{value}</label>
-    </div>
+    </div>;
   }
 }

@@ -1,0 +1,19 @@
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: whitesmoke;
+  background: no-repeat center center fixed url(http://127.0.0.1:8000/backgrounds/background.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}

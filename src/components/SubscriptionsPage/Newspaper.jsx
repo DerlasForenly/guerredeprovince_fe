@@ -2,22 +2,25 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SubscribeButton from '../../components/NewspaperPage/SubscribeButton';
 import { updateSubscription } from '../../redux/subscriptions/actions';
+import Avatar from '../../components/baseComponents/Avatar';
 
 function Newspaper ({ newspaper, key, subscribed, updateSubscription }) {
   return <div className="newspaper row">
     <div className="row">
       <Link to={`/newspaper/${newspaper.id}`}>
-        <img
+        <Avatar
           src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
           alt="newspaper-avatar"
+          size={'medium'}
+          mr={15}
         />
       </Link>
       <div className="name-nickname col">
         <Link to={`/newspaper/${newspaper.id}`}>
-          <label className="name">{newspaper.name}</label>
+          <label className="medium-name-label">{newspaper.name}</label>
         </Link>
         <Link to={`/user/${newspaper.owner.id}`}>
-          <label className="nickname">Owner: {newspaper.owner.nickname}</label>
+          <label className="medium-content-p">Owner: {newspaper.owner.nickname}</label>
         </Link>
       </div>
     </div>
@@ -25,6 +28,7 @@ function Newspaper ({ newspaper, key, subscribed, updateSubscription }) {
       newspaperId={newspaper.id}
       isSubscribed={subscribed}
       updateStateFunction={updateSubscription}
+      className={"huge-gray-button"}
     />
   </div>;
 }

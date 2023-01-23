@@ -1,0 +1,66 @@
+.base-button {
+  white-space: nowrap;
+  height: fit-content;
+  width: fit-content;
+  background: none;
+  border-radius: 3px;
+  color: gray;
+  padding: 10px;
+  border: none;
+  transition: 0.2s;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.small-base-button {
+  @extend .base-button;
+
+  font-size: 14px;
+}
+
+.medium-base-button {
+  @extend .base-button;
+
+  font-size: 18px;
+}
+
+.huge-base-button {
+  @extend .base-button;
+
+  font-size: 22px;
+}
+
+@import "buttons/gray-button";
+
+.small-no-style-button {
+  @extend .small-base-button;
+
+  padding: 0;
+  margin: 0;
+}
+
+.blue-button {
+  @extend .base-button;
+
+  background: #25ADE8;
+  box-shadow: 0 4px 11px rgba(23, 213, 255, 0.26);
+  border-radius: 3px;
+  color: white;
+}
+
+.red-button {
+  @extend .base-button;
+
+  background: #E84825;
+  box-shadow: 0 4px 11px rgba(255, 23, 23, 0.26);
+  color: white;
+}
+
+.green-button {
+  @extend .base-button;
+
+  background: #39C370;
+  box-shadow: 0 4px 11px rgba(57, 195, 112, 0.26);
+  color: white;
+}

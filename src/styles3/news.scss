@@ -1,0 +1,185 @@
+.news-page {
+  @extend .page;
+
+  .articles-list {
+    @extend .container;
+    width: 360px;
+    padding: 20px 20px 10px 20px !important;
+
+    .articles-list__title-container {
+      align-items: center;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      height: 23px;
+
+      .articles-list__header {
+        width: auto;
+        font-size: 20px;
+        color: gray;
+      }
+
+      .articles-list__flag {
+        margin-left: 10px;
+        height: 10px;
+        width: 17px;
+      }
+
+      button {
+        margin-left: auto;
+        background: none;
+        border: none;
+        font-size: 14px;
+        color: gray;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        color: black;
+      }
+    }
+
+    .article {
+      text-decoration: none; /* no underline */
+      padding-bottom: 5px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      justify-content: space-between;
+      transition: 0.2s;
+
+      .space-between {
+        justify-content: space-between;
+        width: 100%;
+
+        .title {
+          width: 100%;
+          margin: 0 auto;
+          font-size: 15px;
+          color: gray;
+          transition: 0.2s;
+        }
+
+        .author-and-rating {
+          justify-content: space-between;
+          display: flex;
+          transition: 0.2s;
+
+          .date {
+            font-size: 10px;
+            color: gray;
+            white-space: nowrap;
+            height: fit-content;
+            align-self: flex-end;
+            margin-left: 25px;
+          }
+
+          .author {
+            width: 160px;
+            font-size: 15px;
+            color: gray;
+            transition: 0.2s;
+          }
+        }
+      }
+    }
+
+    .article:hover {
+      cursor: pointer;
+
+      .title, .author-and-rating .author, .author-and-rating .date {
+        color: black;
+        cursor: pointer;
+      }
+    }
+
+    .loading-gif {
+      margin: auto;
+      height: 120px;
+      padding: 15px;
+    }
+  }
+
+  .newspaper-and-navigation-container {
+    @extend .container;
+    justify-content: space-between;
+
+    button {
+      margin: 3px;
+      padding: 10px;
+      background: none;
+      border: none;
+      color: gray;
+      font-size: 18px;
+      border-radius: 7px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: whitesmoke;
+    }
+
+    .newspaper-short-info-container {
+      transition: 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+
+      label {
+        transition: 0.2s;
+        cursor: pointer;
+        color: gray;
+      }
+
+      .newspaper-name {
+        margin-bottom: 5px;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+
+      .text-info {
+        transition: 0.2s;
+        justify-content: space-between;
+
+        .rating {
+          transition: 0.2s;
+          font-size: 17px;
+          color: forestgreen;
+          font-weight: bold;
+        }
+
+        .negative-rating {
+          @extend .rating;
+
+          color: red;
+        }
+
+        .positive-rating {
+          @extend .rating;
+
+          color: forestgreen;
+        }
+      }
+
+      .help-text {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: fit-content;
+        }
+      }
+
+      .newspaper-icon {
+        transition: 0.2s;
+        filter: contrast(0.1);
+        height: 80px;
+        width: 80px;
+        margin-right: 15px;
+      }
+    }
+
+    .newspaper-short-info-container:hover {
+      .newspaper-name {
+        color: black;
+      }
+    }
+  }
+}

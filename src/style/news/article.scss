@@ -1,0 +1,53 @@
+.articles-list {
+  @extend .container;
+
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  .article-in-list {
+    text-decoration: none; /* no underline */
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    transition: 0.2s;
+
+    .title-author {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+
+      .title {
+        width: 100%;
+        margin: 0 auto;
+        font-size: 14px;
+        color: gray;
+        transition: 0.2s;
+      }
+
+      .author-and-rating {
+        justify-content: space-between;
+        display: flex;
+        transition: 0.2s;
+
+        .author {
+          width: 160px;
+          font-size: 14px;
+          color: gray;
+          transition: 0.2s;
+        }
+      }
+    }
+  }
+
+  .article-in-list:hover {
+    cursor: pointer;
+
+    .title, .author-and-rating .author, .author-and-rating {
+      color: black;
+      cursor: pointer;
+    }
+  }
+}

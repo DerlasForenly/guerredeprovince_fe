@@ -1,0 +1,24 @@
+.create-article-container {
+  @extend .container;
+
+  width: 800px;
+
+  .title, .content {
+    margin-bottom: 20px;
+  }
+
+  .content {
+    height: 300px;
+  }
+
+  .author {
+    margin-bottom: 20px;
+  }
+
+  .meta-and-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}

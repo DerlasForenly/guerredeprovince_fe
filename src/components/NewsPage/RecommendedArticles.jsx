@@ -1,22 +1,22 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import ArticlesList from '../../components/ArticlesList';
+import ArticlesList from '../../components/NewsPage/ArticlesList';
 import RefreshButton from '../../components/NewsPage/RefreshButton';
 
 const RecommendedArticles = ({ articles, loadSubscriptionArticles }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(false);
   }, [loadSubscriptionArticles]);
 
-  return <div className="articles-list col">
-    <div className="articles-list__title-container row">
-      <label className="articles-list__header">Recommended for you</label>
+  return <div className="articles-list">
+    <div className="container-header">
+      <label className="container-header-title">Recommended for you</label>
       <RefreshButton />
     </div>
-    <ArticlesList articles={articles} loading={loading}></ArticlesList>
+    <ArticlesList articles={articles}/>
   </div>;
 };
 

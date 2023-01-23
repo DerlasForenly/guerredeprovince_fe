@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import InputTextarea from '../../../components/InputTextarea';
+import InputTextarea from '../../../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';
@@ -57,7 +57,7 @@ function CreateComment ({ article, loadComments }) {
       changeInputHandler={changeInputHandler}
       className={"content-input"}
     />
-    <button type="submit">Send</button>
+    <button type="submit" className="create-comment-button">Send</button>
   </form>
 }
 

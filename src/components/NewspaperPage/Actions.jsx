@@ -8,7 +8,7 @@ import { updateSubscription } from '../../redux/newspaper/actions';
 function Actions ({ user, newspaper, updateSubscription }) {
   const isOwner = user.id === newspaper.owner.id;
 
-  return <div className="actions">
+  return <div className="actions col">
     <SubscribeButton
       newspaperId={newspaper.id}
       isSubscribed={newspaper.subscribed}

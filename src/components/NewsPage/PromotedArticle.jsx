@@ -3,11 +3,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 
-import Article from '../../components/Article';
+import Article from './Article';
 
 import { loadPromotedArticle } from '../../redux/news/actions';
-
-import loadingGif from '../../assets/loading.gif';
 
 function PromotedArticle ({ loadPromotedArticle, article }) {
   const [loading, setLoading] = useState(true);
@@ -29,12 +27,12 @@ function PromotedArticle ({ loadPromotedArticle, article }) {
     });
   }, [loadPromotedArticle]);
 
-  return <div className="articles-list col">
-    <div className="articles-list__title-container row">
-      <label className="articles-list__header">Promoted article</label>
-      <button>Promote my article</button>
+  return <div className="container articles-list">
+    <div className="container-header">
+      <label className="container-header-title">Promoted article</label>
+      <button className={"small-no-style-button"}>Promote my article</button>
     </div>
-    {loading ? <img className="loading-gif" src={loadingGif} alt="loading-gif"/> : <Article article={article}></Article>}
+    <Article article={article}/>
   </div>;
 }
 

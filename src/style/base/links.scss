@@ -1,0 +1,10 @@
+.small-link-label {
+  @extend .small-name-label;
+
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.small-link-label:hover {
+  color: black;
+}

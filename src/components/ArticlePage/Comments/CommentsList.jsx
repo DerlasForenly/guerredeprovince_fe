@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Comment from './Comment';
 
 function CommentsList ({ comments }) {
-  return <div className="comments-list col">
+  return <div className="col">
     {
       comments.map((element, index) => {
         return <Comment comment={element} key={index} />;
