@@ -2,16 +2,53 @@
   color: gray;
   font-weight: bold;
   font-size: 22px;
+  transition: 0.2s;
+}
+
+.big-name-label {
+  color: gray;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.2s;
 }
 
 .medium-name-label {
   color: gray;
   font-weight: bold;
   font-size: 18px;
+  transition: 0.2s;
 }
 
-.small-content-p {
+.small-name-label {
+  color: gray;
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.content-p {
   color: gray;
   font-weight: normal;
   font-size: 14px;
+  text-align: start;
+  transition: 0.2s;
+  overflow-wrap: anywhere;
+}
+
+.small-content-p {
+  @extend .content-p;
+
+  font-size: 14px;
+}
+
+.medium-content-p {
+  @extend .content-p;
+
+  font-size: 18px;
+}
+
+.huge-content-p {
+  @extend .content-p;
+
+  font-size: 22px;
 }

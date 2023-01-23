@@ -37,10 +37,8 @@
   }
 
   .input-label {
-    width: 100%;
-    color: gray !important;
-    font-size: 22px;
-    font-weight: bold;
-    height: fit-content;
+    @extend .huge-name-label;
+
+    margin-bottom: 5px;
   }
 }

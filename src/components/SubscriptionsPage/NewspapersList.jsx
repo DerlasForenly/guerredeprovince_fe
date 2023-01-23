@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Newspaper from './Newspaper';
 
 function NewspapersList ({ subscriptions }) {
-  return <div className="col">{
+  return <div className="newspaper-list col">{
     subscriptions.map((item, index) => {
       return <Newspaper newspaper={item} key={index} subscribed={item.subscribed}></Newspaper>;
     })

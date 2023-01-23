@@ -38,7 +38,7 @@ function CommentsSection ({ loadComments, article }) {
     </div>;
   } else {
     return <div className="comments-section-container">
-      <button onClick={onClick}>{`Show comments (${article.comments_count})`}</button>
+      <button onClick={onClick} className="medium-gray-button">{`Show comments (${article.comments_count})`}</button>
     </div>;
   }
 }

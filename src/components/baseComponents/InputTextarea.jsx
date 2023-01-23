@@ -23,7 +23,7 @@ function InputTextarea ({
 
   return <div className={className}>
     <div className={'textarea-input-container'}>
-      <div className="input-label">{label}</div>
+      {label ? <label className="input-label">{label}</label> : <div />}
       <div className="textarea-input">
         <TextareaAutosize
           style={{ fontSize: fs, height: 0 }}

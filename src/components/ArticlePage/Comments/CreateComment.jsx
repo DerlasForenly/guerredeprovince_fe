@@ -57,7 +57,7 @@ function CreateComment ({ article, loadComments }) {
       changeInputHandler={changeInputHandler}
       className={"content-input"}
     />
-    <button type="submit">Send</button>
+    <button type="submit" className="create-comment-button">Send</button>
   </form>
 }
 

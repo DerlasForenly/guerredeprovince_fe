@@ -4,11 +4,15 @@ import NavigationButtons from './NavigationButtons';
 import UserPanel from './UserPanel';
 
 function Headers ({ user }) {
-  return <div className="navigation">
-    <Logo/>
-    <NavigationButtons/>
-    <UserPanel/>
-  </div>;
+  if (user) {
+    return <div className="navigation">
+      <Logo/>
+      <NavigationButtons/>
+      <UserPanel/>
+    </div>;
+  } else {
+    return <div/>
+  }
 }
 
 const mapStateToProps = state => {

@@ -27,9 +27,9 @@ const SubscriptionsPage = ({ userId, loadSubscriptions, meta, setSubscriptionsPa
     });
   }, [userId, loadSubscriptions, currentPage]);
 
-  return <div className="subscriptions-page col">
+  return <div className="page col">
     <div className="subscriptions-container col">
-      <label className="title">Subscriptions</label>
+      <label className="huge-name-label">Subscriptions</label>
       <NewspapersList />
       <Pagination pagesMeta={meta} setPageFunction={setSubscriptionsPage} />
     </div>

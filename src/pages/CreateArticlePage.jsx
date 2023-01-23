@@ -79,10 +79,10 @@ const CreateArticlePage = ({ user }) => {
         name="content"
         className={"content"}
       />
-      <div className="settings row">
+      <div className="meta-and-button row">
         <div className="col">
-          <div className="author col">
-            <label className="select-label">On behalf of the</label>
+          <div className="author col text-input-container">
+            <label className="input-label">On behalf of the</label>
             <select
               name="newspaperId"
               defaultValue={0}
@@ -95,7 +95,7 @@ const CreateArticlePage = ({ user }) => {
           <Language></Language>
         </div>
         <State></State>
-        <button type="submit" disabled={loading}>Create</button>
+        <button type="submit" disabled={loading} className={"huge-gray-button"}>Create</button>
       </div>
     </form>
   </div>;
@@ -130,8 +130,8 @@ function BackAndHelp () {
 }
 
 function Language () {
-  return <div className="language col">
-    <label className="select-label">Language</label>
+  return <div className="text-input-container col">
+    <label className="input-label">Language</label>
     <select
       name="languageId"
       defaultValue={0}

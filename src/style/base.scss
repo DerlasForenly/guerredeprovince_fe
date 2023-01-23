@@ -1,4 +1,6 @@
 @import "base/body";
+@import "base/labels";
+@import "base/rating-label";
 @import "base/buttons";
 @import "base/page";
 @import "base/avatars";
@@ -7,8 +9,10 @@
 @import "base/icons";
 @import "base/pagination";
 @import "base/flags";
-@import "base/rating-label";
-@import "base/labels";
+@import "base/links";
+@import "base/rating/rating";
+@import "article/comments";
+
 
 .MuiMenu-root, .MuiMenu-paper, .MuiMenu-list {
   color: gray;

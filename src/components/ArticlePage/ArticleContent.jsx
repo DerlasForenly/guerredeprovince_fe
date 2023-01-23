@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { loadArticle, updateArticleRating } from '../../redux/article/actions';
 import { Link } from 'react-router-dom';
 import Rating from '../../components/baseComponents/Rating';
+import Avatar from '../../components/baseComponents/Avatar';
 
 function ArticleContent ({ article, loadArticle, updateArticleRating }) {
   const [loading, setLoading] = useState(true);
@@ -39,25 +40,24 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
     </div>;
   } else {
     return <div className="article-content-container col">
-      {/*<ArticlePageNavigation></ArticlePageNavigation>*/}
       <div className="title">{article?.title}</div>
       <div className="content">{article?.content}</div>
       <div className="meta row">
         <div className="row">
-          <img
+          <Avatar
             src={`${process.env.REACT_APP_API}/${article?.avatar}`}
-            alt="avatar"
-            className="avatar"
+            size={'small'}
+            mr={10}
           />
-          <div className="newspaper-author col">
+          <div className="col">
             <Link to={`/newspaper/${article?.newspaper.id}`}>
-              <div className="newspaper">{article?.newspaper.name}</div>
+              <div className="small-link-label">{article?.newspaper.name}</div>
             </Link>
             <Link to={`/user/${article?.author.id}`}>
-              <div className="author">{article?.newspaper ? 'Moderator:' : ''} {article?.author.nickname}</div>
+              <div
+                className="small-link-label">{article?.newspaper ? 'Moderator:' : ''} {article?.author.nickname}</div>
             </Link>
           </div>
-          {/*<button className="subscribe-button">Subscribe</button>*/}
         </div>
         <Rating
           item={article}
@@ -85,9 +85,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(ArticleContent);
 
 function ArticlePageNavigation () {
   return <div className="back-more row">
-    <Link to={'/news'}><button>Back</button></Link>
+    <Link to={'/news'}>
+      <button>Back</button>
+    </Link>
     <img src={moreIcon} alt="more-icon" className="more-icon"></img>
-  </div>
+  </div>;
 }
 
 
