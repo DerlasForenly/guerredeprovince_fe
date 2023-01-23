@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';
 
