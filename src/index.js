@@ -5,6 +5,9 @@ import thunk from 'redux-thunk';
 import App from './App';
 import { Provider } from 'react-redux';
 import { rootReducer } from './redux/rootReducer';
+import axios from 'axios';
+
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(
