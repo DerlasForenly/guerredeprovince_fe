@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-//import Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -13,6 +13,9 @@ function GuardedPage ({ me, element, clearUser }) {
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API}/api/auth/me`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token'),
+      }
     }).then((response) => {
       me(response.data);
     }).catch((error) => {
