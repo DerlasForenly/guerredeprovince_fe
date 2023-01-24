@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 
 import {
   signIn,
-  hideErrorMessage,
-  showErrorMessage,
 } from '../../redux/auth/actions';
 
 import {
@@ -22,6 +20,9 @@ const SignIn = (props) => {
     email: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
 
   const changeInputHandler = e => {
@@ -34,8 +35,9 @@ const SignIn = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    props.hideErrorMessage();
     props.showLoader();
+    setError('');
+    setLoading(true);
 
     axios({
       method: 'POST',
@@ -45,14 +47,13 @@ const SignIn = (props) => {
         password: state.password,
       }
     }).then((response) => {
-      console.log(response.data);
       Cookies.set('access_token', response.data.access_token);
       props.signIn(response.data);
-      props.hideLoader();
-
+      setLoading(false);
       navigate('/home');
     }).catch((error) => {
-      props.showErrorMessage(error.message);
+      setError(error.response.data.error);
+      setLoading(false);
     });
   };
 
@@ -71,15 +72,14 @@ const SignIn = (props) => {
       name="password"
       onChange={changeInputHandler}
     ></input>
-    <button type="submit">Sign In</button>
+    <label>{error}</label>
+    <button type="submit" disabled={loading}>Sign In</button>
     <label>Or create a new account <Link to="/sign-up">here</Link></label>
   </form>;
 };
 
 const mapDispatchToProps = {
   signIn,
-  hideErrorMessage,
-  showErrorMessage,
   hideLoader,
   showLoader,
 };

@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-import { hideLoader, showLoader } from '../../redux/app/actions';
-import { hideErrorMessage, showErrorMessage } from '../../redux/auth/actions';
-
 import okGif from '../../assets/ok2.gif';
 
 const SignUp = (props) => {
@@ -18,6 +15,8 @@ const SignUp = (props) => {
   });
 
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const changeInputHandler = e => {
     setState(prev => ({
@@ -29,8 +28,8 @@ const SignUp = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    props.hideErrorMessage();
-    props.showLoader();
+    setError('');
+    setLoading(true);
 
     axios({
       method: 'POST',
@@ -42,18 +41,17 @@ const SignUp = (props) => {
         password_confirmation: state.password_confirmation,
       }
     }).then((response) => {
-      console.log(response.data);
-      props.hideLoader();
       setSuccess(true);
+      setLoading(false);
     }).catch((error) => {
-      props.showErrorMessage(error.message);
+      setError(error.response.data.error);
     });
   };
 
   return <form onSubmit={submitHandler} className="auth-form">
     {success ?
       <div className="col">
-        <img src={okGif} alt="ok-gif"/>
+        <img src={okGif} alt="ok-gif" />
         <label>User has been created.</label>
         <label>Go to <Link to="/sign-in">sign in</Link> page and use this credentials.</label>
       </div> :
@@ -86,19 +84,15 @@ const SignUp = (props) => {
           name="password_confirmation"
           onChange={changeInputHandler}
         ></input>
-        <button type="submit">Sign Up</button>
+        <label>{error}</label>
+        <button type="submit" disabled={loading}>Sign Up</button>
         <label>Or use an account <Link to="/sign-in">here</Link></label>
       </div>
     }
   </form>;
 };
 
-const mapDispatchToProps = {
-  hideErrorMessage,
-  showErrorMessage,
-  hideLoader,
-  showLoader,
-};
+const mapDispatchToProps = {};
 
 const mapStateToProps = state => ({
   errorMessage: state.auth.errorMessage,

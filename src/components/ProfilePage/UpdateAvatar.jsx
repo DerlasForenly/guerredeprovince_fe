@@ -91,15 +91,15 @@ function UpdateAvatar ({ user, selectedFile, previewFile, setPreviewAvatarFile, 
       multiple={false}
       onChange={onChangeFileInput}
     />
-    <div className="update-clear row">
+    <div className="row">
       <button
-        className="update-avatar-button"
+        className="medium-gray-button"
         type="submit"
-        disabled={!previewFile}
+        disabled={!previewFile || loading}
       >
         Update
       </button>
-      <button className="update-avatar-button" type="reset" onClick={onReset}>Clear</button>
+      <button className="medium-gray-button" type="reset" onClick={onReset}>Clear</button>
     </div>
   </form>
 }

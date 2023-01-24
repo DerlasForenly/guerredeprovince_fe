@@ -25,16 +25,3 @@ export function clearUser () {
     type: CLEAR_USER,
   };
 }
-
-export const hideErrorMessage = () => {
-  return {
-    type: HIDE_ERROR_MESSAGE
-  };
-};
-
-export const showErrorMessage = (message) => {
-  return {
-    type: SHOW_ERROR_MESSAGE,
-    payload: message,
-  };
-};

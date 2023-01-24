@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import UpdateAvatar from '../components/ProfilePage/UpdateAvatar';
+import Avatar from '../components/baseComponents/Avatar';
 
 /**
  * @param user {id, avatar, nickname}
@@ -19,13 +20,13 @@ const BaseUserPage = ({ user, currentUser, previewFile }) => {
     return `${process.env.REACT_APP_API}/${user.avatar}`;
   }
 
-  return <div className="profile-page">
-    <div className="profile-container row">
-      <div className="first-col col">
-        <img
+  return <div className="page">
+    <div className="container row">
+      <div className="col">
+        <Avatar
           src={avatarImg()}
           alt="user-avatar"
-          className="user-avatar"
+          className="avatar-huge"
         />
         {
           currentUser.id === user.id ?
@@ -34,7 +35,7 @@ const BaseUserPage = ({ user, currentUser, previewFile }) => {
         }
       </div>
       <div className="col">
-        <label className="nickname">{user?.nickname}</label>
+        <label className="huge-name-label">{user?.nickname}</label>
       </div>
     </div>
   </div>;
