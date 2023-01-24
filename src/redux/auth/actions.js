@@ -1,8 +1,6 @@
 import {
   ME,
   SIGN_IN,
-  HIDE_ERROR_MESSAGE,
-  SHOW_ERROR_MESSAGE,
   CLEAR_USER,
 } from './types';
 
