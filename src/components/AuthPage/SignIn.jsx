@@ -52,7 +52,7 @@ const SignIn = (props) => {
       setLoading(false);
       navigate('/home');
     }).catch((error) => {
-      setError(error.response.data.error);
+      setError(error.response.data.error ? error.response.data.error : error.response.data.message);
       setLoading(false);
     });
   };

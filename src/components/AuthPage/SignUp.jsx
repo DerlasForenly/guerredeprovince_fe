@@ -44,8 +44,7 @@ const SignUp = (props) => {
       setSuccess(true);
       setLoading(false);
     }).catch((error) => {
-      console.log(error.response.data);
-      setError(error.response.data.error);
+      setError(error.response.data.error ? error.response.data.error : error.response.data.message);
       setLoading(false);
     });
   };
