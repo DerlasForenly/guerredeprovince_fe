@@ -2,17 +2,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SubscribeButton from '../../components/NewspaperPage/SubscribeButton';
 import { updateSubscription } from '../../redux/subscriptions/actions';
-import Avatar from '../../components/baseComponents/Avatar';
 
 function Newspaper ({ newspaper, key, subscribed, updateSubscription }) {
   return <div className="newspaper row">
     <div className="row">
       <Link to={`/newspaper/${newspaper.id}`}>
-        <Avatar
+        <img
           src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
           alt="newspaper-avatar"
-          size={'medium'}
-          mr={15}
         />
       </Link>
       <div className="name-nickname col">

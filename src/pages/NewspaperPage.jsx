@@ -1,13 +1,19 @@
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Container from '@mui/material/Container';
 
-import Actions from '../components/NewspaperPage/Actions';
 import { loadNewspaper } from '../redux/newspaper/actions';
-import Avatar from '../components/baseComponents/Avatar';
+import Paper from '@mui/material/Paper';
+import Title from '../components/baseComponents/Title';
+import { ButtonGroup, Stack } from '@mui/material';
+import NewspaperArticles from '../components/NewspaperPage/NewspaperArticles';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import SubscribeButton from '../components/NewspaperPage/SubscribeButton';
 
 function NewspaperPage ({ newspaper, loadNewspaper }) {
   // eslint-disable-next-line no-unused-vars
@@ -33,55 +39,73 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
 
   }, [id, loadNewspaper]);
 
-  return <div className="page">
-    <div className="newspaper-container">
-      <div className="row">
-        <div className="col">
-          <Avatar
-            src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
-            size={'huge'}
-            mb={15}
-          />
-          <Actions></Actions>
-        </div>
-        <div className="text-data col">
-          <label className="huge-name-label">{newspaper.name}</label>
-          <p className="description small-content-p">{newspaper.description}</p>
-          <StatisticsRow
-            label="Owner:"
-            value={newspaper.owner.nickname}
-          />
-          <div className="statistics col">
-            <label className="medium-name-label">Statistics:</label>
-            <StatisticsRow
-              label="Best article:"
-              value={newspaper.best_article?.title}
-            />
-            <StatisticsRow
-              label="Worst article:"
-              value={newspaper.worst_article?.title}
-            />
-            <StatisticsRow
-              label="Count articles:"
-              value={newspaper?.total_articles}
-            />
-            <StatisticsRow
-              label="Total rating:"
-              value={newspaper?.rating}
-            />
-            <StatisticsRow
-              label="Personal:"
-              value={newspaper?.count_staff}
-            />
-            <StatisticsRow
-              label="Founded:"
-              value={newspaper?.created_at}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>;
+  return (
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Stack spacing={2} direction={'row'} sx={{ width: '100%' }}>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 650 }}>
+          <Stack sx={{ width: '100%' }}>
+            <Stack direction={'row'} spacing={2} sx={{ width: '100%' }}>
+              <Stack spacing={3}>
+                <Avatar
+                  src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
+                  sx={{ width: 200, height: 200 }}
+                />
+                <ButtonGroup
+                  orientation="vertical"
+                  aria-label="vertical contained button group"
+                  variant="text"
+                >
+                  <SubscribeButton key={'1'} newspaper={newspaper}/>
+                  <Button key="2">Edit</Button>
+                  <Button key="3">Staff</Button>
+                  <Button key="4" color={'error'}>Delete</Button>
+                </ButtonGroup>
+              </Stack>
+              <Stack spacing={3} sx={{ width: '100%' }}>
+                <Title>{newspaper.name}</Title>
+                <Typography variant={'body2'} component={'h2'}>
+                  {newspaper.description}
+                </Typography>
+                <Stack>
+                  <Typography variant={'body1'} component={'h2'}>
+                    Statistics:
+                  </Typography>
+                  <StatisticsRow
+                    label="Best article:"
+                    value={newspaper.best_article?.title}
+                  />
+                  <StatisticsRow
+                    label="Worst article:"
+                    value={newspaper.worst_article?.title}
+                  />
+                  <StatisticsRow
+                    label="Count articles:"
+                    value={newspaper?.total_articles}
+                  />
+                  <StatisticsRow
+                    label="Total rating:"
+                    value={newspaper?.rating}
+                  />
+                  <StatisticsRow
+                    label="Personal:"
+                    value={newspaper?.count_staff}
+                  />
+                  <StatisticsRow
+                    label="Founded:"
+                    value={newspaper?.created_at}
+                  />
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Paper>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
+          <Title>Newspaper articles</Title>
+          <NewspaperArticles />
+        </Paper>
+      </Stack>
+    </Container>
+  );
 }
 
 const mapDispatchToProps = {
@@ -98,15 +122,15 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperPage);
 
 function StatisticsRow ({ label, value, url = false }) {
-  if (url) {
-    return <div className="statistics-row row">
-      <label>{label}</label>
-      <Link to={`/home`}><label>{value}</label></Link>
-    </div>;
-  } else {
-    return <div className="statistics-row row">
-      <label>{label}</label>
-      <label>{value}</label>
-    </div>;
-  }
+  return (
+    <Stack direction={'row'} justifyContent={'space-between'} sx={{ width: '100%' }}>
+      <Typography variant={'body2'} component={'h2'}>
+        {label}
+      </Typography>
+      <Typography variant={'body2'} component={'h2'}>
+        {value}
+      </Typography>
+    </Stack>
+  )
 }
+

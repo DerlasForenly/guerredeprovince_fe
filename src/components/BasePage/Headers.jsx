@@ -6,12 +6,12 @@ import UserPanel from './UserPanel';
 function Headers ({ user }) {
   if (user) {
     return <div className="navigation">
-      <Logo/>
-      <NavigationButtons/>
-      <UserPanel/>
+      <Logo />
+      <NavigationButtons />
+      <UserPanel />
     </div>;
   } else {
-    return <div/>
+    return <div />;
   }
 }
 
@@ -24,5 +24,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, null)(Headers);
 
 function Logo () {
-  return <div></div>
+  return <div className={""}></div>;
 }

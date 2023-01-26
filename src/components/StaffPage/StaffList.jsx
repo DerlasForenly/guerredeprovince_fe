@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import StaffUser from './StaffUser';
 
 function StaffList ({ staff = [] }) {
-  return <div className="staff-list">
+  return <div className="container">
     {
       staff.map((item, index) => {
         return <StaffUser staff={item} key={index} />;

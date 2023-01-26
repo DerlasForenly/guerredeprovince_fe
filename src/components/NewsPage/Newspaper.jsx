@@ -1,31 +1,37 @@
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Avatar from '../baseComponents/Avatar';
+import { Stack } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Link from '@mui/material/Link';
 import RatingLabel from '../../components/baseComponents/RatingLabel';
 
 function Newspaper ({ newspaper }) {
-  return <Link className="newspaper-short-info-container row" to={`/newspaper/${newspaper.id}`}>
-    <Avatar
-      src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
-      size={'medium'}
-      mr={15}
-    />
-    <div className="text-info col">
-      <div className="col">
-        <label className="newspaper-name">{newspaper?.name}</label>
-        <label>Your position: {newspaper.position}</label>
-      </div>
-      <RatingLabel
-        value={newspaper.rating}
-        fs={22}
-      />
-    </div>
-  </Link>;
+  return (
+    <Link href={`/newspaper/${newspaper.id}`} underline={'none'} color={'inherit'}>
+      <Stack direction={'row'} spacing={2}>
+        <Avatar
+          alt="newspaper-avatar"
+          src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
+          sx={{ width: 86, height: 86 }}
+        />
+        <Stack justifyContent="space-between">
+          <Stack>
+            <Typography variant="h6">
+              {newspaper?.name}
+            </Typography>
+            <Typography component="h2" variant="body2">
+              Your position: {newspaper.position}
+            </Typography>
+          </Stack>
+          <RatingLabel value={newspaper.value} />
+        </Stack>
+      </Stack>
+    </Link>
+  )
 }
 
-const mapDispatchToProps = {
-
-};
+const mapDispatchToProps = {};
 
 const mapStateToProps = state => {
   return {

@@ -12,7 +12,6 @@ import WorldMapPage from './pages/WorldMapPage';
 import ProfilePage from './pages/ProfilePage';
 import RedirectPage from './pages/RedirectPage';
 import JobPage from './pages/JobPage';
-import Headers from './components/BasePage/Headers';
 import RegionPage from './pages/RegionPage';
 import MarketPage from './pages/MarketPage';
 import CreateArticlePage from './pages/CreateArticlePage';
@@ -26,7 +25,6 @@ import NewspaperStaffPage from './pages/NewspaperStaffPage';
 function App () {
   return <div className="App">
     <BrowserRouter>
-      <Headers/>
       <Routes>
         <Route
           path="/sign-in"
@@ -63,12 +61,12 @@ function App () {
           element={<GuardedPage element={<CreateNewspaperPage />} />}
         />
         <Route
-          path="/news/article/:id"
+          path="/article/:id"
           exact
           element={<GuardedPage element={<ArticlePage />} />}
         />
         <Route
-          path="/news/article/create"
+          path="/article/create"
           exact
           element={<GuardedPage element={<CreateArticlePage />} />}
         />
@@ -78,7 +76,7 @@ function App () {
           element={<GuardedPage element={<WorldMapPage />} />}
         />
         <Route
-          path="/home"
+          path="/overview"
           exact
           element={<GuardedPage element={<HomePage />} />}
         />

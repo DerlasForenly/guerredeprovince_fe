@@ -1,19 +1,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import loadingGif from '../../assets/ok2.gif';
 import RatingLabel from '../../components/baseComponents/RatingLabel';
-import ratingArrowIcon from '../../assets/pagination-arrow.png';
+import { CircularProgress, Stack } from '@mui/material';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 /**
  * @param item
  * @param updateItemFunction
  * @param voteUrl
- * @param fs
- * @param fw
- * @param iconH
- * @param iconW
- * @param padding
  * @returns {JSX.Element}
  * @constructor
  */
@@ -21,11 +17,8 @@ function Rating ({
                    item,
                    updateItemFunction,
                    voteUrl,
-                   fs = 28,
-                   fw = 'bold',
-                   iconH = 15,
-                   iconW = 15,
-                   padding = 10
+                   size = 'medium',
+                   typoVariant = 'body2'
                  }) {
   const [loading, setLoading] = useState(false);
 
@@ -67,49 +60,26 @@ function Rating ({
     });
   };
 
-  return <div className="rating-container">
-    <div
-      className={item.voted === -1 ? "arrow-container-activated" : "arrow-container"}
-      style={{ height: iconH, width: iconW, padding: padding }}
-      onClick={down}
-    >
-      <img
-        src={ratingArrowIcon}
-        alt="rating-arrow"
-        className="rating-arrow down"
-        style={{ height: iconH, width: iconW }}
+  return (
+    <Stack direction={'row'} spacing={1} alignContent={'center'} justifyContent={'center'}>
+      <KeyboardArrowDownIcon
+        fontSize={size}
+        onClick={down}
       />
-    </div>
-    {
-      loading ?
-        <img
-          className="loading"
-          src={loadingGif}
-          alt="loading-gif"
-          style={{
-            height: iconH,
-            width: iconW,
-          }}
-        /> :
-        <RatingLabel
-          value={item.rating}
-          fs={fs}
-          fw={fw}
-        />
-    }
-    <div
-      className={item.voted === 1 ? "arrow-container-activated" : "arrow-container"}
-      style={{ height: iconH, width: iconW, padding: padding }}
-      onClick={up}
-    >
-      <img
-        src={ratingArrowIcon}
-        alt="rating-arrow"
-        className="rating-arrow up"
-        style={{ height: iconH, width: iconW }}
+      {
+        loading ?
+          <CircularProgress size={8} /> :
+          <RatingLabel
+            value={item.rating}
+            variant={typoVariant}
+          />
+      }
+      <KeyboardArrowUpIcon
+        fontSize={size}
+        onClick={up}
       />
-    </div>
-  </div>;
+    </Stack>
+  );
 }
 
 export default Rating;

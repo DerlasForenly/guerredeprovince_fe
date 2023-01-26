@@ -8,65 +8,56 @@ import { useEffect, useState } from 'react';
 import { loadArticle, updateArticleRating } from '../../redux/article/actions';
 import { Link } from 'react-router-dom';
 import Rating from '../../components/baseComponents/Rating';
-import Avatar from '../../components/baseComponents/Avatar';
+import Paper from '@mui/material/Paper';
+import Title from '../../components/baseComponents/Title';
+import Typography from '@mui/material/Typography';
+import { LinearProgress, Stack } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 
 function ArticleContent ({ article, loadArticle, updateArticleRating }) {
-  const [loading, setLoading] = useState(true);
-
-  const { id } = useParams();
-
-  useEffect(() => {
-    setLoading(true);
-
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API}/api/articles/${id}`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      loadArticle(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
-
-  }, [id, loadArticle]);
-
-  if (loading) {
-    return <div className="article-content-container">
-      <img className="loading-gif" src={loadingGif} alt="loading-gif" />
-    </div>;
-  } else {
-    return <div className="article-content-container col">
-      <div className="title">{article?.title}</div>
-      <div className="content">{article?.content}</div>
-      <div className="meta row">
-        <div className="row">
-          <Avatar
-            src={`${process.env.REACT_APP_API}/${article?.avatar}`}
-            size={'small'}
-            mr={10}
-          />
-          <div className="col">
-            <Link to={`/newspaper/${article?.newspaper.id}`}>
-              <div className="small-link-label">{article?.newspaper.name}</div>
-            </Link>
-            <Link to={`/user/${article?.author.id}`}>
-              <div
-                className="small-link-label">{article?.newspaper ? 'Moderator:' : ''} {article?.author.nickname}</div>
-            </Link>
-          </div>
-        </div>
-        <Rating
-          item={article}
-          voteUrl={`${process.env.REACT_APP_API}/api/articles/${article.id}/vote`}
-          updateItemFunction={updateArticleRating}
-        />
-      </div>
-      <div className="date-time">{article?.created_at}</div>
-    </div>;
-  }
+  return (
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 800 }}>
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Title>{article.title}</Title>
+        <Typography variant={'body2'} component={'h2'}>
+          {article?.content}
+        </Typography>
+        <Stack justifyContent={'center'} alignItems="center" sx={{ width: '100%' }}>
+          <Stack
+            sx={{ width: '100%' }}
+            direction={'row'}
+            justifyContent={'space-between'}
+            alignItems={'center'}>
+            <Stack direction={'row'} spacing={1}>
+              <Avatar
+                src={`${process.env.REACT_APP_API}/${article.avatar}`}
+                alt={'article-avatar'}
+                sx={{ width: 56, height: 56 }}
+              />
+              <Stack justifyContent={'space-between'}>
+                <Typography variant={'body1'} component={'h2'}>
+                  {article.newspaper.name}
+                </Typography>
+                <Typography variant={'body2'} component={'h2'}>
+                  {article.author.nickname}
+                </Typography>
+              </Stack>
+            </Stack>
+            <Rating
+              typoVariant={'h6'}
+              size={'large'}
+              item={article}
+              voteUrl={`${process.env.REACT_APP_API}/api/articles/${article.id}/vote`}
+              updateItemFunction={updateArticleRating}
+            />
+          </Stack>
+          <Typography variant={'body2'} component={'h2'}>
+            {article.created_at}
+          </Typography>
+        </Stack>
+      </Stack>
+    </Paper>
+  );
 }
 
 const mapDispatchToProps = {

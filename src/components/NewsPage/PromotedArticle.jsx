@@ -2,10 +2,13 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
+import { LinearProgress, Stack } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import * as React from 'react';
 
 import Article from './Article';
-
 import { loadPromotedArticle } from '../../redux/news/actions';
+import Title from '../../components/baseComponents/Title';
 
 function PromotedArticle ({ loadPromotedArticle, article }) {
   // eslint-disable-next-line no-unused-vars
@@ -28,13 +31,22 @@ function PromotedArticle ({ loadPromotedArticle, article }) {
     });
   }, [loadPromotedArticle]);
 
-  return <div className="container articles-list">
-    <div className="container-header">
-      <label className="container-header-title">Promoted article</label>
-      <button className={"small-no-style-button"}>Promote my article</button>
-    </div>
-    <Article article={article}/>
-  </div>;
+  if (loading) {
+    return (
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
+        <LinearProgress />
+      </Paper>
+    );
+  }
+
+  return (
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
+      <Stack>
+        <Title>Promoted article</Title>
+        <Article article={article} />
+      </Stack>
+    </Paper>
+  );
 }
 
 const mapDispatchToProps = {

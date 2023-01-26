@@ -9,7 +9,6 @@ import InputTextarea from '../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
-import Avatar from '../components/baseComponents/Avatar';
 
 const CreateNewspaperPage = () => {
   const [state, setState] = useState({
@@ -103,7 +102,7 @@ const CreateNewspaperPage = () => {
   return <div className="page">
     <form className="create-newspaper-container col" onSubmit={submitHandler}>
       <div className="row">
-        <Avatar
+        <img
           src={selectedFile ? preview : picturePlaceholder}
           alt="avatar-placeholder"
           className={'avatar-huge'}

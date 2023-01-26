@@ -1,14 +1,18 @@
 import { connect } from 'react-redux';
 import Comment from './Comment';
+import { Stack } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
 function CommentsList ({ comments }) {
-  return <div className="col">
-    {
-      comments.map((element, index) => {
-        return <Comment comment={element} key={index} />;
-      })
-    }
-  </div>;
+  return (
+    <Stack spacing={1} divider={<Divider />}>
+      {
+        comments.map((element, index) => {
+          return <Comment comment={element} key={index} />;
+        })
+      }
+    </Stack>
+  );
 }
 
 const mapDispatchToProps = {};

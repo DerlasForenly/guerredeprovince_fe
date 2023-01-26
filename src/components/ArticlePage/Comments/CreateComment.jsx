@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { useState } from 'react';
-import InputTextarea from '../../../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';
+import { Stack } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextareaAutosize from 'react-textarea-autosize';
 
 function CreateComment ({ article, loadComments }) {
   const [state, setState] = useState({
@@ -50,15 +52,22 @@ function CreateComment ({ article, loadComments }) {
     });
   }
 
-  return <form className="create-comment-form" onSubmit={onSubmit}>
-    <InputTextarea
-      name={"content"}
-      max={300}
-      changeInputHandler={changeInputHandler}
-      className={"content-input"}
-    />
-    <button type="submit" className="create-comment-button">Send</button>
-  </form>
+  return (
+    <form className="create-comment-form" onSubmit={onSubmit}>
+      <Stack direction={'row'} spacing={1} alignItems={'flex-end'}>
+        <TextareaAutosize
+          minRows={3}
+          maxRows={10}
+          name={"content"}
+          max={300}
+          changeInputHandler={changeInputHandler}
+          className={"content-input"}
+          style={{ width: '100%', resize: 'none' }}
+        />
+        <Button type="submit" >Send</Button>
+      </Stack>
+    </form>
+  );
 }
 
 const mapDispatchToProps = {

@@ -1,91 +1,131 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { connect } from 'react-redux';
-import axios from 'axios';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
+import { useState } from 'react';
 
 import {
   signIn,
 } from '../../redux/auth/actions';
+import { connect } from 'react-redux';
+import Copyright from '../../components/baseComponents/Copyright';
 
-import {
-  hideLoader,
-  showLoader
-} from '../../redux/app/actions';
+const theme = createTheme();
 
-const SignIn = (props) => {
-  const [state, setState] = useState({
-    password: '',
-    email: '',
-  });
-
+function SignIn ({ singIn }) {
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
-  const changeInputHandler = e => {
-    setState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    props.showLoader();
-    setError('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setLoading(true);
+
+    const data = new FormData(event.currentTarget);
 
     axios({
       method: 'POST',
       url: `${process.env.REACT_APP_API}/api/auth/login`,
       data: {
-        email: state.email,
-        password: state.password,
+        email: data.get('email'),
+        password: data.get('password'),
       }
     }).then((response) => {
       Cookies.set('access_token', response.data.access_token);
-      props.signIn(response.data);
+      signIn(response.data);
       setLoading(false);
-      navigate('/home');
+      navigate('/overview');
     }).catch((error) => {
       setError(error.response.data.error ? error.response.data.error : error.response.data.message);
       setLoading(false);
     });
   };
 
-  return <form onSubmit={submitHandler} className="auth-form">
-    <input
-      required
-      type="email"
-      placeholder="email"
-      name="email"
-      onChange={changeInputHandler}
-    ></input>
-    <input
-      required
-      type="password"
-      placeholder="password"
-      name="password"
-      onChange={changeInputHandler}
-    ></input>
-    <label>{error}</label>
-    <button type="submit" disabled={loading}>Sign In</button>
-    <label>Or create a new account <Link to="/sign-up">here</Link></label>
-  </form>;
-};
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/sign-up" variant="body2">
+                  {'Don\'t have an account? Sign Up'}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}
 
 const mapDispatchToProps = {
   signIn,
-  hideLoader,
-  showLoader,
 };
 
-const mapStateToProps = state => ({
-  errorMessage: state.auth.errorMessage,
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
