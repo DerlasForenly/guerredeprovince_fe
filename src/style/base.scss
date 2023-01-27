@@ -13,11 +13,6 @@
 @import "base/rating/rating";
 @import "article/comments";
 
-
-.MuiMenu-root, .MuiMenu-paper, .MuiMenu-list {
-  color: gray;
-}
-
 .col {
   display: flex;
   flex-direction: column;

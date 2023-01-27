@@ -1,10 +1,13 @@
-export default function RatingLabel ({ value, fw = 'bold', fs = 15 }) {
-  let className = value >= 0 ? 'positive' : 'negative';
+import Typography from '@mui/material/Typography';
+
+export default function RatingLabel ({ value = 0, variant = 'body1' }) {
+  let color = value >= 0 ? 'green' : 'red';
   let signedValue = value > 0 ? '+' + value : value;
 
-  return <div className="rating-label-container" style={{ fontSize: fs, fontWeight: fw }}>
-    <label className={ className }>
-      { signedValue }
-    </label>
-  </div>;
+
+  return (
+    <Typography component="h2" variant={variant} color={color}>
+      {signedValue}
+    </Typography>
+  );
 }

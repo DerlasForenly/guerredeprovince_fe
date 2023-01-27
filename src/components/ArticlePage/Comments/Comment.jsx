@@ -1,8 +1,7 @@
 import Rating from '../../baseComponents/Rating';
 import { connect } from 'react-redux';
 import { updateCommentRating } from '../../../redux/comments/actions';
-import { Link } from 'react-router-dom';
-import { IconButton } from '@mui/material';
+import { IconButton, Link, Stack } from '@mui/material';
 import { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Fade from '@mui/material/Fade';
@@ -10,8 +9,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
-import Avatar from '../../../components/baseComponents/Avatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 function Comment ({ comment, updateCommentRating }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,33 +42,32 @@ function Comment ({ comment, updateCommentRating }) {
     });
   };
 
-  return <div className="comment row">
-    <Link to={`/user/${comment.user.id}`} className={"avatar-link"}>
+  return <Stack direction={'row'} spacing={1} sx={{ width: '100%' }}>
+    <Link to={`/user/${comment.user.id}`}>
       <Avatar
         src={`${process.env.REACT_APP_API}/${comment.user.avatar}`}
-        size={'small'}
-        mr={10}
+        alt={'user-avatar'}
       />
     </Link>
-    <div className="col">
-      <div className="nick-more row">
-        <div className="row">
-          <Link to={`/user/${comment.user.id}`}>
-            <label className="small-name-label">{comment.user.nickname}</label>
+    <Stack sx={{ width: '100%' }} spacing={1}>
+      <Stack direction={'row'} justifyContent={'space-between'} sx={{ width: '100%' }} alignItems={'center'}>
+        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+          <Link href={`/user/${comment.user.id}`} color={'inherit'} underline={'none'}>
+            <Typography component={'h2'} variant={'body1'}>{comment.user.nickname}</Typography>
           </Link>
           {
             comment.comment_id ?
-              <div>
-                <label>in reply to</label>
-                <Link to={`/user/${comment.in_reply_to.id}`}>
-                  <label className="small-name-label">{comment.in_reply_to.nicknam}</label>
+              <Stack spacing={1}>
+                <Typography component={'h2'} variant={'body2'}>in reply to</Typography>
+                <Link href={`/user/${comment.in_reply_to.id}`}>
+                  <Typography component={'h2'} variant={'body2'}>{comment.in_reply_to.nickname}</Typography>
                 </Link>
-                <label>{`(comment: ${comment.comment_id})`}</label>
-              </div> :
-              <div></div>
+                <Typography component={'h2'} variant={'body2'}>{`(comment: ${comment.comment_id})`}</Typography>
+              </Stack> :
+              <Stack></Stack>
           }
-          <label className="reply">Reply</label>
-        </div>
+          <Button size={'small'}>Reply</Button>
+        </Stack>
         <IconButton
           aria-label="more"
           id="long-button"
@@ -93,22 +93,23 @@ function Comment ({ comment, updateCommentRating }) {
           <MenuItem onClick={handleClose}>Complain</MenuItem>
           <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
-      </div>
-      <p className="small-content-p">{comment.content}</p>
-      <div className="date-rating row">
-        <label className="small-content-p">{comment.updated_at}</label>
+      </Stack>
+      <Typography component={'h2'} variant={'body2'}>{comment.content}</Typography>
+      <Stack
+        direction={'row'}
+        sx={{ width: '100%' }}
+        justifyContent={'space-between'}
+      >
+        <Typography component={'h2'} variant={'body2'}>{comment.updated_at}</Typography>
         <Rating
+          size={'small'}
           item={comment}
           voteUrl={`${process.env.REACT_APP_API}/api/comments/${comment.id}/vote`}
           updateItemFunction={updateCommentRating}
-          fs={13}
-          iconH={8}
-          iconW={8}
-          padding={5}
         />
-      </div>
-    </div>
-  </div>;
+      </Stack>
+    </Stack>
+  </Stack>;
 }
 
 const mapDispatchToProps = {

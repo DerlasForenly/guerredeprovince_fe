@@ -33,10 +33,8 @@ const NewspaperStaffPage = ({ user, loadStaff }) => {
     });
   }, [loadStaff, user])
 
-  return <div className="newspaper-staff-page row">
-    <div className="newspaper-staff-container">
-      <StaffList/>
-    </div>
+  return <div className="page row">
+    <StaffList/>
     <HireStaff/>
   </div>;
 };
@@ -55,7 +53,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperStaffPage);
 
 function HireStaff() {
-  return <div className="newspaper-staff-container">
+  return <div className="container">
     <div className={"container-header"}>
       <label className={"text-label"}>Hire user</label>
     </div>
@@ -65,7 +63,7 @@ function HireStaff() {
 }
 
 function HireSearchResult({ searchResult = [1,2,3]}) {
-  return <div>
+  return <div className="container">
     {searchResult.map((item, index) => {
       return <HireSearchUser user={item} key={index}/>
     })}

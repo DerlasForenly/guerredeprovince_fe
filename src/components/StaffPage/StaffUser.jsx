@@ -18,16 +18,16 @@ function StaffUser ({ staff }) {
     setAnchorEl(null);
   };
 
-  return <div className="user-staff">
+  return <div className="row">
     <div className={"row"}>
       <img
         src={`${process.env.REACT_APP_API}/${staff.user.avatar}`}
         alt={"avatar"}
-        className={"staff-avatar"}
+        className={"avatar-medium"}
       />
       <div className="col">
-        <label className={"nickname"}>{staff.user.nickname}</label>
-        <label className={"position-name"}>Position: {staff.position.name}</label>
+        <label className={"medium-name-label"}>{staff.user.nickname}</label>
+        <label className={"medium-name-label"}>Position: {staff.position.name}</label>
       </div>
     </div>
     <IconButton

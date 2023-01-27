@@ -3,11 +3,14 @@ import Fade from '@mui/material/Fade';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useState } from 'react';
-import { Avatar, Divider, IconButton } from '@mui/material';
+import { Avatar, Divider, IconButton, Stack } from '@mui/material';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { clearUser } from '../../redux/auth/actions';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Typography from '@mui/material/Typography';
 
 const UserPanel = ({ user, clearUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,7 +40,7 @@ const UserPanel = ({ user, clearUser }) => {
   };
 
   const handleProfile = () => {
-    navigate('/profile');
+    navigate(`/user/${user.id}`);
     setAnchorEl(null);
   };
 
@@ -45,8 +48,9 @@ const UserPanel = ({ user, clearUser }) => {
     setAnchorEl(null);
   };
 
-  return <div className="user-panel-container">
-    <NotificationIndicator />
+  return <Stack direction={'row'} spacing={2}>
+    <UserBalance user={user} />
+    <Notifications/>
     <IconButton
       onClick={handleClick}
       size="small"
@@ -56,7 +60,6 @@ const UserPanel = ({ user, clearUser }) => {
     >
       <Avatar
         src={`${process.env.REACT_APP_API}/${user?.avatar}`}
-        sx={{ width: 50, height: 50 }}
       />
     </IconButton>
     <Menu
@@ -74,8 +77,7 @@ const UserPanel = ({ user, clearUser }) => {
       <Divider />
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
-    <UserBalance user={user} />
-  </div>;
+  </Stack>;
 };
 
 const mapDispatchToProps = {
@@ -88,19 +90,27 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
 
-function NotificationIndicator () {
-  return <div className="notification-indicator-container">99+</div>;
+function UserBalance ({ user = { gold: 0, diamonds: 0 } }) {
+  return <Stack>
+    <Stack direction={'row'}>
+      <Typography>{user.gold}</Typography>
+      <Typography>G</Typography>
+    </Stack>
+    <Stack direction={'row'}>
+      <Typography>{user.diamonds}</Typography>
+      <Typography>D</Typography>
+    </Stack>
+  </Stack>;
 }
 
-function UserBalance ({ user = { gold: 0, diamonds: 0 } }) {
-  return <div className="user-panel-balance col">
-    <div className={'gold-container'}>
-      <label>{user.gold}</label>
-      <label className={'currency'}>G</label>
-    </div>
-    <div className={'diamonds-container'}>
-      <label>{user.diamonds}</label>
-      <label className={'currency'}>D</label>
-    </div>
-  </div>;
+function Notifications() {
+  return <IconButton
+    size="large"
+    aria-label="show 17 new notifications"
+    color="inherit"
+  >
+    <Badge badgeContent={17} color="error">
+      <NotificationsIcon />
+    </Badge>
+  </IconButton>
 }

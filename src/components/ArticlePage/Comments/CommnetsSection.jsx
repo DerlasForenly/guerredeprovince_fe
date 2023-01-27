@@ -5,14 +5,23 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';
+import Paper from '@mui/material/Paper';
+import { LinearProgress, Stack } from '@mui/material';
+import Button from '@mui/material/Button';
+import Title from '../../../components/baseComponents/Title';
 
 function CommentsSection ({ loadComments, article }) {
-  const [showComments, setShowComments] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [showComments, setShowComments] = useState(false);
+
+  const width = 800;
 
   useEffect(() => {
     if (article.id === undefined || article.id === null) {
-      return
+      return;
     }
+
+    setLoading(true);
 
     axios({
       method: 'get',
@@ -22,25 +31,57 @@ function CommentsSection ({ loadComments, article }) {
       }
     }).then((response) => {
       loadComments(response.data);
+      setLoading(false);
     }).catch((error) => {
-
+      setLoading(false);
     });
-  }, [article, loadComments])
+  }, [article, loadComments]);
 
   const onClick = e => {
     setShowComments(true);
-  }
+  };
 
   if (showComments) {
-    return <div className="comments-section-container">
-      <CommentsList/>
-      <CreateComment/>
-    </div>;
-  } else {
-    return <div className="comments-section-container">
-      <button onClick={onClick} className="medium-gray-button">{`Show comments (${article.comments_count})`}</button>
-    </div>;
+    return (
+      <Paper sx={{ p: 2, width: width }}>
+        <Stack spacing={3}>
+          <CommentsList />
+          <CreateComment />
+        </Stack>
+      </Paper>
+    );
   }
+
+  if (article.comments_count === 0) {
+    return (
+      <Paper sx={{ p: 2, width: width }}>
+        <Stack spacing={1}>
+          <Title>Create first comment!</Title>
+          <CreateComment />
+        </Stack>
+      </Paper>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Paper sx={{ p: 2, width: width }}>
+        <Stack spacing={3}>
+          <LinearProgress />
+        </Stack>
+      </Paper>
+    );
+  }
+
+  return (
+    <Paper sx={{ p: 2, width: width }}>
+      <Button
+        onClick={onClick}
+      >
+        {`Show comments (${article.comments_count})`}
+      </Button>
+    </Paper>
+  );
 }
 
 const mapDispatchToProps = {

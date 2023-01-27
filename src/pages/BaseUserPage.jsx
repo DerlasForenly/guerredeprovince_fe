@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import UpdateAvatar from '../components/ProfilePage/UpdateAvatar';
-import Avatar from '../components/baseComponents/Avatar';
 
 /**
  * @param user {id, avatar, nickname}
@@ -23,7 +22,7 @@ const BaseUserPage = ({ user, currentUser, previewFile }) => {
   return <div className="page">
     <div className="container row">
       <div className="col">
-        <Avatar
+        <img
           src={avatarImg()}
           alt="user-avatar"
           className="avatar-huge"

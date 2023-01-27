@@ -6,7 +6,14 @@ import Cookies from 'js-cookie';
 import loadingGif from '../assets/ok.gif';
 import { Link } from 'react-router-dom';
 import InputText from '../components/baseComponents/InputText';
-import InputTextarea from '../components/baseComponents/InputTextarea';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import { CircularProgress, LinearProgress, Stack } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Title from '../components/baseComponents/Title';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router';
 
 const CreateArticlePage = ({ user }) => {
   const [state, setState] = useState({
@@ -27,6 +34,8 @@ const CreateArticlePage = ({ user }) => {
       [e.target.name]: e.target.value
     }));
   };
+
+  const navigate = useNavigate();
 
   const submitHandler = event => {
     event.preventDefault();
@@ -59,48 +68,77 @@ const CreateArticlePage = ({ user }) => {
         newspaperId: 0,
       });
       event.target.reset();
+      navigate(`/article/${response.data.article_id}`);
     }).catch((error) => {
       setErrorMessage(error.message);
       setLoading(false);
     });
   };
 
-  return <div className="page row">
-    <form onSubmit={submitHandler} className="create-article-container col">
-      <InputText
-        changeInputHandler={changeInputHandler}
-        max={80}
-        label={'Title'}
-        name="title"
-        className={"title"}
-      />
-      <InputTextarea
-        changeInputHandler={changeInputHandler}
-        max={4000}
-        label={'Content'}
-        name="content"
-        className={"content"}
-      />
-      <div className="meta-and-button row">
-        <div className="col">
-          <div className="author col text-input-container">
-            <label className="input-label">On behalf of the</label>
-            <select
-              name="newspaperId"
-              defaultValue={0}
+  return (
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Paper sx={{ p: 2, width: 900 }}>
+        <form onSubmit={submitHandler}>
+          <Stack spacing={2}>
+            <Title>Create article:</Title>
+            <TextField
+              required
+              label={'Title'}
+              name={'title'}
+              placeholder={'Title'}
+              max={80}
+              sx={{ width: '100%' }}
               onChange={changeInputHandler}
+            />
+            <TextField
+              required
+              label="Content"
+              multiline
+              minRows={15}
+              placeholder={'Content'}
+              onChange={changeInputHandler}
+              max={4000}
+              name={'content'}
+            />
+            <Stack
+              direction={'row'}
+              sx={{ width: '100%' }}
+              alignItems={'flex-end'}
+              justifyContent={'space-between'}
             >
-              <option value={0}>Me</option>
-              <option value={user?.newspaper_id}>Newspaper</option>
-            </select>
-          </div>
-          <Language></Language>
-        </div>
-        <State></State>
-        <button type="submit" disabled={loading} className={"huge-gray-button"}>Create</button>
-      </div>
-    </form>
-  </div>;
+              <Stack spacing={2} sx={{ width: '50%' }}>
+                <TextField
+                  sx={{ width: '100%' }}
+                  required
+                  select
+                  label="On behalf of the"
+                  defaultValue={0}
+                  onChange={changeInputHandler}
+                >
+                  <MenuItem key={1} value={0}>{user?.nickname}</MenuItem>
+                  <MenuItem key={2} value={user?.newspaper_id}>Newspaper</MenuItem>
+                </TextField>
+                <TextField
+                  sx={{ width: '100%' }}
+                  required
+                  select
+                  label="Language"
+                  defaultValue={0}
+                >
+                  <MenuItem key={1} value={0}>Ukrainian</MenuItem>
+                  <MenuItem key={2} value={1}>English</MenuItem>
+                </TextField>
+              </Stack>
+              <Stack direction={'row'} spacing={2}>
+                {loading ? <CircularProgress /> : <div></div>}
+                <Button type={'submit'} variant="contained" size="large" disabled={loading}>Create</Button>
+              </Stack>
+            </Stack>
+          </Stack>
+        </form>
+      </Paper>
+    </Container>
+  );
 };
 
 const mapDispatchToProps = {};

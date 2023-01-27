@@ -6,7 +6,7 @@ function RedirectPage (props) {
 
   useEffect(() => {
     console.error('Incorrect route');
-    navigate('/home');
+    navigate('/overview');
   }, [props, navigate]);
 
   return <div></div>;

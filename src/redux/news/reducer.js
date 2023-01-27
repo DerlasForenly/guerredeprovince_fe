@@ -92,7 +92,6 @@ export const newsReducer = (state = initialState, action) => {
         },
       };
     case GET_LAST_ARTICLES_PAGE:
-      console.log(state.lastArticles);
       return {
         ...state,
         lastArticles: {
