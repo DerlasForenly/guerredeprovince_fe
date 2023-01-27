@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Title from '../components/baseComponents/Title';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router';
+import Typography from '@mui/material/Typography';
 
 const CreateArticlePage = ({ user }) => {
   const [state, setState] = useState({
@@ -22,7 +23,7 @@ const CreateArticlePage = ({ user }) => {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ const CreateArticlePage = ({ user }) => {
     event.preventDefault();
     setLoading(true);
     setSuccess(false);
-    setErrorMessage('');
+    setError('');
 
     const data = {
       title: state.title,
@@ -69,7 +70,7 @@ const CreateArticlePage = ({ user }) => {
       event.target.reset();
       navigate(`/article/${response.data.article_id}`);
     }).catch((error) => {
-      setErrorMessage(error.message);
+      setError(error.response.data.message);
       setLoading(false);
     });
   };
@@ -129,8 +130,20 @@ const CreateArticlePage = ({ user }) => {
                 </TextField>
               </Stack>
               <Stack direction={'row'} spacing={2}>
+                {
+                  error ?
+                    <Typography component={'h2'} color={'red'} variant={'body2'}>{error}</Typography> :
+                    <div></div>
+                }
                 {loading ? <CircularProgress /> : <div></div>}
-                <Button type={'submit'} variant="contained" size="large" disabled={loading}>Create</Button>
+                <Button
+                  type={'submit'}
+                  variant="contained"
+                  size="large"
+                  disabled={loading}
+                >
+                  Create
+                </Button>
               </Stack>
             </Stack>
           </Stack>
@@ -149,23 +162,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateArticlePage);
-
-// eslint-disable-next-line no-unused-vars
-function Loading ({ active }) {
-  return active ? <div className="loading">
-    <label>Wait...</label>
-    <img src={loadingGif} alt="loading-gif"></img>
-  </div> : <div></div>;
-}
-
-// eslint-disable-next-line no-unused-vars
-function BackAndHelp () {
-  return <div className="back-more row">
-    <Link to="/news">
-      <button className="back-button">Back</button>
-    </Link>
-    <Link to="/news">
-      <button className="back-button">Help</button>
-    </Link>
-  </div>;
-}

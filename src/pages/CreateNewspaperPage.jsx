@@ -25,6 +25,7 @@ const CreateNewspaperPage = () => {
   const [preview, setPreview] = useState();
   const [croppedFile, setCroppedFile] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -74,6 +75,7 @@ const CreateNewspaperPage = () => {
   const submitHandler = event => {
     event.preventDefault();
     setLoading(true);
+    setError('');
 
     const formData = new FormData();
     formData.append('name', state.name);
@@ -101,6 +103,7 @@ const CreateNewspaperPage = () => {
 
       navigate(`/newspaper/${response.data.newspaper_id}`);
     }).catch((error) => {
+      setError(error.response.data.message);
       setLoading(false);
     });
   };
@@ -132,8 +135,9 @@ const CreateNewspaperPage = () => {
                   variant="contained"
                   component="label"
                   sx={{ width: '30%' }}
+                  type="button"
                 >
-                  Upload File
+                  Upload File*
                   <input
                     required
                     type="file"
@@ -158,9 +162,15 @@ const CreateNewspaperPage = () => {
                 name={'description'}
               />
               <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                <Typography variant={'body1'} component={'h2'}>
-                  It is free now, but it is going to be 50G later ;)
-                </Typography>
+                {
+                  error ?
+                    <Typography variant={'body1'} component={'h2'} color={'red'}>
+                      {error}
+                    </Typography> :
+                    <Typography variant={'body1'} component={'h2'}>
+                      It is free now, but it is going to be 50G later ;)
+                    </Typography>
+                }
                 <Button
                   type={'submit'}
                   size={'large'}
