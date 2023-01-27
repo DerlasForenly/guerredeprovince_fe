@@ -19,10 +19,7 @@ const CreateArticlePage = ({ user }) => {
     newspaperId: 0,
   });
 
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const changeInputHandler = e => {
@@ -37,7 +34,6 @@ const CreateArticlePage = ({ user }) => {
   const submitHandler = event => {
     event.preventDefault();
     setLoading(true);
-    setSuccess(false);
     setError('');
 
     const data = {
@@ -58,7 +54,6 @@ const CreateArticlePage = ({ user }) => {
       data: data,
     }).then((response) => {
       setLoading(false);
-      setSuccess(true);
       setState({
         title: '',
         content: '',
@@ -86,6 +81,7 @@ const CreateArticlePage = ({ user }) => {
               max={80}
               sx={{ width: '100%' }}
               onChange={changeInputHandler}
+              disabled={loading}
             />
             <TextField
               required
@@ -96,6 +92,7 @@ const CreateArticlePage = ({ user }) => {
               onChange={changeInputHandler}
               max={4000}
               name={'content'}
+              disabled={loading}
             />
             <Stack
               direction={'row'}
@@ -111,6 +108,7 @@ const CreateArticlePage = ({ user }) => {
                   label="On behalf of the"
                   defaultValue={0}
                   onChange={changeInputHandler}
+                  disabled={loading}
                 >
                   <MenuItem key={1} value={0}>{user?.nickname}</MenuItem>
                   <MenuItem key={2} value={user?.newspaper_id}>Newspaper</MenuItem>
@@ -121,6 +119,7 @@ const CreateArticlePage = ({ user }) => {
                   select
                   label="Language"
                   defaultValue={0}
+                  disabled={loading}
                 >
                   <MenuItem key={1} value={0}>Ukrainian</MenuItem>
                   <MenuItem key={2} value={1}>English</MenuItem>

@@ -42,6 +42,10 @@ function GuardedPage ({ me, element, clearUser }) {
   };
 
   useEffect(() => {
+    if (!Cookies.get('access_token')) {
+      navigate('/sign-in');
+    }
+
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API}/api/auth/me`,
