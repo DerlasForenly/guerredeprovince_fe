@@ -1,7 +1,8 @@
-import { HIDE_LOADER, SHOW_LOADER } from './types';
+import { HIDE_DRAWER, HIDE_LOADER, SHOW_DRAWER, SHOW_LOADER } from './types';
 
 const initialState = {
   loading: false,
+  drawer: true,
 }
 
 export const appReducer = (state = initialState, action) => {
@@ -15,6 +16,16 @@ export const appReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      };
+    case SHOW_DRAWER:
+      return {
+        ...state,
+        drawer: true
+      };
+    case HIDE_DRAWER:
+      return {
+        ...state,
+        drawer: false
       };
     default:
       return state;
