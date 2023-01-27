@@ -3,12 +3,12 @@ import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import RatingLabel from '../../components/baseComponents/RatingLabel';
 
 function Newspaper ({ newspaper }) {
   return (
-    <Link href={`/newspaper/${newspaper.id}`} underline={'none'} color={'inherit'}>
+    <Link to={`/newspaper/${newspaper.id}`}>
       <Stack direction={'row'} spacing={2}>
         <Avatar
           alt="newspaper-avatar"

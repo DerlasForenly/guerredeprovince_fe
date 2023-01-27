@@ -112,7 +112,7 @@ function App () {
         <Route
           path="*"
           exact
-          element={<RedirectPage />}
+          element={<GuardedPage element={<RedirectPage />} />}
         />
       </Routes>
     </BrowserRouter>

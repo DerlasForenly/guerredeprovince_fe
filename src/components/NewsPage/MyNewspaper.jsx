@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Title from '../../components/baseComponents/Title';
 import Newspaper from './Newspaper';
 import { loadNewspaper } from '../../redux/newspaper/actions';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 
 function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
   const [newspaperNotFound, setNewspaperNotFound] = useState(false);
@@ -65,12 +65,12 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
           <Title>You do not have any newspaper</Title>
           <ButtonGroup variant="text" aria-label="text button group">
             <Button fullWidth>
-              <Link href={'/newspaper/create'} underline={'none'} color={'inherit'}>
+              <Link to={'/newspaper/create'}>
                 Create Newspaper
               </Link>
             </Button>
             <Button fullWidth>
-              <Link href={'/news/subscriptions'} underline={'none'} color={'inherit'}>
+              <Link to={'/news/subscriptions'}>
                 My Subscriptions
               </Link>
             </Button>
@@ -87,12 +87,12 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
         <Newspaper />
         <ButtonGroup variant="text" aria-label="text button group">
           <Button fullWidth>
-            <Link href={'/article/create'} underline={'none'} color={'inherit'}>
+            <Link to={'/article/create'}>
               Create article
             </Link>
           </Button>
           <Button fullWidth>
-            <Link href={'/news/subscriptions'} underline={'none'} color={'inherit'}>
+            <Link to={'/news/subscriptions'}>
               My Subscriptions
             </Link>
           </Button>

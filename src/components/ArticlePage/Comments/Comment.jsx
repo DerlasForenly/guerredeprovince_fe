@@ -51,14 +51,14 @@ function Comment ({ comment, updateCommentRating }) {
     <Stack sx={{ width: '100%' }} spacing={1}>
       <Stack direction={'row'} justifyContent={'space-between'} sx={{ width: '100%' }} alignItems={'center'}>
         <Stack direction={'row'} spacing={1} alignItems={'center'}>
-          <Link href={`/user/${comment.user.id}`} color={'inherit'} underline={'none'}>
+          <Link to={`/user/${comment.user.id}`}>
             <Typography component={'h2'} variant={'body1'}>{comment.user.nickname}</Typography>
           </Link>
           {
             comment.comment_id ?
               <Stack spacing={1}>
                 <Typography component={'h2'} variant={'body2'}>in reply to</Typography>
-                <Link href={`/user/${comment.in_reply_to.id}`}>
+                <Link to={`/user/${comment.in_reply_to.id}`}>
                   <Typography component={'h2'} variant={'body2'}>{comment.in_reply_to.nickname}</Typography>
                 </Link>
                 <Typography component={'h2'} variant={'body2'}>{`(comment: ${comment.comment_id})`}</Typography>

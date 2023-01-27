@@ -14,14 +14,13 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Divider from '@mui/material/Divider';
-import List from '@mui/material/List';
+import { Link } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LayersIcon from '@mui/icons-material/Layers';
 import ListSubheader from '@mui/material/ListSubheader';
 import { AppBar, Drawer } from '../components/baseComponents/AppBar';
-import Link from '@mui/material/Link';
 import UserPanel from '../components/BasePage/UserPanel';
 import backgroundGif from '../assets/background.gif';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -32,6 +31,7 @@ import DomainIcon from '@mui/icons-material/Domain';
 import ExploreIcon from '@mui/icons-material/Explore';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeIcon from '@mui/icons-material/Home';
+import { List } from '@mui/material';
 
 function GuardedPage ({ me, element, clearUser }) {
   const navigate = useNavigate();
@@ -164,8 +164,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(GuardedPage);
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItem label={'Overview'} href={'/overview'} icon={<HomeIcon />} />
-    <ListItem label={'News'} href={'/news'} icon={<ArticleIcon />} />
+    <ListItem label={'Overview'} to={'/overview'} icon={<HomeIcon />} />
+    <ListItem label={'News'} to={'/news'} icon={<ArticleIcon />} />
     <ListItem label={'World'} icon={<ExploreIcon />} />
     <ListItem label={'Region'} icon={<DomainIcon />} />
     <ListItem label={'Market'} icon={<BalanceIcon />} />
@@ -175,8 +175,8 @@ export const mainListItems = (
   </React.Fragment>
 );
 
-function ListItem ({ label, href = '#', icon = <LayersIcon /> }) {
-  return <Link href={href} color="inherit" underline="none">
+function ListItem ({ label, to = '/', icon = <LayersIcon /> }) {
+  return <Link to={to}>
     <ListItemButton>
       <ListItemIcon>
         {icon}
