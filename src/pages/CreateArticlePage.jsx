@@ -2,9 +2,6 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
-import loadingGif from '../assets/ok.gif';
-import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
