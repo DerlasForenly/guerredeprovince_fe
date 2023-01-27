@@ -11,7 +11,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 function Comment ({ comment, updateCommentRating }) {

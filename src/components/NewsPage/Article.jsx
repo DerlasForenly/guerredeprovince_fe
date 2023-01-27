@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
-import RatingLabel from '../../components/baseComponents/RatingLabel';
 
 function Article ({ article }) {
   return (

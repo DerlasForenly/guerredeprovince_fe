@@ -10,7 +10,6 @@ import TabPanel from '@mui/lab/TabPanel';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 
-import Copyright from '../components/baseComponents/Copyright';
 import RecommendedArticle from '../components/NewsPage/RecommendedArticle';
 import PromotedArticle from '../components/NewsPage/PromotedArticle';
 import SubscriptionArticles from '../components/NewsPage/SubscriptionArticles';

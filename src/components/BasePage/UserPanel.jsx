@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router';
 import { clearUser } from '../../redux/auth/actions';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import Typography from '@mui/material/Typography';
 
 const UserPanel = ({ user, clearUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
