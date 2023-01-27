@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Container from '@mui/material/Container';
@@ -22,6 +22,8 @@ const CreateArticlePage = ({ user }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const [onBehalf, setOnBehalf] = useState([])
+
   const changeInputHandler = e => {
     setState(prev => ({
       ...prev,
@@ -30,6 +32,13 @@ const CreateArticlePage = ({ user }) => {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.newspaper_id) {
+      setOnBehalf([<MenuItem key={2} value={user.newspaper_id}>Newspaper</MenuItem>]);
+    }
+
+  }, [user.newspaper_id]);
 
   const submitHandler = event => {
     event.preventDefault();
@@ -108,10 +117,9 @@ const CreateArticlePage = ({ user }) => {
                   label="On behalf of the"
                   defaultValue={0}
                   onChange={changeInputHandler}
-                  disabled={loading}
+                  disabled={loading || onBehalf.length === 0}
                 >
-                  <MenuItem key={1} value={0}>{user?.nickname}</MenuItem>
-                  <MenuItem key={2} value={user?.newspaper_id}>Newspaper</MenuItem>
+                  {[<MenuItem key={1} value={0}>{user?.nickname}</MenuItem>, ...onBehalf]}
                 </TextField>
                 <TextField
                   sx={{ width: '100%' }}

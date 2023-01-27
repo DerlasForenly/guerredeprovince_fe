@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
@@ -20,7 +20,17 @@ import {
 } from '../../redux/auth/actions';
 import { connect } from 'react-redux';
 import Copyright from '../../components/baseComponents/Copyright';
-import { mdTheme } from '../../style/theme';
+
+const mdTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#a67d0c',
+    },
+    secondary: {
+      main: '#a67d0c',
+    },
+  },
+});
 
 function SignIn ({ singIn }) {
   // eslint-disable-next-line no-unused-vars

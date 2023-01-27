@@ -63,10 +63,15 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
       <Paper sx={{ p: p, width: width }}>
         <Stack spacing={2}>
           <Title>You do not have any newspaper</Title>
+          <Button fullWidth>
+            <Link to={'/newspaper/create'}>
+              Create Newspaper
+            </Link>
+          </Button>
           <ButtonGroup variant="text" aria-label="text button group">
             <Button fullWidth>
-              <Link to={'/newspaper/create'}>
-                Create Newspaper
+              <Link to={'/article/create'}>
+                Create Article
               </Link>
             </Button>
             <Button fullWidth>

@@ -1,9 +1,10 @@
-import { HIDE_DRAWER, HIDE_LOADER, SHOW_DRAWER, SHOW_LOADER } from './types';
+import { HIDE_DRAWER, HIDE_LOADER, SET_PRIMARY_COLOR, SHOW_DRAWER, SHOW_LOADER } from './types';
 
 const initialState = {
   loading: false,
   drawer: true,
-}
+  primaryColor: '#a67d0c',
+};
 
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +27,11 @@ export const appReducer = (state = initialState, action) => {
       return {
         ...state,
         drawer: false
+      };
+    case SET_PRIMARY_COLOR:
+      return {
+        ...state,
+        primaryColor: action.payload,
       };
     default:
       return state;

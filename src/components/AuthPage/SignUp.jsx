@@ -8,16 +8,26 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Copyright from '../../components/baseComponents/Copyright';
-import { mdTheme } from '../../style/theme';
 import Cookies from 'js-cookie';
 import { signIn } from '../../redux/auth/actions';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router';
+
+const mdTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#a67d0c',
+    },
+    secondary: {
+      main: '#a67d0c',
+    },
+  },
+});
 
 function SignUp ({ singIn }) {
   // eslint-disable-next-line no-unused-vars

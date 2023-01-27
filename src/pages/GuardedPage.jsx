@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
@@ -19,7 +19,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LayersIcon from '@mui/icons-material/Layers';
-import ListSubheader from '@mui/material/ListSubheader';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { AppBar, Drawer } from '../components/baseComponents/AppBar';
 import UserPanel from '../components/BasePage/UserPanel';
 import backgroundGif from '../assets/background.gif';
@@ -33,13 +33,37 @@ import GroupIcon from '@mui/icons-material/Group';
 import HomeIcon from '@mui/icons-material/Home';
 import { List } from '@mui/material';
 
-function GuardedPage ({ me, element, clearUser }) {
+function GuardedPage ({ me, element, clearUser, primaryColor }) {
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const [theme, setTheme] = useState(createTheme({
+    palette: {
+      primary: {
+        main: '#a67d0c',
+      },
+      secondary: {
+        main: '#a67d0c',
+      },
+    },
+  }));
+
+  useEffect(() => {
+    setTheme(createTheme({
+      palette: {
+        primary: {
+          main: primaryColor,
+        },
+        secondary: {
+          main: '#a67d0c',
+        },
+      },
+    }))
+  }, [primaryColor])
 
   useEffect(() => {
     if (!Cookies.get('access_token')) {
@@ -61,7 +85,7 @@ function GuardedPage ({ me, element, clearUser }) {
   }, [me, navigate, clearUser]);
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{
         display: 'flex',
       }}>
@@ -141,17 +165,6 @@ function GuardedPage ({ me, element, clearUser }) {
   );
 }
 
-const mdTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#a67d0c',
-    },
-    secondary: {
-      main: '#a67d0c',
-    },
-  },
-});
-
 const mapDispatchToProps = {
   me,
   clearUser,
@@ -160,7 +173,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => {
   return {
     loading: state.app.loading,
-    stability: state.app.stability,
+    primaryColor: state.app.primaryColor,
   };
 };
 
@@ -192,11 +205,10 @@ function ListItem ({ label, to = '/', icon = <LayersIcon /> }) {
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListSubheader component="div" inset>
-      There is nothing here
-    </ListSubheader>
-    <ListItem label={'Nothing'} />
-    <ListItem label={'Nothing'} />
-    <ListItem label={'Nothing'} />
+    <ListItem
+      label={'Settings'}
+      to={'/settings'}
+      icon={<SettingsIcon />}
+    />
   </React.Fragment>
 );

@@ -20,6 +20,7 @@ import CreateNewspaperPage from './pages/CreateNewspaperPage';
 import NewspaperPage from './pages/NewspaperPage';
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import NewspaperStaffPage from './pages/NewspaperStaffPage';
+import SettingsPage from './pages/SettingsPage';
 
 function App () {
   return <div className="App">
@@ -110,6 +111,11 @@ function App () {
           element={<GuardedPage element={<JobPage />} />}
         />
         <Route
+          path="/settings"
+          exact
+          element={<GuardedPage element={<SettingsPage />} />}
+        />
+        <Route
           path="*"
           exact
           element={<GuardedPage element={<RedirectPage />} />}
@@ -119,4 +125,10 @@ function App () {
   </div>;
 }
 
-export default connect(null, null)(App);
+const mapDispatchToProps = {};
+
+const mapStateToProps = state => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

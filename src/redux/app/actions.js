@@ -1,6 +1,6 @@
 import {
   HIDE_DRAWER,
-  HIDE_LOADER, SHOW_DRAWER,
+  HIDE_LOADER, SET_PRIMARY_COLOR, SHOW_DRAWER,
   SHOW_LOADER,
 } from './types';
 
@@ -25,5 +25,12 @@ export function showDrawer () {
 export function hideDrawer () {
   return {
     type: HIDE_DRAWER,
+  };
+}
+
+export function setPrimaryColor (data) {
+  return {
+    type: SET_PRIMARY_COLOR,
+    payload: data,
   };
 }
