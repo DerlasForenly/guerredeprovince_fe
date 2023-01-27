@@ -1,7 +1,7 @@
 import Rating from '../../baseComponents/Rating';
 import { connect } from 'react-redux';
 import { updateCommentRating } from '../../../redux/comments/actions';
-import { IconButton, Link, Stack } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Fade from '@mui/material/Fade';
@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 function Comment ({ comment, updateCommentRating }) {
   const [anchorEl, setAnchorEl] = useState(null);

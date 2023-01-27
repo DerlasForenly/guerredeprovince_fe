@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
@@ -20,8 +20,7 @@ import {
 } from '../../redux/auth/actions';
 import { connect } from 'react-redux';
 import Copyright from '../../components/baseComponents/Copyright';
-
-const theme = createTheme();
+import { mdTheme } from '../../style/theme';
 
 function SignIn ({ singIn }) {
   // eslint-disable-next-line no-unused-vars
@@ -56,7 +55,7 @@ function SignIn ({ singIn }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={mdTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -94,24 +93,28 @@ function SignIn ({ singIn }) {
               id="password"
               autoComplete="current-password"
             />
+            <Typography color={'red'} variant={'body1'} component={'h2'}>
+              {error}
+            </Typography>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="#" >
+                <Link to={'#'} style={{ textDecoration: 'underline'}}>
                   <Typography component={'h2'} variant={'body2'}>
                     Forgot password?
                   </Typography>
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/sign-up" >
+                <Link to="/sign-up" style={{ textDecoration: 'underline'}}>
                   <Typography component={'h2'} variant="body2">
                     {'Don\'t have an account? Sign Up'}
                   </Typography>

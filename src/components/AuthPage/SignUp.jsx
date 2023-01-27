@@ -8,18 +8,24 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Copyright from '../../components/baseComponents/Copyright';
+import { mdTheme } from '../../style/theme';
+import Cookies from 'js-cookie';
+import { signIn } from '../../redux/auth/actions';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-const theme = createTheme();
-
-export default function SignUp() {
+function SignUp ({ singIn }) {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +43,22 @@ export default function SignUp() {
       }
     }).then((response) => {
 
-      setLoading(false);
+      axios({
+        method: 'POST',
+        url: `${process.env.REACT_APP_API}/api/auth/login`,
+        data: {
+          email: data.get('email'),
+          password: data.get('password'),
+        }
+      }).then((response) => {
+        Cookies.set('access_token', response.data.access_token);
+        signIn(response.data);
+        setLoading(false);
+        navigate('/overview');
+      }).catch((error) => {
+        setError(error.response.data.error ? error.response.data.error : error.response.data.message);
+        setLoading(false);
+      });
     }).catch((error) => {
       setError(error.response.data.error ? error.response.data.error : error.response.data.message);
       setLoading(false);
@@ -45,7 +66,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={mdTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -103,18 +124,24 @@ export default function SignUp() {
                   id="password_confirmation"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Typography color={'red'} variant={'body1'} component={'h2'}>
+                  {error}
+                </Typography>
+              </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to={'/sign-in'}>
+                <Link to={'/sign-in'} style={{ textDecoration: 'underline' }}>
                   <Typography component={'h2'} variant={'body2'}>
                     Already have an account? Sign in
                   </Typography>
@@ -123,8 +150,16 @@ export default function SignUp() {
             </Grid>
           </Box>
         </Box>
-        {/*<Copyright sx={{ mt: 5 }} />*/}
+        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
 }
+
+const mapDispatchToProps = {
+  signIn,
+};
+
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
