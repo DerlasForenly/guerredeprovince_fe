@@ -11,6 +11,7 @@ function Newspaper ({ newspaper }) {
     <Link to={`/newspaper/${newspaper.id}`}>
       <Stack direction={'row'} spacing={2}>
         <Avatar
+          variant={'square'}
           alt="newspaper-avatar"
           src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
           sx={{ width: 86, height: 86 }}

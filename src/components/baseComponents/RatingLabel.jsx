@@ -6,7 +6,7 @@ export default function RatingLabel ({ value = 0, variant = 'body1' }) {
 
 
   return (
-    <Typography component="h2" variant={variant} color={color}>
+    <Typography component="h2" variant={variant} color={color} fontWeight={'bold'}>
       {signedValue}
     </Typography>
   );

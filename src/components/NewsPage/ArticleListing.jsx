@@ -64,7 +64,6 @@ function ArticleListing ({
       alignItems="center"
     >
       <Stack
-        spacing={1}
         divider={<Divider sx={{ width: '100%' }} />}
         sx={{ width: '100%' }}
       >

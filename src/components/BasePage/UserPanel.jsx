@@ -49,7 +49,6 @@ const UserPanel = ({ user, clearUser }) => {
   };
 
   return <Stack direction={'row'} spacing={2}>
-    <UserBalance user={user} />
     <Notifications/>
     <IconButton
       onClick={handleClick}
@@ -89,19 +88,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
-
-function UserBalance ({ user = { gold: 0, diamonds: 0 } }) {
-  return <Stack>
-    <Stack direction={'row'}>
-      <Typography>{user.gold}</Typography>
-      <Typography>G</Typography>
-    </Stack>
-    <Stack direction={'row'}>
-      <Typography>{user.diamonds}</Typography>
-      <Typography>D</Typography>
-    </Stack>
-  </Stack>;
-}
 
 function Notifications() {
   return <IconButton

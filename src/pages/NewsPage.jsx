@@ -19,28 +19,25 @@ import MyNewspaper from '../components/NewsPage/MyNewspaper';
 
 const NewsPage = () => {
   return <Container sx={{ mt: 4, mb: 4 }}>
-    <Stack spacing={2}>
-      <Stack direction={'row'} spacing={2}>
-        <Stack direction={'column'} spacing={2}>
-          <MyNewspaper />
-          <PromotedArticle />
-          <RecommendedArticle />
-        </Stack>
-        <TwoTabsArticleListing
-          firstLabel={'My subscriptions'}
-          firstElement={<SubscriptionArticles />}
-          secondLabel={'My articles'}
-          secondElement={'Soon'}
-        />
-        <TwoTabsArticleListing
-          firstLabel={'Top articles'}
-          firstElement={'Soon'}
-          secondLabel={'Last articles'}
-          secondElement={<LastArticles />}
-          defaultTab={'2'}
-        />
+    <Stack direction={'row'} spacing={2}>
+      <Stack direction={'column'} spacing={2}>
+        <MyNewspaper />
+        <PromotedArticle />
+        <RecommendedArticle />
       </Stack>
-      <Copyright sx={{ pt: 4 }} />
+      <TwoTabsArticleListing
+        firstLabel={'My subscriptions'}
+        firstElement={<SubscriptionArticles />}
+        secondLabel={'My articles'}
+        secondElement={'Soon'}
+      />
+      <TwoTabsArticleListing
+        firstLabel={'Top articles'}
+        firstElement={'Soon'}
+        secondLabel={'Last articles'}
+        secondElement={<LastArticles />}
+        defaultTab={'2'}
+      />
     </Stack>
   </Container>;
 };
@@ -65,7 +62,7 @@ function TwoTabsArticleListing ({
   };
 
   return (
-    <Paper sx={{ p: 1, display: 'flex', flexDirection: 'column', width: 400 }}>
+    <Paper sx={{ p: 1, paddingBottom: 0, display: 'flex', flexDirection: 'column', width: 400, height: 'fit-content' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">

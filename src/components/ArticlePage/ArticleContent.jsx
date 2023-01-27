@@ -23,6 +23,7 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
             alignItems={'center'}>
             <Stack direction={'row'} spacing={1}>
               <Avatar
+                variant={'square'}
                 src={`${process.env.REACT_APP_API}/${article.avatar}`}
                 alt={'article-avatar'}
                 sx={{ width: 56, height: 56 }}

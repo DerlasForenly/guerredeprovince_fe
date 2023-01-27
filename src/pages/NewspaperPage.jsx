@@ -63,6 +63,7 @@ function NewspaperPage ({ newspaper, loadNewspaper, updateSubscription }) {
             <Stack direction={'row'} spacing={2} sx={{ width: '100%' }}>
               <Stack spacing={3}>
                 <Avatar
+                  variant={'square'}
                   src={`${process.env.REACT_APP_API}/${newspaper.avatar}`}
                   sx={{ width: 200, height: 200 }}
                 />

@@ -45,28 +45,33 @@ function Comment ({ comment, updateCommentRating }) {
   return <Stack direction={'row'} spacing={1} sx={{ width: '100%' }}>
     <Link to={`/user/${comment.user.id}`}>
       <Avatar
+        variant={'square'}
         src={`${process.env.REACT_APP_API}/${comment.user.avatar}`}
         alt={'user-avatar'}
+        sx={{ height: 56, width: 56 }}
       />
     </Link>
     <Stack sx={{ width: '100%' }} spacing={1}>
-      <Stack direction={'row'} justifyContent={'space-between'} sx={{ width: '100%' }} alignItems={'center'}>
-        <Stack direction={'row'} spacing={1} alignItems={'center'}>
-          <Link to={`/user/${comment.user.id}`}>
-            <Typography component={'h2'} variant={'body1'}>{comment.user.nickname}</Typography>
-          </Link>
-          {
-            comment.comment_id ?
-              <Stack spacing={1}>
-                <Typography component={'h2'} variant={'body2'}>in reply to</Typography>
-                <Link to={`/user/${comment.in_reply_to.id}`}>
-                  <Typography component={'h2'} variant={'body2'}>{comment.in_reply_to.nickname}</Typography>
-                </Link>
-                <Typography component={'h2'} variant={'body2'}>{`(comment: ${comment.comment_id})`}</Typography>
-              </Stack> :
-              <Stack></Stack>
-          }
-          <Button size={'small'}>Reply</Button>
+      <Stack direction={'row'} spacing={1}>
+        <Stack direction={'column'} justifyContent={'space-between'} sx={{ width: '100%' }} spacing={1}>
+          <Stack direction={'row'} spacing={1}>
+            <Link to={`/user/${comment.user.id}`}>
+              <Typography component={'h2'} variant={'body2'}>{comment.user.nickname}</Typography>
+            </Link>
+            {
+              comment.comment_id ?
+                <Stack spacing={1}>
+                  <Typography component={'h2'} variant={'body2'}>in reply to</Typography>
+                  <Link to={`/user/${comment.in_reply_to.id}`}>
+                    <Typography component={'h2'} variant={'body2'}>{comment.in_reply_to.nickname}</Typography>
+                  </Link>
+                  <Typography component={'h2'} variant={'body2'}>{`(comment: ${comment.comment_id})`}</Typography>
+                </Stack> :
+                <Stack></Stack>
+            }
+            <Typography component={'h2'} variant={'body2'} color={'primary'} fontWeight={'bold'}>Reply</Typography>
+          </Stack>
+          <Typography component={'h2'} variant={'body2'}>{comment.content}</Typography>
         </Stack>
         <IconButton
           aria-label="more"
@@ -76,8 +81,9 @@ function Comment ({ comment, updateCommentRating }) {
           aria-haspopup="true"
           onClick={handleClick}
           size={'small'}
+          sx={{ height: 20, width: 20 }}
         >
-          <MoreVertIcon />
+          <MoreVertIcon sx={{ height: 20, width: 20 }} />
         </IconButton>
         <Menu
           id="fade-menu"
@@ -94,13 +100,12 @@ function Comment ({ comment, updateCommentRating }) {
           <MenuItem onClick={handleDelete}>Delete</MenuItem>
         </Menu>
       </Stack>
-      <Typography component={'h2'} variant={'body2'}>{comment.content}</Typography>
       <Stack
         direction={'row'}
         sx={{ width: '100%' }}
         justifyContent={'space-between'}
       >
-        <Typography component={'h2'} variant={'body2'}>{comment.updated_at}</Typography>
+        <Typography component={'h2'} variant={'body2'} color={'gray'} fontSize={'12px'}>{comment.updated_at}</Typography>
         <Rating
           size={'small'}
           item={comment}

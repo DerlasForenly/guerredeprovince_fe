@@ -88,8 +88,10 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
   return (
     <Paper sx={{ p: p, width: width }}>
       <Stack spacing={2}>
-        <Title>My newspaper</Title>
-        <Newspaper />
+        <Stack>
+          <Title>My newspaper</Title>
+          <Newspaper />
+        </Stack>
         <ButtonGroup variant="text" aria-label="text button group">
           <Button fullWidth>
             <Link to={'/article/create'}>

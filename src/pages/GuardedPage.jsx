@@ -31,9 +31,9 @@ import DomainIcon from '@mui/icons-material/Domain';
 import ExploreIcon from '@mui/icons-material/Explore';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeIcon from '@mui/icons-material/Home';
-import { List } from '@mui/material';
+import { List, Stack } from '@mui/material';
 
-function GuardedPage ({ me, element, clearUser, primaryColor }) {
+function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(true);
@@ -132,6 +132,16 @@ function GuardedPage ({ me, element, clearUser, primaryColor }) {
               px: [1],
             }}
           >
+            <Stack>
+              <Stack direction={'row'} spacing={1}>
+                <Typography variant={'body2'}>{user.gold}</Typography>
+                <Typography variant={'body2'} fontWeight={'bold'}>G</Typography>
+              </Stack>
+              <Stack direction={'row'} spacing={1}>
+                <Typography variant={'body2'}>{user.diamonds}</Typography>
+                <Typography variant={'body2'} fontWeight={'bold'}>D</Typography>
+              </Stack>
+            </Stack>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
@@ -172,6 +182,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => {
   return {
+    user: state.auth.user,
     loading: state.app.loading,
     primaryColor: state.app.primaryColor,
   };
@@ -203,7 +214,7 @@ function ListItem ({ label, to = '/', icon = <LayersIcon /> }) {
   </Link>;
 }
 
-export const secondaryListItems = (
+const secondaryListItems = (
   <React.Fragment>
     <ListItem
       label={'Settings'}

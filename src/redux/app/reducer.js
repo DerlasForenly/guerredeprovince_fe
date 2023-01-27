@@ -3,7 +3,7 @@ import { HIDE_DRAWER, HIDE_LOADER, SET_PRIMARY_COLOR, SHOW_DRAWER, SHOW_LOADER }
 const initialState = {
   loading: false,
   drawer: true,
-  primaryColor: '#a67d0c',
+  primaryColor: '#710404',
 };
 
 export const appReducer = (state = initialState, action) => {
