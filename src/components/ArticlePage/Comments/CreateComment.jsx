@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';
 import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
-import TextareaAutosize from 'react-textarea-autosize';
 import TextField from '@mui/material/TextField';
 
 function CreateComment ({ article, loadComments }) {

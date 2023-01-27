@@ -1,17 +1,10 @@
 import { connect } from 'react-redux';
-import { useParams } from 'react-router';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
-import loadingGif from '../../assets/loading.gif';
-import { useEffect, useState } from 'react';
 import { loadArticle, updateArticleRating } from '../../redux/article/actions';
-import { Link } from 'react-router-dom';
 import Rating from '../../components/baseComponents/Rating';
 import Paper from '@mui/material/Paper';
 import Title from '../../components/baseComponents/Title';
 import Typography from '@mui/material/Typography';
-import { LinearProgress, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 
 function ArticleContent ({ article, loadArticle, updateArticleRating }) {

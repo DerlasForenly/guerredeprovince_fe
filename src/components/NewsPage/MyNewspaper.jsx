@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Paper from '@mui/material/Paper';
-import { ButtonGroup, CircularProgress, LinearProgress, Stack } from '@mui/material';
+import { ButtonGroup, LinearProgress, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
@@ -10,7 +10,6 @@ import Title from '../../components/baseComponents/Title';
 import Newspaper from './Newspaper';
 import { loadNewspaper } from '../../redux/newspaper/actions';
 import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 
 function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
   const [newspaperNotFound, setNewspaperNotFound] = useState(false);

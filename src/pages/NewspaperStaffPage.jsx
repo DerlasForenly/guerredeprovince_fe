@@ -4,7 +4,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadStaff } from '../redux/newspaper/actions';
 import StaffList from '../components/StaffPage/StaffList';
-import InputSearch from '../components/baseComponents/InputSearch';
 
 const NewspaperStaffPage = ({ user, loadStaff }) => {
   // eslint-disable-next-line no-unused-vars
@@ -35,7 +34,6 @@ const NewspaperStaffPage = ({ user, loadStaff }) => {
 
   return <div className="page row">
     <StaffList/>
-    <HireStaff/>
   </div>;
 };
 
@@ -51,30 +49,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperStaffPage);
-
-function HireStaff() {
-  return <div className="container">
-    <div className={"container-header"}>
-      <label className={"text-label"}>Hire user</label>
-    </div>
-    <InputSearch/>
-    <HireSearchResult/>
-  </div>
-}
-
-function HireSearchResult({ searchResult = [1,2,3]}) {
-  return <div className="container">
-    {searchResult.map((item, index) => {
-      return <HireSearchUser user={item} key={index}/>
-    })}
-  </div>
-}
-
-function HireSearchUser() {
-  return <div>
-    <img
-      alt={"avatar"}
-    />
-    <label>Nickname</label>
-  </div>
-}

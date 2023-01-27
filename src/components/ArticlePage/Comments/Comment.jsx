@@ -12,7 +12,6 @@ import Cookies from 'js-cookie';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 
 function Comment ({ comment, updateCommentRating }) {
   const [anchorEl, setAnchorEl] = useState(null);

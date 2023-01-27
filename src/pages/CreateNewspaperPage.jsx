@@ -2,22 +2,19 @@ import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
 import convert from 'image-file-resize';
 import { getImageSize } from 'react-image-size';
-
-import picturePlaceholder from '../assets/picture-placeholder.jpg';
-import InputText from '../components/baseComponents/InputText';
-import InputTextarea from '../components/baseComponents/InputTextarea';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
+
+import picturePlaceholder from '../assets/picture-placeholder.jpg';
 import Title from '../components/baseComponents/Title';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 
 const CreateNewspaperPage = () => {
   const [state, setState] = useState({

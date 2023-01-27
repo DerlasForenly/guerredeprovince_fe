@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadSubscriptions, setSubscriptionsPage } from '../redux/subscriptions/actions';
-import NewspapersList from '../components/SubscriptionsPage/NewspapersList';
 import { LinearProgress, Pagination, Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Title from '../components/baseComponents/Title';
