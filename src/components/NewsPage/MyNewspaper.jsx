@@ -10,6 +10,7 @@ import Title from '../../components/baseComponents/Title';
 import Newspaper from './Newspaper';
 import { loadNewspaper } from '../../redux/newspaper/actions';
 import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
   const [newspaperNotFound, setNewspaperNotFound] = useState(false);
@@ -62,7 +63,7 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
     return (
       <Paper sx={{ p: p, width: width }}>
         <Stack spacing={2}>
-          <Title>My newspaper</Title>
+          <Title>You do not have any newspaper</Title>
           <ButtonGroup variant="text" aria-label="text button group">
             <Button fullWidth>
               <Link href={'/newspaper/create'} underline={'none'} color={'inherit'}>
@@ -70,7 +71,7 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
               </Link>
             </Button>
             <Button fullWidth>
-              <Link href={'#'} underline={'none'} color={'inherit'}>
+              <Link href={'/news/subscriptions'} underline={'none'} color={'inherit'}>
                 My Subscriptions
               </Link>
             </Button>
@@ -92,7 +93,7 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
             </Link>
           </Button>
           <Button fullWidth>
-            <Link href={'#'} underline={'none'} color={'inherit'}>
+            <Link href={'/news/subscriptions'} underline={'none'} color={'inherit'}>
               My Subscriptions
             </Link>
           </Button>

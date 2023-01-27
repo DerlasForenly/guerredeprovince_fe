@@ -9,10 +9,11 @@ import InputText from '../components/baseComponents/InputText';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import { Stack } from '@mui/material';
+import { CircularProgress, LinearProgress, Stack } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Title from '../components/baseComponents/Title';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router';
 
 const CreateArticlePage = ({ user }) => {
   const [state, setState] = useState({
@@ -33,6 +34,8 @@ const CreateArticlePage = ({ user }) => {
       [e.target.name]: e.target.value
     }));
   };
+
+  const navigate = useNavigate();
 
   const submitHandler = event => {
     event.preventDefault();
@@ -65,6 +68,7 @@ const CreateArticlePage = ({ user }) => {
         newspaperId: 0,
       });
       event.target.reset();
+      navigate(`/article/${response.data.article_id}`);
     }).catch((error) => {
       setErrorMessage(error.message);
       setLoading(false);
@@ -73,26 +77,26 @@ const CreateArticlePage = ({ user }) => {
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Paper sx={{ p: 2, width: 700 }}>
+      <Paper sx={{ p: 2, width: 900 }}>
         <form onSubmit={submitHandler}>
           <Stack spacing={2}>
             <Title>Create article:</Title>
             <TextField
               required
-              id="outlined-required"
               label={'Title'}
-              name={'Title'}
+              name={'title'}
               placeholder={'Title'}
               max={80}
               sx={{ width: '100%' }}
+              onChange={changeInputHandler}
             />
             <TextField
               required
               label="Content"
               multiline
-              rows={20}
+              minRows={15}
               placeholder={'Content'}
-              changeInputHandler={changeInputHandler}
+              onChange={changeInputHandler}
               max={4000}
               name={'content'}
             />
@@ -125,7 +129,10 @@ const CreateArticlePage = ({ user }) => {
                   <MenuItem key={2} value={1}>English</MenuItem>
                 </TextField>
               </Stack>
-              <Button variant="contained" size="large">Create</Button>
+              <Stack direction={'row'} spacing={2}>
+                {loading ? <CircularProgress /> : <div></div>}
+                <Button type={'submit'} variant="contained" size="large" disabled={loading}>Create</Button>
+              </Stack>
             </Stack>
           </Stack>
         </form>

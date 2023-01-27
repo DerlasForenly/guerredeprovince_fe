@@ -40,7 +40,7 @@ const UserPanel = ({ user, clearUser }) => {
   };
 
   const handleProfile = () => {
-    navigate('/profile');
+    navigate(`/user/${user.id}`);
     setAnchorEl(null);
   };
 

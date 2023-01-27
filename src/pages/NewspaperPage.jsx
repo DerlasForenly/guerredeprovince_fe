@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Container from '@mui/material/Container';
@@ -8,18 +8,20 @@ import Container from '@mui/material/Container';
 import { loadNewspaper } from '../redux/newspaper/actions';
 import Paper from '@mui/material/Paper';
 import Title from '../components/baseComponents/Title';
-import { ButtonGroup, Stack } from '@mui/material';
+import { ButtonGroup, LinearProgress, Stack } from '@mui/material';
 import NewspaperArticles from '../components/NewspaperPage/NewspaperArticles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SubscribeButton from '../components/NewspaperPage/SubscribeButton';
+import { updateSubscription } from '../redux/newspaper/actions';
 
-function NewspaperPage ({ newspaper, loadNewspaper }) {
+function NewspaperPage ({ newspaper, loadNewspaper, updateSubscription }) {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -39,6 +41,20 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
 
   }, [id, loadNewspaper]);
 
+  if (loading) {
+    return <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Stack spacing={2} direction={'row'} sx={{ width: '100%' }}>
+        <Paper sx={{ p: 2, width: 650 }}>
+          <LinearProgress />
+        </Paper>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
+          <Title>Newspaper articles</Title>
+          <NewspaperArticles />
+        </Paper>
+      </Stack>
+    </Container>;
+  }
+
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Stack spacing={2} direction={'row'} sx={{ width: '100%' }}>
@@ -55,9 +71,9 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
                   aria-label="vertical contained button group"
                   variant="text"
                 >
-                  <SubscribeButton key={'1'} newspaper={newspaper}/>
-                  <Button key="2">Edit</Button>
-                  <Button key="3">Staff</Button>
+                  <SubscribeButton key={'1'} newspaper={newspaper} updateSubscription={updateSubscription} />
+                  <Button key="2" onClick={() => (navigate(`#`))}>Edit</Button>
+                  <Button key="3" onClick={() => (navigate(`/newspaper/${newspaper.id}/staff`))}>Staff</Button>
                   <Button key="4" color={'error'}>Delete</Button>
                 </ButtonGroup>
               </Stack>
@@ -109,7 +125,8 @@ function NewspaperPage ({ newspaper, loadNewspaper }) {
 }
 
 const mapDispatchToProps = {
-  loadNewspaper
+  loadNewspaper,
+  updateSubscription
 };
 
 const mapStateToProps = state => {
@@ -131,6 +148,6 @@ function StatisticsRow ({ label, value, url = false }) {
         {value}
       </Typography>
     </Stack>
-  )
+  );
 }
 

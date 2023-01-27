@@ -3,9 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { updateSubscription } from '../../redux/newspaper/actions';
 
-function SubscribeButton ({ newspaper, isSubscribed, updateSubscription, key = '' }) {
+function SubscribeButton ({ newspaper, updateSubscription, key = '', variant = 'text' }) {
   const [loading, setLoading] = useState(false);
 
   const onClickHandler = event => {
@@ -34,6 +33,7 @@ function SubscribeButton ({ newspaper, isSubscribed, updateSubscription, key = '
 
   return (
     <Button
+      variant={variant}
       key={key}
       onClick={onClickHandler}
       disabled={loading}
@@ -44,7 +44,6 @@ function SubscribeButton ({ newspaper, isSubscribed, updateSubscription, key = '
 }
 
 const mapDispatchToProps = {
-  updateSubscription,
 };
 
 const mapStateToProps = state => {

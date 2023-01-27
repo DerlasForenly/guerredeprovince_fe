@@ -6,6 +6,7 @@ import { loadComments } from '../../../redux/comments/actions';
 import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextareaAutosize from 'react-textarea-autosize';
+import TextField from '@mui/material/TextField';
 
 function CreateComment ({ article, loadComments }) {
   const [state, setState] = useState({
@@ -55,14 +56,13 @@ function CreateComment ({ article, loadComments }) {
   return (
     <form className="create-comment-form" onSubmit={onSubmit}>
       <Stack direction={'row'} spacing={1} alignItems={'flex-end'}>
-        <TextareaAutosize
+        <TextField
+          required
+          multiline
           minRows={3}
-          maxRows={10}
-          name={"content"}
-          max={300}
-          changeInputHandler={changeInputHandler}
-          className={"content-input"}
-          style={{ width: '100%', resize: 'none' }}
+          onChange={changeInputHandler}
+          name={'content'}
+          sx={{ width: '100%' }}
         />
         <Button type="submit" >Send</Button>
       </Stack>

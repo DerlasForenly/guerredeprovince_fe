@@ -9,6 +9,15 @@ import InputTextarea from '../components/baseComponents/InputTextarea';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
+import Paper from '@mui/material/Paper';
+import { Stack } from '@mui/material';
+import Title from '../components/baseComponents/Title';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 const CreateNewspaperPage = () => {
   const [state, setState] = useState({
@@ -99,52 +108,77 @@ const CreateNewspaperPage = () => {
     });
   };
 
-  return <div className="page">
-    <form className="create-newspaper-container col" onSubmit={submitHandler}>
-      <div className="row">
-        <img
-          src={selectedFile ? preview : picturePlaceholder}
-          alt="avatar-placeholder"
-          className={'avatar-huge'}
-          mr={20}
-          mb={20}
-        />
-        <div className="avatar-name col">
-          <InputText
-            changeInputHandler={changeInputHandler}
-            max={50}
-            label="Name"
-            name="name"
-            className={"name-input"}
-          />
-          <input
-            type="file"
-            className="file-input"
-            accept=".png, .jpg"
-            multiple={false}
-            onChange={onChangeFileInput}
-          />
-        </div>
-      </div>
-      <InputTextarea
-        changeInputHandler={changeInputHandler}
-        max={500}
-        label="Description"
-        name="description"
-        className="description-input"
-      />
-      <div className="settings row">
-        <label className={"small-content-p"}>It is free now, but it is going to be 50G later ;)</label>
-        <button
-          type="submit"
-          disabled={loading}
-          className={"medium-gray-button"}
-        >
-          Create
-        </button>
-      </div>
-    </form>
-  </div>;
+  return (
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Paper sx={{ p: 2, width: 700 }}>
+        <form onSubmit={submitHandler}>
+          <Stack spacing={2}>
+            <Title>Create Newspaper:</Title>
+            <Stack direction={'row'} spacing={2} sx={{ width: '100%' }}>
+              <Avatar
+                variant={'square'}
+                src={selectedFile ? preview : picturePlaceholder}
+                alt={'newspaper-avatar'}
+                sx={{ width: 128, height: 128 }}
+              />
+              <Stack spacing={2} sx={{ width: '100%' }}>
+                <TextField
+                  required
+                  label={'Name'}
+                  name={'name'}
+                  placeholder={'Name'}
+                  max={80}
+                  sx={{ width: '100%' }}
+                  onChange={changeInputHandler}
+                />
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ width: '30%' }}
+                >
+                  Upload File
+                  <input
+                    required
+                    type="file"
+                    className="file-input"
+                    accept=".png, .jpg"
+                    multiple={false}
+                    onChange={onChangeFileInput}
+                    hidden
+                  />
+                </Button>
+              </Stack>
+            </Stack>
+            <Stack spacing={2}>
+              <TextField
+                required
+                label="Description"
+                multiline
+                minRows={6}
+                placeholder={'Description'}
+                onChange={changeInputHandler}
+                max={300}
+                name={'description'}
+              />
+              <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                <Typography variant={'body1'} component={'h2'}>
+                  It is free now, but it is going to be 50G later ;)
+                </Typography>
+                <Button
+                  type={'submit'}
+                  size={'large'}
+                  variant={'contained'}
+                  disabled={loading}
+                >
+                  Create
+                </Button>
+              </Stack>
+            </Stack>
+          </Stack>
+        </form>
+      </Paper>
+    </Container>
+  );
 };
 
 export default connect(null, null)(CreateNewspaperPage);

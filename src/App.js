@@ -19,7 +19,6 @@ import ArticlePage from './pages/ArticlePage';
 import CreateNewspaperPage from './pages/CreateNewspaperPage';
 import NewspaperPage from './pages/NewspaperPage';
 import SubscriptionsPage from './pages/SubscriptionsPage';
-import UserPage from './pages/UserPage';
 import NewspaperStaffPage from './pages/NewspaperStaffPage';
 
 function App () {
@@ -86,14 +85,9 @@ function App () {
           element={<GuardedPage element={<MarketPage />} />}
         />
         <Route
-          path="/profile"
-          exact
-          element={<GuardedPage element={<ProfilePage />} />}
-        />
-        <Route
           path="/user/:id"
           exact
-          element={<GuardedPage element={<UserPage />} />}
+          element={<GuardedPage element={<ProfilePage />} />}
         />
         <Route
           path="/region"

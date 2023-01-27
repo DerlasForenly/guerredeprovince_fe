@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Article from './Article';
-import { Pagination, Stack } from '@mui/material';
+import { CircularProgress, Pagination, Stack } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -11,7 +11,7 @@ function ArticleListing ({
                            url = '',
                            loadArticles,
                            articles = [],
-                           pagesMeta = { currentPage: 1 },
+                           pagesMeta,
                            setPage
                          }) {
   // eslint-disable-next-line no-unused-vars
@@ -43,6 +43,19 @@ function ArticleListing ({
     setPage(value);
   };
 
+  if (loading) {
+    return (
+      <Stack
+        sx={{ width: '100%' }}
+        justifyContent="center"
+        spacing={1}
+        alignItems="center"
+      >
+        <CircularProgress />
+      </Stack>
+    )
+  }
+
   return (
     <Stack
       sx={{ width: '100%' }}
@@ -63,6 +76,7 @@ function ArticleListing ({
         <div></div>
       </Stack>
       <Pagination
+        page={pagesMeta.currentPage}
         count={pagesMeta.lastPage}
         size="small"
         onChange={onPageChange}
