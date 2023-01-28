@@ -28,7 +28,7 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
                 alt={'article-avatar'}
                 sx={{ width: 56, height: 56 }}
               />
-              <Stack justifyContent={'space-between'}>
+              <Stack>
                 <Typography variant={'body1'} component={'h2'}>
                   {article.newspaper.name}
                 </Typography>
@@ -45,7 +45,7 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
               updateItemFunction={updateArticleRating}
             />
           </Stack>
-          <Typography variant={'body2'} component={'h2'}>
+          <Typography variant={'body2'} component={'h2'} color={'gray'} fontSize={13}>
             {article.created_at}
           </Typography>
         </Stack>

@@ -13,6 +13,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import DiamondIcon from '@mui/icons-material/Diamond';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -22,7 +24,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'none' ? '#fcf403' : '#fff93d',
   },
 }));
-
 
 const UserPanel = ({ user, clearUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -63,18 +64,20 @@ const UserPanel = ({ user, clearUser }) => {
   return <Stack direction={'row'} spacing={2} alignItems={'center'}>
     <Paper sx={{ p: 0.5, width: 'fit-content', boxShadow: 'inset 0 0 3px', minWidth: 220 }} elevation={0}>
       <Stack alignItems={'flex-end'}>
-        <Stack direction={'row'} spacing={1}>
-          <Typography variant={'body2'} noWrap>{user.gold}</Typography>
-          <Typography variant={'body2'} fontWeight={'bold'}>G</Typography>
+        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+          <Typography fontSize={'small'} noWrap>{user.gold}</Typography>
+          <MonetizationOnIcon fontSize={'small'} />
+          {/*<Typography variant={'body2'} fontWeight={'bold'}>G</Typography>*/}
         </Stack>
-        <Stack direction={'row'} spacing={1}>
-          <Typography variant={'body2'} noWrap>{user.diamonds}</Typography>
-          <Typography variant={'body2'} fontWeight={'bold'}>D</Typography>
+        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+          <Typography fontSize={'small'} noWrap>{user.diamonds}</Typography>
+          <DiamondIcon fontSize={'small'} />
+          {/*<Typography variant={'body2'} fontWeight={'bold'}>D</Typography>*/}
         </Stack>
       </Stack>
     </Paper>
 
-    <Notifications/>
+    <Notifications />
     <IconButton
       onClick={handleClick}
       size="small"
@@ -118,7 +121,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPanel);
 
-function Notifications() {
+function Notifications () {
   return <IconButton
     size="large"
     aria-label="show 17 new notifications"
@@ -127,5 +130,5 @@ function Notifications() {
     <Badge badgeContent={17} color="error">
       <NotificationsIcon />
     </Badge>
-  </IconButton>
+  </IconButton>;
 }

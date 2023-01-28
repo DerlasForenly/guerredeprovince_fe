@@ -142,22 +142,48 @@ function ProfileSettings ({ user }) {
                 Save
               </Button>
             </Stack>
-            <Stack sx={{ width: '100%' }} spacing={1}>
-              <TextField
-                type={'text'}
-                label={'Nickname'}
-                variant={'standard'}
-                placeholder={'Nickname'}
-                fullWidth
-                defaultValue={user.nickname}
-              />
-              <TextField
-                type={'text'}
-                label={'Status'}
-                variant={'standard'}
-                placeholder={'Status'}
-                fullWidth
-              />
+            <Stack sx={{ width: '100%' }} spacing={2}>
+              <Stack sx={{ width: '100%' }} spacing={1}>
+                <TextField
+                  type={'text'}
+                  label={'Nickname'}
+                  variant={'standard'}
+                  placeholder={'Nickname'}
+                  fullWidth
+                  defaultValue={user.nickname}
+                />
+                <TextField
+                  type={'text'}
+                  label={'Status'}
+                  variant={'standard'}
+                  placeholder={'Status'}
+                  fullWidth
+                />
+              </Stack>
+              {/*<Stack sx={{ width: '100%' }} spacing={1}>*/}
+              {/*  <Title>Security</Title>*/}
+              {/*  <TextField*/}
+              {/*    type={'password'}*/}
+              {/*    label={'Old password'}*/}
+              {/*    variant={'standard'}*/}
+              {/*    placeholder={'Old password'}*/}
+              {/*    fullWidth*/}
+              {/*  />*/}
+              {/*  <TextField*/}
+              {/*    type={'password'}*/}
+              {/*    label={'New password'}*/}
+              {/*    variant={'standard'}*/}
+              {/*    placeholder={'New password'}*/}
+              {/*    fullWidth*/}
+              {/*  />*/}
+              {/*  <TextField*/}
+              {/*    type={'password'}*/}
+              {/*    label={'Repeat password'}*/}
+              {/*    variant={'standard'}*/}
+              {/*    placeholder={'Repeat password'}*/}
+              {/*    fullWidth*/}
+              {/*  />*/}
+              {/*</Stack>*/}
             </Stack>
           </Stack>
         </form>

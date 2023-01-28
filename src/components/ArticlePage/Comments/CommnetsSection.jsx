@@ -10,7 +10,7 @@ import { LinearProgress, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import Title from '../../../components/baseComponents/Title';
 
-function CommentsSection ({ loadComments, article }) {
+function CommentsSection ({ loadComments, article, comments = [] }) {
   const [loading, setLoading] = useState(true);
   const [showComments, setShowComments] = useState(false);
 
@@ -31,6 +31,11 @@ function CommentsSection ({ loadComments, article }) {
       }
     }).then((response) => {
       loadComments(response.data);
+
+      if (response.data.length === 0) {
+        setShowComments(true);
+      }
+
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -41,7 +46,7 @@ function CommentsSection ({ loadComments, article }) {
     setShowComments(true);
   };
 
-  if (showComments) {
+  if (showComments && (comments.length !== 0 || article.comments_count !== 0)) {
     return (
       <Paper sx={{ p: 2, width: width }}>
         <Stack spacing={3}>
@@ -52,7 +57,7 @@ function CommentsSection ({ loadComments, article }) {
     );
   }
 
-  if (article.comments_count === 0) {
+  if (comments.length === 0 && article.comments_count === 0) {
     return (
       <Paper sx={{ p: 2, width: width }}>
         <Stack spacing={1}>
@@ -91,6 +96,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => {
   return {
     article: state.article.article,
+    comments: state.comments.comments
   };
 };
 
