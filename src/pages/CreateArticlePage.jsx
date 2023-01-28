@@ -50,6 +50,8 @@ const CreateArticlePage = ({ user }) => {
       content: state.content,
     };
 
+    console.log(state.newspaperId);
+
     if (parseInt(state.newspaperId) !== 0) {
       data.newspaper_id = parseInt(state.newspaperId);
     }
@@ -115,6 +117,7 @@ const CreateArticlePage = ({ user }) => {
                   variant={'standard'}
                   sx={{ width: '100%' }}
                   required
+                  name={'newspaperId'}
                   select
                   label="On behalf of the"
                   defaultValue={0}

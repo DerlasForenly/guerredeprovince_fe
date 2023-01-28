@@ -228,6 +228,7 @@ function AppBarBreadcrumbs ({ url = '' }) {
         path.map((item, index) => {
           return (
             <Typography
+              key={index}
               component="h1"
               variant="h6"
               color="inherit"
