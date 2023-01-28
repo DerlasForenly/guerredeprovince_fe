@@ -4,20 +4,19 @@ import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Container from '@mui/material/Container';
-
-import { loadNewspaper } from '../redux/newspaper/actions';
 import Paper from '@mui/material/Paper';
-import Title from '../components/baseComponents/Title';
 import { ButtonGroup, CircularProgress, LinearProgress, Stack } from '@mui/material';
-import NewspaperArticles from '../components/NewspaperPage/NewspaperArticles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+
 import SubscribeButton from '../components/NewspaperPage/SubscribeButton';
 import { updateSubscription } from '../redux/newspaper/actions';
+import { loadNewspaper } from '../redux/newspaper/actions';
+import Title from '../components/baseComponents/Title';
+import NewspaperArticles from '../components/NewspaperPage/NewspaperArticles';
 
 function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) {
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [buttons, setButtons] = useState([]);
 
@@ -25,6 +24,10 @@ function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) 
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user || !newspaper) {
+      return false;
+    }
+
     if (user.id === newspaper.owner.id) {
       setButtons([
         <Button key="2" onClick={() => (navigate(`#`))}>Edit</Button>,
@@ -32,7 +35,7 @@ function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) 
         <Button key="4" color={'error'}>Delete</Button>,
       ]);
     }
-  }, [user, newspaper, navigate])
+  }, [user, newspaper, navigate]);
 
   useEffect(() => {
     setLoading(true);
@@ -93,7 +96,7 @@ function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) 
               </Stack>
               <Stack spacing={2} sx={{ width: '100%' }}>
                 <Title>{newspaper.name}</Title>
-                <Typography variant={'body2'} paragraph sx={{ overflowWrap: 'anywhere'}}>
+                <Typography variant={'body2'} paragraph sx={{ overflowWrap: 'anywhere' }}>
                   {newspaper.description}
                 </Typography>
                 <Stack>

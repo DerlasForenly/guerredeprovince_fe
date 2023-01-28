@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
+import Container from '@mui/material/Container';
+import { Stack } from '@mui/material';
+import CurrentJobCard from '../components/JobPage/CurrentJobCard';
+import BusinessesTable from '../components/JobPage/BusinessesTable';
 
-// import FactoryCard from '../components/FactoryCard';
-// import ShortStorage from '../components/ShortStorage';
-
-const JobPage = (props) => {
-  return <div className="job-page">
-    <label className="soon">Soon</label>
-  </div>
-
-  // return <div className="row">
-  //   {props.user.job ? <FactoryCard></FactoryCard> : <div></div>}
-  //   <ShortStorage></ShortStorage>
-  // </div>;
+const JobPage = ({ user }) => {
+  return (
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Stack spacing={2} direction={'row'}>
+        <CurrentJobCard />
+        <BusinessesTable />
+      </Stack>
+    </Container>
+  );
 };
 
 const mapStateToProps = (state) => {
