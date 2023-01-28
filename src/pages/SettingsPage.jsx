@@ -14,9 +14,9 @@ import ThemeSettings from '../components/SettingsPage/ThemeSettings';
 function SettingsPage ({ user }) {
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Stack direction={'row'} spacing={2}>
+      <Stack direction={'column'} spacing={2}>
         <ProfileSettings />
-        <Paper sx={{ p: 2, width: '400px' }}>
+        <Paper sx={{ p: 2, width: '500px' }}>
           <Stack spacing={2}>
             <Title>General</Title>
             <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
@@ -30,6 +30,7 @@ function SettingsPage ({ user }) {
                 label="Language"
                 defaultValue={0}
                 disabled={true}
+                variant="standard"
               >
                 <MenuItem key={1} value={0}>Ukrainian</MenuItem>
                 <MenuItem key={2} value={1}>English</MenuItem>

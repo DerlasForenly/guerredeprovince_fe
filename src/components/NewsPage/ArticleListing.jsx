@@ -6,6 +6,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Typography from '@mui/material/Typography';
 
 function ArticleListing ({
                            url = '',
@@ -54,6 +55,19 @@ function ArticleListing ({
         <CircularProgress />
       </Stack>
     )
+  }
+
+  if (articles.length === 0 || !articles) {
+    return (
+      <Stack
+        sx={{ width: '100%' }}
+        justifyContent="center"
+        spacing={1}
+        alignItems="center"
+      >
+        <Typography component={'h2'} variant={'body1'}>There are no articles</Typography>
+      </Stack>
+    );
   }
 
   return (

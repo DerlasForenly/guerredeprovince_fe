@@ -3,13 +3,26 @@ import Fade from '@mui/material/Fade';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { useState } from 'react';
-import { Avatar, Divider, IconButton, Stack } from '@mui/material';
+import { Avatar, Divider, IconButton, LinearProgress, linearProgressClasses, Stack } from '@mui/material';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import { clearUser } from '../../redux/auth/actions';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: 'none',
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    backgroundColor: theme.palette.mode === 'none' ? '#fcf403' : '#fff93d',
+  },
+}));
+
 
 const UserPanel = ({ user, clearUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,7 +60,20 @@ const UserPanel = ({ user, clearUser }) => {
     setAnchorEl(null);
   };
 
-  return <Stack direction={'row'} spacing={2}>
+  return <Stack direction={'row'} spacing={2} alignItems={'center'}>
+    <Paper sx={{ p: 0.5, width: 'fit-content', boxShadow: 'inset 0 0 3px', minWidth: 220 }} elevation={0}>
+      <Stack alignItems={'flex-end'}>
+        <Stack direction={'row'} spacing={1}>
+          <Typography variant={'body2'} noWrap>{user.gold}</Typography>
+          <Typography variant={'body2'} fontWeight={'bold'}>G</Typography>
+        </Stack>
+        <Stack direction={'row'} spacing={1}>
+          <Typography variant={'body2'} noWrap>{user.diamonds}</Typography>
+          <Typography variant={'body2'} fontWeight={'bold'}>D</Typography>
+        </Stack>
+      </Stack>
+    </Paper>
+
     <Notifications/>
     <IconButton
       onClick={handleClick}
@@ -75,6 +101,10 @@ const UserPanel = ({ user, clearUser }) => {
       <Divider />
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
+    <Stack>
+      <Typography variant={'body1'} component={'h2'} fontWeight={'bold'} noWrap>LVL: 98</Typography>
+      <BorderLinearProgress variant="determinate" value={50} />
+    </Stack>
   </Stack>;
 };
 

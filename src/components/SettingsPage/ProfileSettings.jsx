@@ -1,5 +1,5 @@
 import Title from '../../components/baseComponents/Title';
-import { Stack } from '@mui/material';
+import { LinearProgress, Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import TextField from '@mui/material/TextField';
 
 function ProfileSettings ({ user }) {
   const [loading, setLoading] = useState(false);
@@ -86,25 +87,36 @@ function ProfileSettings ({ user }) {
     });
   };
 
+  if (!user) {
+    return (
+      <Paper sx={{ p: 2, width: 500 }}>
+        <Stack>
+          <Title>Profile</Title>
+          <LinearProgress />
+        </Stack>
+      </Paper>
+    );
+  }
+
   return (
-    <Paper sx={{ p: 2, width: 400 }}>
+    <Paper sx={{ p: 2, width: 500 }}>
       <Stack>
         <Title>Profile</Title>
         <form onSubmit={submitHandler}>
-          <Stack direction={'row'} justifyContent={'space-between'}>
-            <Avatar
-              variant={'square'}
-              src={selectedFile ? preview : `${process.env.REACT_APP_API}/${user.avatar}`}
-              alt={'newspaper-avatar'}
-              sx={{ width: 128, height: 128 }}
-            />
-            <Stack spacing={2} justifyContent={'space-between'}>
+          <Stack direction={'row'} spacing={2}>
+            <Stack direction={'column'} justifyContent={'space-between'} width={'fit-content'} spacing={2}>
+              <Avatar
+                variant={'square'}
+                src={selectedFile ? preview : `${process.env.REACT_APP_API}/${user.avatar}`}
+                alt={'newspaper-avatar'}
+                sx={{ width: 156, height: 156 }}
+              />
               <Button
-                variant="contained"
                 component="label"
-                sx={{ height: 'fit-content' }}
+                variant={'contained'}
                 type="button"
                 disabled={loading}
+                size={'small'}
                 fullWidth
               >
                 Upload File*
@@ -120,15 +132,32 @@ function ProfileSettings ({ user }) {
                 />
               </Button>
               <Button
-                variant="contained"
+                size={'small'}
+                variant={'contained'}
                 component="button"
-                disabled={loading}
+                disabled={loading || !selectedFile}
                 fullWidth
-                sx={{ height: 'fit-content' }}
                 type="submit"
               >
                 Save
               </Button>
+            </Stack>
+            <Stack sx={{ width: '100%' }} spacing={1}>
+              <TextField
+                type={'text'}
+                label={'Nickname'}
+                variant={'standard'}
+                placeholder={'Nickname'}
+                fullWidth
+                defaultValue={user.nickname}
+              />
+              <TextField
+                type={'text'}
+                label={'Status'}
+                variant={'standard'}
+                placeholder={'Status'}
+                fullWidth
+              />
             </Stack>
           </Stack>
         </form>

@@ -94,6 +94,7 @@ const CreateArticlePage = ({ user }) => {
             />
             <TextField
               required
+              variant="filled"
               label="Content"
               multiline
               minRows={15}
@@ -111,6 +112,7 @@ const CreateArticlePage = ({ user }) => {
             >
               <Stack spacing={2} sx={{ width: '50%' }}>
                 <TextField
+                  variant={'standard'}
                   sx={{ width: '100%' }}
                   required
                   select
@@ -122,6 +124,8 @@ const CreateArticlePage = ({ user }) => {
                   {[<MenuItem key={1} value={0}>{user?.nickname}</MenuItem>, ...onBehalf]}
                 </TextField>
                 <TextField
+                  variant={'standard'}
+
                   sx={{ width: '100%' }}
                   required
                   select

@@ -1,9 +1,14 @@
-import { HIDE_DRAWER, HIDE_LOADER, SET_PRIMARY_COLOR, SHOW_DRAWER, SHOW_LOADER } from './types';
+import { HIDE_DRAWER, HIDE_LOADER, SET_PRIMARY_COLOR, SET_SECONDARY_COLOR, SHOW_DRAWER, SHOW_LOADER } from './types';
 
 const initialState = {
   loading: false,
   drawer: true,
   primaryColor: '#710404',
+  secondaryColor: '#710404',
+
+  imageInput: {
+
+  }
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -29,6 +34,11 @@ export const appReducer = (state = initialState, action) => {
         drawer: false
       };
     case SET_PRIMARY_COLOR:
+      return {
+        ...state,
+        primaryColor: action.payload,
+      };
+    case SET_SECONDARY_COLOR:
       return {
         ...state,
         primaryColor: action.payload,

@@ -31,7 +31,8 @@ import DomainIcon from '@mui/icons-material/Domain';
 import ExploreIcon from '@mui/icons-material/Explore';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeIcon from '@mui/icons-material/Home';
-import { List, Stack } from '@mui/material';
+import { Breadcrumbs, List } from '@mui/material';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
   const navigate = useNavigate();
@@ -41,16 +42,7 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
     setOpen(!open);
   };
 
-  const [theme, setTheme] = useState(createTheme({
-    palette: {
-      primary: {
-        main: '#a67d0c',
-      },
-      secondary: {
-        main: '#a67d0c',
-      },
-    },
-  }));
+  const [theme, setTheme] = useState(createTheme());
 
   useEffect(() => {
     setTheme(createTheme({
@@ -59,15 +51,17 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
           main: primaryColor,
         },
         secondary: {
-          main: '#a67d0c',
+          main: '#fcf403',
         },
       },
-    }))
-  }, [primaryColor])
+    }));
+  }, [primaryColor]);
 
   useEffect(() => {
     if (!Cookies.get('access_token')) {
       navigate('/sign-in');
+
+      return;
     }
 
     axios({
@@ -79,6 +73,7 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
     }).then((response) => {
       me(response.data);
     }).catch((error) => {
+      Cookies.remove('access_token');
       clearUser();
       navigate('/sign-in');
     });
@@ -108,18 +103,7 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{
-                flexGrow: 1,
-                width: '100%',
-              }}
-            >
-              Dashboard
-            </Typography>
+            <AppBarBreadcrumbs url={window.location.pathname} />
             <UserPanel />
           </Toolbar>
         </AppBar>
@@ -132,16 +116,7 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user }) {
               px: [1],
             }}
           >
-            <Stack>
-              <Stack direction={'row'} spacing={1}>
-                <Typography variant={'body2'}>{user.gold}</Typography>
-                <Typography variant={'body2'} fontWeight={'bold'}>G</Typography>
-              </Stack>
-              <Stack direction={'row'} spacing={1}>
-                <Typography variant={'body2'}>{user.diamonds}</Typography>
-                <Typography variant={'body2'} fontWeight={'bold'}>D</Typography>
-              </Stack>
-            </Stack>
+            <Typography variant={'body2'} fontWeight={'bold'}>GUERRE DE PROVINCE</Typography>
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
@@ -194,12 +169,12 @@ export const mainListItems = (
   <React.Fragment>
     <ListItem label={'Overview'} to={'/overview'} icon={<HomeIcon />} />
     <ListItem label={'News'} to={'/news'} icon={<ArticleIcon />} />
-    <ListItem label={'World'} icon={<ExploreIcon />} />
-    <ListItem label={'Region'} icon={<DomainIcon />} />
-    <ListItem label={'Market'} icon={<BalanceIcon />} />
-    <ListItem label={'Party'} icon={<GroupIcon />} />
-    <ListItem label={'Job'} icon={<BusinessCenterIcon />} />
-    <ListItem label={'Wars'} icon={<CastleIcon />} />
+    <ListItem label={'World'} to={'/world'} icon={<ExploreIcon />} />
+    <ListItem label={'Region'} to={'/region'} icon={<DomainIcon />} />
+    <ListItem label={'Market'} to={'/market'} icon={<BalanceIcon />} />
+    <ListItem label={'Party'} to={'/party'} icon={<GroupIcon />} />
+    <ListItem label={'Job'} to={'/job'} icon={<BusinessCenterIcon />} />
+    <ListItem label={'Wars'} to={'/wars'} icon={<CastleIcon />} />
   </React.Fragment>
 );
 
@@ -223,3 +198,47 @@ const secondaryListItems = (
     />
   </React.Fragment>
 );
+
+function AppBarBreadcrumbs ({ url = '' }) {
+  const [path, setPath] = useState([]);
+
+  useEffect(() => {
+    let u = url.split('/');
+    u.shift();
+
+    u = u.map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1);
+    });
+
+    setPath(u);
+  }, [url]);
+
+  return (
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      sx={{
+        flexGrow: 1,
+        width: '100%',
+        alignItems: 'center'
+      }}
+      color={'inherit'}
+      separator={<NavigateNextIcon fontSize="small" />}
+    >
+      {
+        path.map((item, index) => {
+          return (
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              fontWeight={index === url.length - 1 ? 'normal' : 'bold'}
+            >
+              {item}
+            </Typography>
+          );
+        })
+      }
+    </Breadcrumbs>
+  );
+}

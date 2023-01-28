@@ -16,12 +16,23 @@ import Button from '@mui/material/Button';
 import SubscribeButton from '../components/NewspaperPage/SubscribeButton';
 import { updateSubscription } from '../redux/newspaper/actions';
 
-function NewspaperPage ({ newspaper, loadNewspaper, updateSubscription }) {
+function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) {
   // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
+  const [buttons, setButtons] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.id === newspaper.owner.id) {
+      setButtons([
+        <Button key="2" onClick={() => (navigate(`#`))}>Edit</Button>,
+        <Button key="3" onClick={() => (navigate(`/newspaper/${newspaper.id}/staff`))}>Staff</Button>,
+        <Button key="4" color={'error'}>Delete</Button>,
+      ]);
+    }
+  }, [user, newspaper, navigate])
 
   useEffect(() => {
     setLoading(true);
@@ -72,15 +83,17 @@ function NewspaperPage ({ newspaper, loadNewspaper, updateSubscription }) {
                   aria-label="vertical contained button group"
                   variant="text"
                 >
-                  <SubscribeButton key={'1'} newspaper={newspaper} updateSubscription={updateSubscription} />
-                  <Button key="2" onClick={() => (navigate(`#`))}>Edit</Button>
-                  <Button key="3" onClick={() => (navigate(`/newspaper/${newspaper.id}/staff`))}>Staff</Button>
-                  <Button key="4" color={'error'}>Delete</Button>
+                  {
+                    [
+                      <SubscribeButton key={'1'} newspaper={newspaper} updateSubscription={updateSubscription} />,
+                      ...buttons
+                    ]
+                  }
                 </ButtonGroup>
               </Stack>
-              <Stack spacing={3} sx={{ width: '100%' }}>
+              <Stack spacing={2} sx={{ width: '100%' }}>
                 <Title>{newspaper.name}</Title>
-                <Typography variant={'body2'} component={'h2'}>
+                <Typography variant={'body2'} paragraph sx={{ overflowWrap: 'anywhere'}}>
                   {newspaper.description}
                 </Typography>
                 <Stack>
@@ -116,9 +129,9 @@ function NewspaperPage ({ newspaper, loadNewspaper, updateSubscription }) {
             </Stack>
           </Stack>
         </Paper>
-        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400, height: 'fit-content' }}>
           <Title>Newspaper articles</Title>
-          <NewspaperArticles />
+          <NewspaperArticles newspaperId={newspaper.id} />
         </Paper>
       </Stack>
     </Container>

@@ -19,14 +19,11 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
   const p = 2;
 
   useEffect(() => {
-    setLoading(true);
-
     if (user === false) {
       return;
     }
 
     if (user.newspaper_id === null) {
-      setLoading(false);
       setNewspaperNotFound(true);
       return;
     }
@@ -41,9 +38,11 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
       }
     }).then((response) => {
       loadNewspaper(response.data);
+
       setNewspaperNotFound(false);
       setLoading(false);
     }).catch((error) => {
+
       setNewspaperNotFound(true);
       setLoading(false);
     });
@@ -58,52 +57,18 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
     );
   }
 
-  if (newspaperNotFound) {
-    return (
-      <Paper sx={{ p: p, width: width }}>
-        <Stack spacing={2}>
-          <Title>You do not have any newspaper</Title>
-          <Button fullWidth>
-            <Link to={'/newspaper/create'}>
-              Create Newspaper
-            </Link>
-          </Button>
-          <ButtonGroup variant="text" aria-label="text button group">
-            <Button fullWidth>
-              <Link to={'/article/create'}>
-                Create Article
-              </Link>
-            </Button>
-            <Button fullWidth>
-              <Link to={'/news/subscriptions'}>
-                My Subscriptions
-              </Link>
-            </Button>
-          </ButtonGroup>
-        </Stack>
-      </Paper>
-    );
-  }
-
   return (
     <Paper sx={{ p: p, width: width }}>
       <Stack spacing={2}>
-        <Stack>
-          <Title>My newspaper</Title>
-          <Newspaper />
-        </Stack>
-        <ButtonGroup variant="text" aria-label="text button group">
-          <Button fullWidth>
-            <Link to={'/article/create'}>
-              Create article
-            </Link>
-          </Button>
-          <Button fullWidth>
-            <Link to={'/news/subscriptions'}>
-              My Subscriptions
-            </Link>
-          </Button>
-        </ButtonGroup>
+        {
+          newspaperNotFound ?
+            <NewspaperNotFound /> :
+            <Stack>
+              <Title>My newspaper</Title>
+              <Newspaper />
+            </Stack>
+        }
+        <CreateAndSubs />
       </Stack>
     </Paper>
   );
@@ -121,3 +86,33 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyNewspaper);
+
+function NewspaperNotFound () {
+  return (
+    <Stack spacing={2}>
+      <Title>You do not have any newspaper</Title>
+      <Button fullWidth>
+        <Link to={'/newspaper/create'}>
+          Create Newspaper
+        </Link>
+      </Button>
+    </Stack>
+  );
+}
+
+function CreateAndSubs () {
+  return (
+    <ButtonGroup variant="text" aria-label="text button group">
+      <Button fullWidth>
+        <Link to={'/article/create'}>
+          Create article
+        </Link>
+      </Button>
+      <Button fullWidth>
+        <Link to={'/news/subscriptions'}>
+          My Subscriptions
+        </Link>
+      </Button>
+    </ButtonGroup>
+  )
+}

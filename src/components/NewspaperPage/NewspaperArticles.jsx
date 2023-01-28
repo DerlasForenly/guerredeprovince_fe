@@ -13,10 +13,11 @@ const NewspaperArticles = ({
                                 loadSubscriptionArticles,
                                 pagesMeta,
                                 setSubscriptionArticlesPage,
+                                newspaperId,
                               }) => {
   return (
     <ArticleListing
-      url={`${process.env.REACT_APP_API}/api/articles/subscriptions`}
+      url={`${process.env.REACT_APP_API}/api/newspapers/${newspaperId}/articles`}
       loadArticles={loadSubscriptionArticles}
       articles={articles}
       pagesMeta={pagesMeta}

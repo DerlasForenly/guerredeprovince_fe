@@ -4,10 +4,24 @@ import Title from '../../components/baseComponents/Title';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
-import { setPrimaryColor } from '../../redux/app/actions';
+import { setPrimaryColor, setSecondaryColor } from '../../redux/app/actions';
 
-function ThemeSettings ({ setPrimaryColor, primaryColor }) {
+function ThemeSettings ({ setPrimaryColor, primaryColor, setSecondaryColor, secondaryColor }) {
   const [primaryColorTimer, setPrimaryColorTimer] = useState(false);
+  const [secondaryColorTimer, setSecondaryColorTimer] = useState(false);
+
+  const onChangeSecondaryColor = (event) => {
+    if (secondaryColorTimer) {
+      return;
+    }
+
+    setSecondaryColorTimer(true);
+
+    setTimeout(() => {
+      setSecondaryColor(event.target.value);
+      setSecondaryColorTimer(false);
+    }, 500);
+  }
 
   const onChangePrimaryColor = (event) => {
     if (primaryColorTimer) {
@@ -22,8 +36,9 @@ function ThemeSettings ({ setPrimaryColor, primaryColor }) {
     }, 500);
   };
 
+
   return (
-    <Paper sx={{ p: 2, width: 300 }}>
+    <Paper sx={{ p: 2, width: 500 }}>
       <Stack spacing={2}>
         <Title>Theme</Title>
         <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
@@ -44,7 +59,8 @@ function ThemeSettings ({ setPrimaryColor, primaryColor }) {
           <input
             style={{ outline: 'none', border: 'none', background: 'none', width: '80px' }}
             type={'color'}
-            defaultValue={primaryColor}
+            defaultValue={secondaryColor}
+            onChange={onChangeSecondaryColor}
           />
         </Stack>
       </Stack>
@@ -54,12 +70,14 @@ function ThemeSettings ({ setPrimaryColor, primaryColor }) {
 
 const mapDispatchToProps = {
   setPrimaryColor,
+  setSecondaryColor,
 };
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
     primaryColor: state.app.primaryColor,
+    secondaryColor: state.app.secondaryColor,
   };
 };
 
