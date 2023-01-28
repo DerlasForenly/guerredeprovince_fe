@@ -1,5 +1,9 @@
 import {
-  LOAD_NEWSPAPER, LOAD_STAFF, UPDATE_STAFF,
+  LOAD_ARTICLES,
+  LOAD_NEWSPAPER,
+  LOAD_STAFF,
+  GET_ARTICLES_PAGE,
+  UPDATE_STAFF,
   UPDATE_SUBSCRIPTION
 } from './types';
 
@@ -24,9 +28,23 @@ export function updateStaff (data) {
   };
 }
 
+export function loadArticles (data) {
+  return {
+    type: LOAD_ARTICLES,
+    payload: data
+  };
+}
+
 export function loadStaff (data) {
   return {
     type: LOAD_STAFF,
+    payload: data,
+  };
+}
+
+export function setArticlesPage (data) {
+  return {
+    type: GET_ARTICLES_PAGE,
     payload: data,
   };
 }

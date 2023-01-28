@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 import { loadNewspaper } from '../redux/newspaper/actions';
 import Paper from '@mui/material/Paper';
 import Title from '../components/baseComponents/Title';
-import { ButtonGroup, LinearProgress, Stack } from '@mui/material';
+import { ButtonGroup, CircularProgress, LinearProgress, Stack } from '@mui/material';
 import NewspaperArticles from '../components/NewspaperPage/NewspaperArticles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -60,7 +60,7 @@ function NewspaperPage ({ user, newspaper, loadNewspaper, updateSubscription }) 
         </Paper>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 400 }}>
           <Title>Newspaper articles</Title>
-          <NewspaperArticles />
+          <CircularProgress />
         </Paper>
       </Stack>
     </Container>;

@@ -1,41 +1,38 @@
 import { connect } from 'react-redux';
 
-import {
-  loadSubscriptionArticles,
-  setSubscriptionArticlesPage
-} from '../../redux/news/actions';
-
 import ArticleListing from '../NewsPage/ArticleListing';
 import * as React from 'react';
 
+import { loadArticles, setArticlesPage } from '../../redux/newspaper/actions';
+
 const NewspaperArticles = ({
-                                articles,
-                                loadSubscriptionArticles,
-                                pagesMeta,
-                                setSubscriptionArticlesPage,
-                                newspaperId,
-                              }) => {
+                             articles,
+                             loadArticles,
+                             pagesMeta,
+                             setArticlesPage,
+                             newspaperId,
+                           }) => {
   return (
     <ArticleListing
-      url={`${process.env.REACT_APP_API}/api/newspapers/${newspaperId}/articles`}
-      loadArticles={loadSubscriptionArticles}
+      url={newspaperId ? `${process.env.REACT_APP_API}/api/newspapers/${newspaperId}/articles` : ''}
+      loadArticles={loadArticles}
       articles={articles}
       pagesMeta={pagesMeta}
-      setPage={setSubscriptionArticlesPage}
+      setPage={setArticlesPage}
     />
   );
 };
 
 const mapStateToProps = state => {
   return {
-    articles: state.news.subscriptionArticles.articles,
-    pagesMeta: state.news.subscriptionArticles.meta,
+    articles: state.newspaper.articles.articles,
+    pagesMeta: state.newspaper.articles.meta,
   };
 };
 
 const mapDispatchToProps = {
-  loadSubscriptionArticles,
-  setSubscriptionArticlesPage,
+  loadArticles,
+  setArticlesPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewspaperArticles);

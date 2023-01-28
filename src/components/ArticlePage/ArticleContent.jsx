@@ -6,6 +6,7 @@ import Title from '../../components/baseComponents/Title';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import { Link } from 'react-router-dom';
 
 function ArticleContent ({ article, loadArticle, updateArticleRating }) {
   return (
@@ -29,9 +30,12 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
                 sx={{ width: 56, height: 56 }}
               />
               <Stack>
-                <Typography variant={'body1'} component={'h2'}>
-                  {article.newspaper.name}
-                </Typography>
+                <Link to={`/newspaper/${article.newspaper.id}`}>
+                  <Typography variant={'body1'} component={'h2'} color={'primary'}>
+                    {article.newspaper.name}
+                  </Typography>
+                </Link>
+
                 <Typography variant={'body2'} component={'h2'}>
                   {article.author.nickname}
                 </Typography>

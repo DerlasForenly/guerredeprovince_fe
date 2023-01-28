@@ -86,7 +86,6 @@ function ArticleListing ({
             return <Article article={item} key={index} />;
           })
         }
-        <div></div>
       </Stack>
       <Pagination
         page={pagesMeta.currentPage}
