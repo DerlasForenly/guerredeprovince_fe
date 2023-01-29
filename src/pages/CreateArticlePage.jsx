@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Container from '@mui/material/Container';
@@ -11,25 +11,25 @@ import Title from '../components/baseComponents/Title';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router';
 import Typography from '@mui/material/Typography';
+import { setLoading } from '../redux/app/actions';
+import { useSnackbar } from 'notistack';
 
-const CreateArticlePage = ({ user }) => {
-  const [state, setState] = useState({
-    title: '',
-    content: '',
-    newspaperId: 0,
-  });
+const CreateArticlePage = ({
+                             user,
+                             article,
+                             pageTitle = 'Create article:',
+                             buttonText = 'Create',
+                             setLoading,
+                             loading,
+                           }) => {
+  const { enqueueSnackbar } = useSnackbar();
+  const titleInput = useRef();
+  const contentInput = useRef();
+  const newspaperIdInput = useRef();
 
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const [onBehalf, setOnBehalf] = useState([])
-
-  const changeInputHandler = e => {
-    setState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const [onBehalf, setOnBehalf] = useState([]);
 
   const navigate = useNavigate();
 
@@ -46,14 +46,12 @@ const CreateArticlePage = ({ user }) => {
     setError('');
 
     const data = {
-      title: state.title,
-      content: state.content,
+      title: titleInput.current.value,
+      content: contentInput.current.value,
     };
 
-    console.log(state.newspaperId);
-
-    if (parseInt(state.newspaperId) !== 0) {
-      data.newspaper_id = parseInt(state.newspaperId);
+    if (parseInt(newspaperIdInput.current.value) !== 0) {
+      data.newspaper_id = parseInt(newspaperIdInput.current.value);
     }
 
     axios({
@@ -65,11 +63,7 @@ const CreateArticlePage = ({ user }) => {
       data: data,
     }).then((response) => {
       setLoading(false);
-      setState({
-        title: '',
-        content: '',
-        newspaperId: 0,
-      });
+      enqueueSnackbar('Article has been created!');
       event.target.reset();
       navigate(`/article/${response.data.article_id}`);
     }).catch((error) => {
@@ -83,28 +77,30 @@ const CreateArticlePage = ({ user }) => {
       <Paper sx={{ p: 2, width: 900 }}>
         <form onSubmit={submitHandler}>
           <Stack spacing={2}>
-            <Title>Create article:</Title>
+            <Title>{pageTitle}</Title>
             <TextField
+              inputRef={titleInput}
               required
               label={'Title'}
               name={'title'}
               placeholder={'Title'}
               max={80}
               sx={{ width: '100%' }}
-              onChange={changeInputHandler}
               disabled={loading}
+              defaultValue={article?.title}
             />
             <TextField
+              inputRef={contentInput}
               required
               variant="filled"
               label="Content"
               multiline
               minRows={15}
               placeholder={'Content'}
-              onChange={changeInputHandler}
               max={4000}
               name={'content'}
               disabled={loading}
+              defaultValue={article?.content}
             />
             <Stack
               direction={'row'}
@@ -114,6 +110,7 @@ const CreateArticlePage = ({ user }) => {
             >
               <Stack spacing={2} sx={{ width: '50%' }}>
                 <TextField
+                  inputRef={newspaperIdInput}
                   variant={'standard'}
                   sx={{ width: '100%' }}
                   required
@@ -121,7 +118,6 @@ const CreateArticlePage = ({ user }) => {
                   select
                   label="On behalf of the"
                   defaultValue={0}
-                  onChange={changeInputHandler}
                   disabled={loading || onBehalf.length === 0}
                 >
                   {[<MenuItem key={1} value={0}>{user?.nickname}</MenuItem>, ...onBehalf]}
@@ -153,7 +149,7 @@ const CreateArticlePage = ({ user }) => {
                   size="large"
                   disabled={loading}
                 >
-                  Create
+                  {buttonText}
                 </Button>
               </Stack>
             </Stack>
@@ -164,11 +160,14 @@ const CreateArticlePage = ({ user }) => {
   );
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setLoading,
+};
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    loading: state.app.loading,
   };
 };
 

@@ -70,6 +70,11 @@ function App () {
           exact
           element={<GuardedPage element={<CreateArticlePage />} />}
         />
+        {/*<Route*/}
+        {/*  path="/article/edit"*/}
+        {/*  exact*/}
+        {/*  element={<GuardedPage element={<EditArticlePage />} />}*/}
+        {/*/>*/}
         <Route
           path="/world"
           exact

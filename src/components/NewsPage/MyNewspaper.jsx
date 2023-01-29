@@ -20,15 +20,15 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
 
   useEffect(() => {
     if (user === false) {
+      setLoading(false);
       return;
     }
 
     if (user.newspaper_id === null) {
       setNewspaperNotFound(true);
+      setLoading(false);
       return;
     }
-
-    setLoading(true);
 
     axios({
       method: 'get',
@@ -39,7 +39,6 @@ function MyNewspaper ({ user = false, newspaper, loadNewspaper }) {
     }).then((response) => {
       loadNewspaper(response.data);
 
-      setNewspaperNotFound(false);
       setLoading(false);
     }).catch((error) => {
 

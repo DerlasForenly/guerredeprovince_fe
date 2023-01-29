@@ -1,26 +1,24 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadComments } from '../../../redux/comments/actions';
 import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { useSnackbar } from 'notistack';
 
 function CreateComment ({ article, loadComments }) {
-  const [state, setState] = useState({
-    content: '',
-  })
-
-  const changeInputHandler = e => {
-    setState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
+  const commentInput = useRef();
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = event => {
     event.preventDefault();
+
+    setLoading(true);
+
+    console.log(commentInput.current);
 
     axios({
       method: 'POST',
@@ -28,11 +26,10 @@ function CreateComment ({ article, loadComments }) {
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       },
-      data: state,
+      data: {
+        content: commentInput.current.value,
+      },
     }).then((response) => {
-      setState({
-        content: '',
-      });
       event.target.reset();
 
       axios({
@@ -43,27 +40,36 @@ function CreateComment ({ article, loadComments }) {
         }
       }).then((response) => {
         loadComments(response.data);
+        setLoading(false);
+        enqueueSnackbar('Comment has been created!');
       }).catch((error) => {
         console.error(error);
+        setLoading(false);
       });
-
     }).catch((error) => {
       console.error(error);
+      setLoading(false);
     });
-  }
+  };
 
   return (
     <form className="create-comment-form" onSubmit={onSubmit}>
       <Stack direction={'row'} spacing={1} alignItems={'flex-end'}>
         <TextField
+          inputRef={commentInput}
           required
           multiline
-          minRows={3}
-          onChange={changeInputHandler}
+          disabled={loading}
+          minRows={1}
           name={'content'}
           sx={{ width: '100%' }}
         />
-        <Button type="submit" >Send</Button>
+        <Button
+          type="submit"
+          disabled={loading}
+        >
+          Send
+        </Button>
       </Stack>
     </form>
   );

@@ -1,4 +1,12 @@
-import { HIDE_DRAWER, HIDE_LOADER, SET_PRIMARY_COLOR, SET_SECONDARY_COLOR, SHOW_DRAWER, SHOW_LOADER } from './types';
+import {
+  HIDE_DRAWER,
+  HIDE_LOADER,
+  SET_LOADER,
+  SET_PRIMARY_COLOR,
+  SET_SECONDARY_COLOR,
+  SHOW_DRAWER,
+  SHOW_LOADER
+} from './types';
 
 const initialState = {
   loading: false,
@@ -22,6 +30,11 @@ export const appReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      };
+    case SET_LOADER:
+      return {
+        ...state,
+        loading: action.payload
       };
     case SHOW_DRAWER:
       return {

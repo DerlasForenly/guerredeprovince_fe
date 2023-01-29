@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import convert from 'image-file-resize';
 import { getImageSize } from 'react-image-size';
 import TextField from '@mui/material/TextField';
@@ -12,29 +12,23 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
+import { useSnackbar, withSnackbar } from 'notistack';
 
 import picturePlaceholder from '../assets/picture-placeholder.jpg';
 import Title from '../components/baseComponents/Title';
+import { setLoading } from '../redux/app/actions';
 
-const CreateNewspaperPage = () => {
-  const [state, setState] = useState({
-    name: '',
-    description: '',
-  });
+
+const CreateNewspaperPage = ({ loading, setLoading }) => {
+  const { enqueueSnackbar } = useSnackbar();
+  const nameInput = useRef();
+  const descriptionInput = useRef();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const [croppedFile, setCroppedFile] = useState();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-
-  const changeInputHandler = e => {
-    setState(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
 
   const onChangeFileInput = e => {
     if (!e.target.files || e.target.files.length === 0) {
@@ -78,8 +72,8 @@ const CreateNewspaperPage = () => {
     setError('');
 
     const formData = new FormData();
-    formData.append('name', state.name);
-    formData.append('description', state.description);
+    formData.append('name', nameInput.current.value);
+    formData.append('description', descriptionInput.current.value);
     formData.append('avatar', croppedFile);
 
     axios({
@@ -91,11 +85,8 @@ const CreateNewspaperPage = () => {
       },
       data: formData,
     }).then((response) => {
+      enqueueSnackbar('Newspaper has been created!')
       setLoading(false);
-      setState({
-        name: '',
-        description: '',
-      });
       setCroppedFile(undefined);
       setPreview(undefined);
       setSelectedFile(undefined);
@@ -123,13 +114,13 @@ const CreateNewspaperPage = () => {
               />
               <Stack spacing={2} sx={{ width: '100%' }}>
                 <TextField
+                  inputRef={nameInput}
                   required
                   label={'Name'}
                   name={'name'}
                   placeholder={'Name'}
                   max={80}
                   sx={{ width: '100%' }}
-                  onChange={changeInputHandler}
                 />
                 <Button
                   variant="contained"
@@ -153,11 +144,11 @@ const CreateNewspaperPage = () => {
             <Stack spacing={2}>
               <TextField
                 required
+                inputRef={descriptionInput}
                 label="Description"
                 multiline
                 minRows={6}
                 placeholder={'Description'}
-                onChange={changeInputHandler}
                 max={300}
                 name={'description'}
               />
@@ -188,4 +179,15 @@ const CreateNewspaperPage = () => {
   );
 };
 
-export default connect(null, null)(CreateNewspaperPage);
+const mapDispatchToProps = {
+  setLoading,
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    loading: state.app.loading,
+  };
+};
+
+export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(CreateNewspaperPage));

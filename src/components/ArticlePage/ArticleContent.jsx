@@ -1,18 +1,23 @@
 import { connect } from 'react-redux';
-import { loadArticle, updateArticleRating } from '../../redux/article/actions';
+import { updateArticleRating } from '../../redux/article/actions';
 import Rating from '../../components/baseComponents/Rating';
 import Paper from '@mui/material/Paper';
-import Title from '../../components/baseComponents/Title';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import { Link } from 'react-router-dom';
+import ArticleMenu from './ArticleMenu';
 
-function ArticleContent ({ article, loadArticle, updateArticleRating }) {
+function ArticleContent ({ article, updateArticleRating }) {
   return (
     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 800 }}>
       <Stack spacing={2} sx={{ width: '100%' }}>
-        <Title>{article.title}</Title>
+        <Stack direction={'row'} justifyContent={'space-between'} alignItems={'flex-start'}>
+          <Typography variant={'h4'} component={'h2'} color={'primary'}>
+            {article.title}
+          </Typography>
+          <ArticleMenu />
+        </Stack>
         <Typography variant={'body2'} component={'h2'}>
           {article?.content}
         </Typography>
@@ -59,7 +64,6 @@ function ArticleContent ({ article, loadArticle, updateArticleRating }) {
 }
 
 const mapDispatchToProps = {
-  loadArticle,
   updateArticleRating,
 };
 

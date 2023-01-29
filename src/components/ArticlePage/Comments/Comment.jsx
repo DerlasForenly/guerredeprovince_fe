@@ -1,6 +1,7 @@
 import Rating from '../../baseComponents/Rating';
 import { connect } from 'react-redux';
-import { updateCommentRating } from '../../../redux/comments/actions';
+import { updateCommentRating, loadComments } from '../../../redux/comments/actions';
+import { setLoading } from '../../../redux/app/actions';
 import { IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -12,10 +13,13 @@ import Cookies from 'js-cookie';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 
-function Comment ({ comment, updateCommentRating }) {
+function Comment ({ comment, updateCommentRating, setLoading, loadComments }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const { id } = useParams();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +32,8 @@ function Comment ({ comment, updateCommentRating }) {
   const handleDelete = () => {
     setAnchorEl(null);
 
+    setLoading(true);
+
     axios({
       method: 'delete',
       url: `${process.env.REACT_APP_API}/api/comments/${comment.id}`,
@@ -35,9 +41,23 @@ function Comment ({ comment, updateCommentRating }) {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-      console.log(response.data);
+
+      axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API}/api/articles/${id}/comments`,
+        headers: {
+          Authorization: `Bearer` + Cookies.get('access_token')
+        }
+      }).then((response) => {
+        loadComments(response.data);
+        setLoading(false);
+      }).catch((error) => {
+        setLoading(false);
+      });
+
     }).catch((error) => {
       console.error(error);
+      setLoading(false);
     });
   };
 
@@ -94,9 +114,9 @@ function Comment ({ comment, updateCommentRating }) {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <MenuItem onClick={handleClose}>Edit</MenuItem>
+          { comment.permissions.edit ? <MenuItem onClick={handleClose}>Edit</MenuItem> : null }
           <MenuItem onClick={handleClose}>Complain</MenuItem>
-          <MenuItem onClick={handleDelete}>Delete</MenuItem>
+          { comment.permissions.delete ? <MenuItem onClick={handleDelete}>Delete</MenuItem> : null }
         </Menu>
       </Stack>
       <Stack
@@ -118,6 +138,8 @@ function Comment ({ comment, updateCommentRating }) {
 
 const mapDispatchToProps = {
   updateCommentRating,
+  setLoading,
+  loadComments,
 };
 
 const mapStateToProps = state => {
