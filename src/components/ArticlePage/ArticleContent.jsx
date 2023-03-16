@@ -13,9 +13,14 @@ function ArticleContent ({ article, updateArticleRating }) {
     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 800 }}>
       <Stack spacing={2} sx={{ width: '100%' }}>
         <Stack direction={'row'} justifyContent={'space-between'} alignItems={'flex-start'}>
-          <Typography variant={'h4'} component={'h2'} color={'primary'}>
-            {article.title}
+          <Stack spacing={1}>
+            <Typography variant={'h4'} component={'h2'} color={'primary'}>
+              {article.title}
+            </Typography>
+            <Typography variant={'body1'} component={'h2'}>
+            Category: {article.category}
           </Typography>
+          </Stack>
           <ArticleMenu />
         </Stack>
         <Typography variant={'body2'} component={'h2'}>
@@ -41,9 +46,11 @@ function ArticleContent ({ article, updateArticleRating }) {
                   </Typography>
                 </Link>
 
-                <Typography variant={'body2'} component={'h2'}>
-                  {article.author.nickname}
-                </Typography>
+                <Link to={`/user/${article.author.id}`}>
+                  <Typography variant={'body2'} component={'h2'}>
+                    {article.author.nickname}
+                  </Typography>
+                </Link>
               </Stack>
             </Stack>
             <Rating

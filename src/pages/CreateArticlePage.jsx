@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router';
 import Typography from '@mui/material/Typography';
 import { setLoading } from '../redux/app/actions';
 import { useSnackbar } from 'notistack';
+import { loadCategories } from '../redux/article/actions';
 
 const CreateArticlePage = ({
                              user,
@@ -21,11 +22,14 @@ const CreateArticlePage = ({
                              buttonText = 'Create',
                              setLoading,
                              loading,
+                             loadCategories,
+                             categories
                            }) => {
   const { enqueueSnackbar } = useSnackbar();
   const titleInput = useRef();
   const contentInput = useRef();
   const newspaperIdInput = useRef();
+  const categoryIdInput = useRef();
 
   const [error, setError] = useState('');
 
@@ -40,6 +44,21 @@ const CreateArticlePage = ({
 
   }, [user.newspaper_id]);
 
+  useEffect(() => {
+    setLoading(true);
+
+    axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_API}/api/categories`,
+    }).then((response) => {
+      setLoading(false);
+      loadCategories(response.data);
+    }).catch((error) => {
+      console.log(error.response.data.message);
+      setLoading(false);
+    });
+  }, [loadCategories, setLoading])
+
   const submitHandler = event => {
     event.preventDefault();
     setLoading(true);
@@ -48,6 +67,7 @@ const CreateArticlePage = ({
     const data = {
       title: titleInput.current.value,
       content: contentInput.current.value,
+      category_id: categoryIdInput.current.value,
     };
 
     if (parseInt(newspaperIdInput.current.value) !== 0) {
@@ -110,6 +130,23 @@ const CreateArticlePage = ({
             >
               <Stack spacing={2} sx={{ width: '50%' }}>
                 <TextField
+                  variant={'standard'}
+                  sx={{ width: '100%' }}
+                  name={'categoryId'}
+                  inputRef={categoryIdInput}
+                  required
+                  select
+                  label="Category"
+                  defaultValue={13}
+                  disabled={loading}
+                >
+                  {
+                    categories.map((item, index) => {
+                      return <MenuItem key={index} value={item.id}>{ item.name.charAt(0).toUpperCase() + item.name.slice(1)}</MenuItem>
+                    })
+                  }
+                </TextField>
+                <TextField
                   inputRef={newspaperIdInput}
                   variant={'standard'}
                   sx={{ width: '100%' }}
@@ -124,7 +161,6 @@ const CreateArticlePage = ({
                 </TextField>
                 <TextField
                   variant={'standard'}
-
                   sx={{ width: '100%' }}
                   required
                   select
@@ -162,12 +198,14 @@ const CreateArticlePage = ({
 
 const mapDispatchToProps = {
   setLoading,
+  loadCategories,
 };
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
     loading: state.app.loading,
+    categories: state.article.categories,
   };
 };
 

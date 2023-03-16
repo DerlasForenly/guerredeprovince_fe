@@ -1,4 +1,4 @@
-import { LOAD_ARTICLE, UPDATE_ARTICLE_RATING } from './types';
+import { LOAD_ARTICLE, LOAD_CATEGORIES, UPDATE_ARTICLE_RATING } from './types';
 
 const initialState = {
   article: {
@@ -13,6 +13,7 @@ const initialState = {
     rating: null,
   },
   loading: true,
+  categories: [],
 }
 
 export const articleReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ export const articleReducer = (state = initialState, action) => {
           voted: action.payload.voted,
         },
       };
+    case LOAD_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
+      }
     default:
       return state;
   }
