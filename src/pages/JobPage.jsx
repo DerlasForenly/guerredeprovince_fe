@@ -7,7 +7,7 @@ import BusinessesTable from '../components/JobPage/BusinessesTable';
 const JobPage = ({ user }) => {
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Stack spacing={2} direction={'row'}>
+      <Stack spacing={2}>
         <CurrentJobCard />
         <BusinessesTable />
       </Stack>

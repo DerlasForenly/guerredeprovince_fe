@@ -6,7 +6,9 @@ import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function TimeForm () {
+import { setUserAction } from '../../redux/auth/actions';
+
+function TimeForm ({ setUserAction }) {
   const [loading, setLoading] = useState(false);
   const timeInput = useRef();
 
@@ -25,6 +27,7 @@ function TimeForm () {
       }
     }).then((response) => {
       console.log(response.data);
+      setUserAction(response.data.action);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -33,7 +36,7 @@ function TimeForm () {
 
   return (
     <form onSubmit={onSubmit} style={{ width: '100%' }}>
-      <Stack direction={'row'} alignItems={'flex-end'} width={'100%'} spacing={2} justifyContent={'space-between'}>
+      <Stack direction={'row'} alignItems={'flex-end'} width={'fit-content'} spacing={2} justifyContent={'space-between'}>
         <TextField
           inputRef={timeInput}
           type={'number'}
@@ -67,4 +70,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(TimeForm);
+const mapDispatchToProps = {
+  setUserAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeForm);
