@@ -8,3 +8,6 @@ export const HIDE_ERROR_MESSAGE = 'APP/HIDE_ERROR_MESSAGE';
 
 export const CLEAR_ACTION = 'USERS/CLEAR_ACTION';
 export const SET_ACTION = 'USERS/SET_ACTION';
+
+export const CLEAR_JOB = 'USER/CLEAR_JOB';
+export const SET_JOB = 'USERS/SET_JOB';

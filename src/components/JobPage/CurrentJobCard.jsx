@@ -12,10 +12,11 @@ import TimeForm from './TimeForm';
 import CompensationFrom from './CompensationFrom';
 import NoJobCard from './NoJobCard';
 import Button from '@mui/material/Button';
+import { clearUserJob } from '../../redux/auth/actions';
 
-function CurrentJobCard ({ user }) {
+function CurrentJobCard ({ user, clearUserJob }) {
   const [business, setBusiness] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const timeToCompensation = (seconds) => {
     if (seconds <= 0) {
@@ -28,8 +29,25 @@ function CurrentJobCard ({ user }) {
     return minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds + "min";
   }
 
+  const onLeave = e => {
+    setLoading(true);
+
+    axios({
+      method: 'post',
+      url: `${process.env.REACT_APP_API}/api/businesses/drop-job`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      clearUserJob();
+    }).catch((error) => {
+
+    });
+  };
+
   useEffect(() => {
     if (user === false || user.job_business_id === null) {
+      setLoading(false);
       return;
     }
 
@@ -47,11 +65,11 @@ function CurrentJobCard ({ user }) {
     }).catch((error) => {
       setLoading(false);
     });
-  }, [user]);
+  }, [user.job_business_id, user]);
 
   if (loading) {
     return (
-      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 'fit-content', height: 'fit-content' }}>
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%', height: 'fit-content' }}>
         <LinearProgress />
       </Paper>
     );
@@ -97,7 +115,7 @@ function CurrentJobCard ({ user }) {
 
             <Stack width={'100%'} justifyContent={'space-between'} direction={'row'}>
               {user.action ? <CompensationFrom /> : <TimeForm />}
-              <Button variant={'text'}>
+              <Button variant={'text'} onClick={onLeave} disabled={loading}>
                 Leave
               </Button>
             </Stack>
@@ -114,4 +132,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CurrentJobCard);
+const mapDispatchToProps = {
+  clearUserJob,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentJobCard);

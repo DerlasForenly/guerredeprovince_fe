@@ -7,7 +7,7 @@ import {
   SIGN_OUT,
   SIGN_UP,
   CLEAR_ACTION,
-  SET_ACTION
+  SET_ACTION, CLEAR_JOB
 } from './types';
 
 const initialState = {
@@ -72,6 +72,14 @@ export const authReducer = (state = initialState, action) => {
           ...state.user,
           action: action.payload,
         },
+      }
+    case CLEAR_JOB:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          job_business_id: null,
+        }
       }
     default:
       return state;
