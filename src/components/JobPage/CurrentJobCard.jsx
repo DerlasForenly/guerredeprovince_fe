@@ -18,17 +18,6 @@ function CurrentJobCard ({ user, clearUserJob }) {
   const [business, setBusiness] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const timeToCompensation = (seconds) => {
-    if (seconds <= 0) {
-      return 'Ready';
-    }
-
-    let minutes = Math.floor(seconds / 60);
-    let remainingSeconds = seconds % 60;
-
-    return minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds + "min";
-  }
-
   const onLeave = e => {
     setLoading(true);
 
@@ -46,7 +35,12 @@ function CurrentJobCard ({ user, clearUserJob }) {
   };
 
   useEffect(() => {
-    if (user === false || user.job_business_id === null) {
+    if (user === false) {
+      setLoading(true);
+      return;
+    }
+
+    if (user.job_business_id === null) {
       setLoading(false);
       return;
     }
@@ -102,13 +96,13 @@ function CurrentJobCard ({ user, clearUserJob }) {
                 <Typography component={'h2'} variant={'body2'}>{business.exp}</Typography>
               </Stack>
               <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
-                <Typography component={'h2'} variant={'body2'}>Salary ({business.salary}%):</Typography>
-                <Typography component={'h2'} variant={'body2'}>1 345 i/m</Typography>
+                <Typography component={'h2'} variant={'body2'}>Salary ({business.salary}):</Typography>
+                <Typography component={'h2'} variant={'body2'}>{business.salary} i/m</Typography>
               </Stack>
 
               {user.action ? <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
                 <Typography component={'h2'} variant={'body2'}>Time to compensation:</Typography>
-                <Typography component={'h2'} variant={'body2'}>{ timeToCompensation(user.action.remaining_time) }</Typography>
+                <Timer time={user.action.remaining_time}/>
               </Stack> : <div />}
 
             </Stack>
@@ -137,3 +131,32 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentJobCard);
+
+function Timer({ time = 0 }) {
+  const [seconds, setSeconds] = useState(time);
+
+  const timeToCompensation = (seconds) => {
+    if (seconds <= 0) {
+      return 'Ready';
+    }
+
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+
+    return minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds + " min";
+  }
+
+  useEffect(() => {
+    if (seconds > 0) {
+      const interval = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [seconds]);
+
+  return (
+    <Typography component={'h2'} variant={'body2'}>{ timeToCompensation(seconds) }</Typography>
+  )
+}

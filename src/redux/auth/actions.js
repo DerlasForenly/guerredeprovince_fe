@@ -4,7 +4,7 @@ import {
   CLEAR_USER,
   CLEAR_ACTION,
   SET_ACTION,
-  CLEAR_JOB,
+  CLEAR_JOB, SET_JOB,
 } from './types';
 
 export function signIn (data) {
@@ -43,5 +43,12 @@ export function setUserAction (data) {
 export function clearUserJob () {
   return {
     type: CLEAR_JOB,
+  }
+}
+
+export function setUserJob (data) {
+  return {
+    payload: data,
+    type: SET_JOB
   }
 }

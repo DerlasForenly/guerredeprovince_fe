@@ -1,20 +1,49 @@
 import { connect } from 'react-redux';
-import { Tab } from '@mui/material';
+import { LinearProgress, Tab } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TabList from '@mui/lab/TabList';
 import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
 import TabPanel from '@mui/lab/TabPanel';
 import WorldTable from './WorldTable';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 
 function BusinessesTable ({ user }) {
   const [value, setValue] = useState('1');
+  const [loading, setLoading] = useState(true);
+  const [businesses, setBusinesses] = useState();
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API}/api/businesses`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      setBusinesses(response.data);
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+    });
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  if (loading) {
+    return (
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <LinearProgress />
+      </Paper>
+    );
+  }
 
   return (
     <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -27,7 +56,7 @@ function BusinessesTable ({ user }) {
           </TabList>
         </Box>
         <TabPanel value="1" sx={{ p: 1 }}>
-          <WorldTable />
+          <WorldTable businesses={businesses}/>
         </TabPanel>
         <TabPanel value="2" sx={{ p: 1 }}>
           <WorldTable />
