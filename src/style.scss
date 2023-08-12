@@ -3,4 +3,15 @@ a {
   color: inherit;
 }
 
+.map-region {
+  transition: fill 0.2s ease; /* Smooth transition for fill color */
+  stroke: black;
+}
 
+.map-region:hover {
+  cursor: pointer; /* Show a pointer cursor on hover */
+}
+
+.selected-map-region {
+  fill: lightblue;
+}

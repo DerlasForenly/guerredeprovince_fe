@@ -2,64 +2,65 @@ import { connect } from 'react-redux';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import WavesIcon from '@mui/icons-material/Waves';
+import Title from '../components/baseComponents/Title';
+import picturePlaceholder from '../assets/picture-placeholder.jpg';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import SvgMap from '../components/WorldMapPage/SvgMap';
 
-const WorldMapPage = ({ user }) => {
+import MoveForm from '../components/WorldMapPage/MoveForm';
+
+const WorldMapPage = ({ user, selectedRegion }) => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Paper sx={{ p: 2, width: '100%', height: '700px', display: 'flex' }}>
-        <Stack sx={{ p: 2, width: '100%', height: '100%' }} justifyContent={'center'} alignItems={'center'}>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
+      <Stack spacing={2}>
+        <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column' }}>
+          <Stack spacing={3}>
+            <Stack spacing={4} mb={5} verticalAlign={'center'}>
+              <Stack direction={'row'} justifyContent={'space-between'} >
+                <Stack direction={'column'} width={300} spacing={1}>
+                  <Title>Current location</Title>
+                  <Stack direction={'row'} spacing={1}>
+                    <Avatar
+                      variant={'square'}
+                      src={picturePlaceholder}
+                      alt={'country-avatar'}
+                      sx={{ height: 56, width: 56 }}
+                    />
+                    <Stack>
+                      <Typography component={'h2'} variant={'body1'}>{user?.current_region?.country?.name}</Typography>
+                      <Typography component={'h2'} variant={'body1'}>{user?.current_region?.name}</Typography>
+                    </Stack>
+                  </Stack>
+                </Stack>
+                <MoveForm />
+                {
+                  selectedRegion ? <Stack direction={'column'} spacing={1} textAlign={'right'} width={300}>
+                    <Title>Selected location</Title>
+                    <Stack direction={'row'} spacing={1} justifyContent={'right'}>
+                      <Stack>
+                        <Typography component={'h2'} variant={'body1'}>{selectedRegion.country.name}</Typography>
+                        <Typography component={'h2'} variant={'body1'}>{selectedRegion.name}</Typography>
+                      </Stack>
+                      <Avatar
+                        variant={'square'}
+                        src={picturePlaceholder}
+                        alt={'country-avatar'}
+                        sx={{ height: 56, width: 56 }}
+                      />
+                    </Stack>
+                  </Stack> : <></>
+                }
+              </Stack>
+            </Stack>
           </Stack>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
+        </Paper>
+        <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column' }}>
+          <Stack spacing={3}>
+            <SvgMap></SvgMap>
           </Stack>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-          </Stack>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-          </Stack>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <LocationCityIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-          </Stack>
-          <Stack direction={'row'}>
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-            <WavesIcon fontSize="large" />
-          </Stack>
-        </Stack>
-      </Paper>
+        </Paper>
+      </Stack>
     </Container>
   );
 };
@@ -67,7 +68,11 @@ const WorldMapPage = ({ user }) => {
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
+    selectedRegion: state.worldMap.selectedRegion
   };
 };
 
-export default connect(mapStateToProps, null)(WorldMapPage);
+const mapDispatchToProps = {
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorldMapPage);
