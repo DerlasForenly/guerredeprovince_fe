@@ -6,9 +6,9 @@ import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-import { setUserAction } from '../../redux/auth/actions';
+import { setUserWorkAction } from '../../redux/auth/actions';
 
-function TimeForm ({ setUserAction }) {
+function TimeForm ({ setUserWorkAction }) {
   const [loading, setLoading] = useState(false);
   const timeInput = useRef();
 
@@ -26,8 +26,7 @@ function TimeForm ({ setUserAction }) {
         time: timeInput.current.value,
       }
     }).then((response) => {
-      console.log(response.data);
-      setUserAction(response.data.action);
+      setUserWorkAction(response.data.action);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -71,7 +70,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setUserAction
+  setUserWorkAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeForm);

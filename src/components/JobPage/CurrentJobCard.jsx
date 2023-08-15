@@ -13,6 +13,7 @@ import CompensationFrom from './CompensationFrom';
 import NoJobCard from './NoJobCard';
 import Button from '@mui/material/Button';
 import { clearUserJob } from '../../redux/auth/actions';
+import Timer from './Timer';
 
 function CurrentJobCard ({ user, clearUserJob }) {
   const [business, setBusiness] = useState(false);
@@ -63,60 +64,60 @@ function CurrentJobCard ({ user, clearUserJob }) {
 
   if (loading) {
     return (
-      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%', height: 'fit-content' }}>
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '40%', height: 'fit-content' }}>
         <LinearProgress />
       </Paper>
     );
   }
 
   if (user.job_business_id === null) {
-    return <NoJobCard user={user}/>;
+    return <NoJobCard user={user} />;
   }
 
   return (
-    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%', height: 'fit-content' }}>
-        <Title>Current job</Title>
-        <Stack spacing={2} direction={'row'}>
-          <Avatar
-            variant={'square'}
-            src={picturePlaceholder}
-            alt={'business-avatar'}
-            sx={{
-              height: 200,
-              width: 200,
-            }}
-          />
-          <Stack sx={{ width: '100%' }} justifyContent={'space-between'}>
-            <Stack spacing={1}>
-              <Typography component={'h2'} variant={'h6'}>
-                {business.name}
-              </Typography>
-              <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
-                <Typography component={'h2'} variant={'body2'}>Exp:</Typography>
-                <Typography component={'h2'} variant={'body2'}>{business.exp}</Typography>
-              </Stack>
-              <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
-                <Typography component={'h2'} variant={'body2'}>Salary ({business.salary}):</Typography>
-                <Typography component={'h2'} variant={'body2'}>{business.salary} i/m</Typography>
-              </Stack>
-
-              {user.action ? <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
-                <Typography component={'h2'} variant={'body2'}>Time to compensation:</Typography>
-                <Timer time={user.action.remaining_time}/>
-              </Stack> : <div />}
-
+    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '40%', height: 'fit-content' }}>
+      <Title>Current job</Title>
+      <Stack spacing={2} direction={'row'}>
+        <Avatar
+          variant={'square'}
+          src={picturePlaceholder}
+          alt={'business-avatar'}
+          sx={{
+            height: 86,
+            width: 86,
+          }}
+        />
+        <Stack sx={{ width: '100%' }} justifyContent={'space-between'}>
+          <Stack spacing={0}>
+            <Typography component={'h2'} variant={'h6'}>
+              {business.name}
+            </Typography>
+            <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+              <Typography component={'h2'} variant={'body2'}>Exp:</Typography>
+              <Typography component={'h2'} variant={'body2'}>{business.exp}</Typography>
+            </Stack>
+            <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+              <Typography component={'h2'} variant={'body2'}>Salary ({business.salary}):</Typography>
+              <Typography component={'h2'} variant={'body2'}>{business.salary} i/m</Typography>
             </Stack>
 
-            <Stack width={'100%'} justifyContent={'space-between'} direction={'row'}>
-              {user.action ? <CompensationFrom /> : <TimeForm />}
-              <Button variant={'text'} onClick={onLeave} disabled={loading}>
-                Leave
-              </Button>
-            </Stack>
+            {user.work_action ? <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+              <Typography component={'h2'} variant={'body2'}>Time to compensation:</Typography>
+              <Timer time={user.work_action.remaining_time} />
+            </Stack> : <div />}
+
           </Stack>
 
+          <Stack width={'100%'} justifyContent={'space-between'} direction={'row'}>
+            {user.work_action ? <CompensationFrom /> : <TimeForm />}
+            <Button variant={'text'} onClick={onLeave} disabled={loading}>
+              Leave
+            </Button>
+          </Stack>
         </Stack>
-      </Paper>
+
+      </Stack>
+    </Paper>
   );
 }
 
@@ -131,32 +132,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentJobCard);
-
-function Timer({ time = 0 }) {
-  const [seconds, setSeconds] = useState(time);
-
-  const timeToCompensation = (seconds) => {
-    if (seconds <= 0) {
-      return 'Ready';
-    }
-
-    let minutes = Math.floor(seconds / 60);
-    let remainingSeconds = seconds % 60;
-
-    return minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds + " min";
-  }
-
-  useEffect(() => {
-    if (seconds > 0) {
-      const interval = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds - 1);
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [seconds]);
-
-  return (
-    <Typography component={'h2'} variant={'body2'}>{ timeToCompensation(seconds) }</Typography>
-  )
-}

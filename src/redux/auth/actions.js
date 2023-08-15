@@ -2,9 +2,14 @@ import {
   ME,
   SIGN_IN,
   CLEAR_USER,
-  CLEAR_ACTION,
-  SET_ACTION,
-  CLEAR_JOB, SET_JOB,
+  CLEAR_JOB,
+  SET_JOB,
+  CLEAR_WAR_ACTION,
+  CLEAR_WORK_ACTION,
+  CLEAR_MOVE_ACTION,
+  SET_MOVE_ACTION,
+  SET_WORK_ACTION,
+  SET_WAR_ACTION,
 } from './types';
 
 export function signIn (data) {
@@ -27,18 +32,46 @@ export function clearUser () {
   };
 }
 
-export function clearUserAction () {
+export function clearUserWarAction () {
   return {
-    type: CLEAR_ACTION,
+    type: CLEAR_WAR_ACTION,
   }
 }
 
-export function setUserAction (data) {
+export function clearUserWorkAction () {
   return {
-    type: SET_ACTION,
+    type: CLEAR_WORK_ACTION,
+  }
+}
+
+export function clearUserMoveAction () {
+  return {
+    type: CLEAR_MOVE_ACTION,
+  }
+}
+
+export function setUserMoveAction (data) {
+  return {
+    type: SET_MOVE_ACTION,
     payload: data,
   }
 }
+
+export function setUserWorkAction (data) {
+  return {
+    type: SET_WORK_ACTION,
+    payload: data,
+  }
+}
+
+
+export function setUserWarAction (data) {
+  return {
+    type: SET_WAR_ACTION,
+    payload: data,
+  }
+}
+
 
 export function clearUserJob () {
   return {
