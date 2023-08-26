@@ -1,6 +1,11 @@
 import {
   HIDE_DRAWER,
-  HIDE_LOADER, SET_LOADER, SET_PRIMARY_COLOR, SET_SECONDARY_COLOR, SHOW_DRAWER,
+  HIDE_LOADER,
+  LOAD_RESOURCES,
+  SET_LOADER,
+  SET_PRIMARY_COLOR,
+  SET_SECONDARY_COLOR,
+  SHOW_DRAWER,
   SHOW_LOADER,
 } from './types';
 
@@ -47,4 +52,11 @@ export function setSecondaryColor (data) {
     type: SET_SECONDARY_COLOR,
     payload: data,
   };
+}
+
+export function loadResources (data) {
+  return {
+    type: LOAD_RESOURCES,
+    payload: data
+  }
 }

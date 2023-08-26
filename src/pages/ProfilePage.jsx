@@ -25,7 +25,6 @@ const ProfilePage = () => {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-
       setUser(response.data);
       setLoading(false);
     }).catch((error) => {
@@ -36,7 +35,7 @@ const ProfilePage = () => {
   if (loading) {
     return (
       <Container sx={{ mt: 4, mb: 4 }}>
-        <Paper sx={{ p: 2, width: 700 }}>
+        <Paper sx={{ p: 2, width: '100%' }}>
           <LinearProgress />
         </Paper>
       </Container>
@@ -45,7 +44,7 @@ const ProfilePage = () => {
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Paper sx={{ p: 2, width: 700 }}>
+      <Paper sx={{ p: 2, width: '100%' }}>
         <Stack direction={'row'} spacing={2}>
           <Avatar
             src={`${process.env.REACT_APP_API}/${user.avatar}`}

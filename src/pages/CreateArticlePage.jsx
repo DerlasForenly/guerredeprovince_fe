@@ -94,7 +94,7 @@ const CreateArticlePage = ({
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Paper sx={{ p: 2, width: 900 }}>
+      <Paper sx={{ p: 2, width: '100%' }}>
         <form onSubmit={submitHandler}>
           <Stack spacing={2}>
             <Title>{pageTitle}</Title>

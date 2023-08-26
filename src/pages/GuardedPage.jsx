@@ -26,15 +26,15 @@ import { me, clearUser } from '../redux/auth/actions';
 import SimpleBackdrop from '../components/BasePage/SimpleBackdrop';
 
 function GuardedPage ({ me, element, clearUser, primaryColor, user, loading }) {
-  const navigate = useNavigate();
-
   const [open, setOpen] = React.useState(true);
+  const [theme, setTheme] = useState(createTheme());
+  const [urlIsValidated, setUrlIsValidated] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
-  const [theme, setTheme] = useState(createTheme());
 
   useEffect(() => {
     setTheme(createTheme({
@@ -55,6 +55,12 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user, loading }) {
 
       return;
     }
+
+    const url = new URL(window.location.href);
+    if (url.pathname.includes('undefined') || url.search.includes('undefined')) {
+      navigate('/home');
+    }
+    setUrlIsValidated(true);
 
     axios({
       method: 'get',
@@ -140,8 +146,8 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user, loading }) {
             }}
           >
             <Toolbar />
-            {loading ? <SimpleBackdrop /> : <div></div>}
-            {element}
+            {loading ? <SimpleBackdrop /> : <></>}
+            {urlIsValidated ? element : <></>}
           </Box>
         </Box>
       </SnackbarProvider>

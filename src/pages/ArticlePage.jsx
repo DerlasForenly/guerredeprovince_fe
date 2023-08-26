@@ -36,11 +36,11 @@ const ArticlePage = ({ article, loadArticle, updateArticleRating }) => {
   if (loading) {
     return (
       <Container sx={{ mt: 4, mb: 4 }}>
-        <Stack spacing={3}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 800 }}>
+        <Stack spacing={2} width={'100%'}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%' }}>
             <LinearProgress />
           </Paper>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: 800 }}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '100%' }}>
             <LinearProgress />
           </Paper>
         </Stack>
@@ -50,7 +50,7 @@ const ArticlePage = ({ article, loadArticle, updateArticleRating }) => {
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Stack spacing={3}>
+      <Stack spacing={2} width={'100%'}>
         <ArticleContent></ArticleContent>
         <CommentsSection></CommentsSection>
       </Stack>

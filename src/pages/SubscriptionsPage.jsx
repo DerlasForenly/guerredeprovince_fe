@@ -47,8 +47,8 @@ const SubscriptionsPage = ({
   if (loading) {
     return (
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Stack spacing={2} direction={'row'} sx={{ width: '100%' }}>
-          <Paper sx={{ p: 2, width: 650 }}>
+        <Stack spacing={2} direction={'row'}>
+          <Paper sx={{ p: 2, width: '100%' }}>
             <LinearProgress />
           </Paper>
         </Stack>
@@ -58,7 +58,7 @@ const SubscriptionsPage = ({
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Paper sx={{ p: 2, width: 650 }}>
+        <Paper sx={{ p: 2, width: '100%' }}>
           <Title>My subscriptions</Title>
           <Stack spacing={2} divider={<Divider />}>
             {

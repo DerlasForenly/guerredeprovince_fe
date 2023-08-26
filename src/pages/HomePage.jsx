@@ -6,7 +6,7 @@ import Title from '../components/baseComponents/Title';
 
 const HomePage = () => {
   return <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-    <Paper sx={{ p: 2, height: 100, width: 400 }}>
+    <Paper sx={{ p: 2, height: 'fit-content', width: '100%' }}>
       <Title>Empty Home page</Title>
     </Paper>
     <Copyright sx={{ pt: 4 }} />

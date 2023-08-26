@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
@@ -17,11 +16,12 @@ import { useSnackbar, withSnackbar } from 'notistack';
 import picturePlaceholder from '../assets/picture-placeholder.jpg';
 import Title from '../components/baseComponents/Title';
 import { setLoading } from '../redux/app/actions';
+import MenuItem from '@mui/material/MenuItem';
 
-
-const CreateNewspaperPage = ({ loading, setLoading }) => {
+const CreateJobPage = ({ loading, setLoading, resources }) => {
   const { enqueueSnackbar } = useSnackbar();
   const nameInput = useRef();
+  const resourceIdInput = useRef();
   const descriptionInput = useRef();
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
@@ -74,11 +74,12 @@ const CreateNewspaperPage = ({ loading, setLoading }) => {
     const formData = new FormData();
     formData.append('name', nameInput.current.value);
     formData.append('description', descriptionInput.current.value);
+    formData.append('resource_id', resourceIdInput.current.value);
     formData.append('avatar', croppedFile);
 
     axios({
       method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/newspapers/`,
+      url: `${process.env.REACT_APP_API}/api/businesses/`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token'),
         'Content-Type': 'multipart/form-data'
@@ -92,7 +93,10 @@ const CreateNewspaperPage = ({ loading, setLoading }) => {
       setSelectedFile(undefined);
       event.target.reset();
 
-      navigate(`/newspaper/${response.data.newspaper_id}`);
+      /**
+       * @todo update navigate
+       */
+      navigate(`/business`);
     }).catch((error) => {
       setError(error.response.data.message);
       setLoading(false);
@@ -104,7 +108,7 @@ const CreateNewspaperPage = ({ loading, setLoading }) => {
       <Paper sx={{ p: 2, width: '100%' }}>
         <form onSubmit={submitHandler}>
           <Stack spacing={2}>
-            <Title>Create Newspaper:</Title>
+            <Title>Create Job</Title>
             <Stack direction={'row'} spacing={2} sx={{ width: '100%' }}>
               <Avatar
                 variant={'square'}
@@ -152,16 +156,27 @@ const CreateNewspaperPage = ({ loading, setLoading }) => {
                 max={300}
                 name={'description'}
               />
+              {
+                resources.length === 0 ? <></> :
+                  <TextField
+                    variant={'standard'}
+                    sx={{ width: '30%' }}
+                    required
+                    select
+                    label="Resource"
+                    defaultValue={1}
+                    inputRef={resourceIdInput}
+                    disabled={loading}
+                    name={'resource_id'}
+                  >
+                    {
+                      resources.map((resource, index) => {
+                        return <MenuItem key={index} value={resource.id}>{resource.name}</MenuItem>
+                      })
+                    }
+                  </TextField>
+              }
               <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                {
-                  error ?
-                    <Typography variant={'body1'} component={'h2'} color={'red'}>
-                      {error}
-                    </Typography> :
-                    <Typography variant={'body1'} component={'h2'}>
-                      It is free now, but it is going to be 50G later ;)
-                    </Typography>
-                }
                 <Button
                   type={'submit'}
                   size={'large'}
@@ -187,7 +202,8 @@ const mapStateToProps = state => {
   return {
     user: state.auth.user,
     loading: state.app.loading,
+    resources: state.app.resourcesList,
   };
 };
 
-export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(CreateNewspaperPage));
+export default withSnackbar(connect(mapStateToProps, mapDispatchToProps)(CreateJobPage));

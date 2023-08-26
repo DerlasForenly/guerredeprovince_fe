@@ -1,6 +1,7 @@
 import {
   HIDE_DRAWER,
   HIDE_LOADER,
+  LOAD_RESOURCES,
   SET_LOADER,
   SET_PRIMARY_COLOR,
   SET_SECONDARY_COLOR,
@@ -9,6 +10,7 @@ import {
 } from './types';
 
 const initialState = {
+  resourcesList: [],
   loading: false,
   drawer: true,
   primaryColor: '#710404',
@@ -56,6 +58,11 @@ export const appReducer = (state = initialState, action) => {
         ...state,
         primaryColor: action.payload,
       };
+    case LOAD_RESOURCES:
+      return {
+        ...state,
+        resourcesList: action.payload,
+      }
     default:
       return state;
   }

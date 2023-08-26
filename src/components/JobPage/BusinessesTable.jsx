@@ -9,7 +9,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import WorldTable from './WorldTable';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import RegionTable from './RegionTable';
+import MyBusinessTable from './MyBusinessTable';
 
 function BusinessesTable ({ user }) {
   const [value, setValue] = useState('1');
@@ -59,10 +60,10 @@ function BusinessesTable ({ user }) {
           <WorldTable businesses={businesses}/>
         </TabPanel>
         <TabPanel value="2" sx={{ p: 1 }}>
-          <WorldTable />
+          <RegionTable />
         </TabPanel>
         <TabPanel value="3" sx={{ p: 1 }}>
-          <WorldTable />
+          <MyBusinessTable />
         </TabPanel>
       </TabContext>
     </Paper>

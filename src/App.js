@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import './style.scss';
 
@@ -21,8 +23,28 @@ import NewspaperPage from './pages/NewspaperPage';
 import SubscriptionsPage from './pages/SubscriptionsPage';
 import NewspaperStaffPage from './pages/NewspaperStaffPage';
 import SettingsPage from './pages/SettingsPage';
+import CreateJobPage from './pages/CreateJobPage';
 
-function App () {
+import { loadResources, setLoading } from './redux/app/actions';
+
+function App ({ resources, loadResources, loading, setLoading }) {
+  useEffect(() => {
+    if (resources.length !== 0) {
+      return;
+    }
+
+    axios({
+      method: 'GET',
+      url: `${process.env.REACT_APP_API}/api/resources`,
+    }).then((response) => {
+      loadResources(response.data);
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+    });
+  });
+
+
   return <div className="App">
     <BrowserRouter>
       <Routes>
@@ -116,6 +138,11 @@ function App () {
           element={<GuardedPage element={<JobPage />} />}
         />
         <Route
+          path="/job/create"
+          exact
+          element={<GuardedPage element={<CreateJobPage />} />}
+        />
+        <Route
           path="/settings"
           exact
           element={<GuardedPage element={<SettingsPage />} />}
@@ -130,10 +157,16 @@ function App () {
   </div>;
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  loadResources,
+  setLoading
+};
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    resources: state.app.resourcesList,
+    loading: state.app.loading,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
