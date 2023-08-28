@@ -23,7 +23,7 @@ function TimeForm ({ setUserWorkAction }) {
         Authorization: `Bearer` + Cookies.get('access_token')
       },
       data: {
-        time: timeInput.current.value,
+        time: parseInt(timeInput.current.value),
       }
     }).then((response) => {
       setUserWorkAction(response.data.action);

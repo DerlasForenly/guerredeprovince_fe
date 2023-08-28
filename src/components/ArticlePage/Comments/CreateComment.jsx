@@ -18,8 +18,6 @@ function CreateComment ({ article, loadComments }) {
 
     setLoading(true);
 
-    console.log(commentInput.current);
-
     axios({
       method: 'POST',
       url: `${process.env.REACT_APP_API}/api/articles/${article.id}/comments`,
@@ -30,7 +28,7 @@ function CreateComment ({ article, loadComments }) {
         content: commentInput.current.value,
       },
     }).then((response) => {
-      event.target.reset();
+      commentInput.current.value = '';
 
       axios({
         method: 'get',

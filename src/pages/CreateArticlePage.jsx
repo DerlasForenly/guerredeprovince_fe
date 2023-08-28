@@ -84,7 +84,6 @@ const CreateArticlePage = ({
     }).then((response) => {
       setLoading(false);
       enqueueSnackbar('Article has been created!');
-      event.target.reset();
       navigate(`/article/${response.data.article_id}`);
     }).catch((error) => {
       setError(error.response.data.message);

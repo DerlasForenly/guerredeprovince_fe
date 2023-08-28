@@ -91,7 +91,6 @@ const CreateJobPage = ({ loading, setLoading, resources }) => {
       setCroppedFile(undefined);
       setPreview(undefined);
       setSelectedFile(undefined);
-      event.target.reset();
 
       /**
        * @todo update navigate

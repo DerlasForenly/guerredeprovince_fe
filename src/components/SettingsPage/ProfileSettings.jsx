@@ -80,7 +80,6 @@ function ProfileSettings ({ user }) {
       setCroppedFile(undefined);
       setPreview(undefined);
       setSelectedFile(undefined);
-      event.target.reset();
     }).catch((error) => {
       setError(error.response.data.message);
       setLoading(false);

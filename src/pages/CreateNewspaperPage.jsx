@@ -90,7 +90,6 @@ const CreateNewspaperPage = ({ loading, setLoading }) => {
       setCroppedFile(undefined);
       setPreview(undefined);
       setSelectedFile(undefined);
-      event.target.reset();
 
       navigate(`/newspaper/${response.data.newspaper_id}`);
     }).catch((error) => {
