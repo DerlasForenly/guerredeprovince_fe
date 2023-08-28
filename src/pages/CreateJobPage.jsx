@@ -103,6 +103,12 @@ const CreateJobPage = ({ loading, setLoading, resources }) => {
     });
   };
 
+  if (error) {
+    return (
+      <div></div>
+    );
+  }
+
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
       <Paper sx={{ p: 2, width: '100%' }}>
