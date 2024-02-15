@@ -24,8 +24,10 @@ import SubscriptionsPage from './pages/SubscriptionsPage';
 import NewspaperStaffPage from './pages/NewspaperStaffPage';
 import SettingsPage from './pages/SettingsPage';
 import CreateJobPage from './pages/CreateJobPage';
+import BusinessPage from './pages/BusinessPage';
 
 import { loadResources, setLoading } from './redux/app/actions';
+
 
 function App ({ resources, loadResources, loading, setLoading }) {
   useEffect(() => {
@@ -146,6 +148,11 @@ function App ({ resources, loadResources, loading, setLoading }) {
           path="/settings"
           exact
           element={<GuardedPage element={<SettingsPage />} />}
+        />
+        <Route
+          path="/business/:id"
+          exact
+          element={<GuardedPage element={<BusinessPage />} />}
         />
         <Route
           path="*"

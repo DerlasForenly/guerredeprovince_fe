@@ -17,11 +17,6 @@ function NoJobCard ({ user }) {
       <Stack spacing={1}>
         <Title>You do not have any job now</Title>
         <Typography component={'h2'} variant={'body1'}>You can found you own business or join an existing one</Typography>
-        <Button fullWidth>
-          <Link to={'/job/create'}>
-            Start new business
-          </Link>
-        </Button>
       </Stack>
     </Paper>
   );

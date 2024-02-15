@@ -79,14 +79,14 @@ const CreateJobPage = ({ loading, setLoading, resources }) => {
 
     axios({
       method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/businesses/`,
+      url: `${process.env.REACT_APP_API}/api/businesses`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token'),
         'Content-Type': 'multipart/form-data'
       },
       data: formData,
     }).then((response) => {
-      enqueueSnackbar('Newspaper has been created!')
+      enqueueSnackbar('New business has been founded!')
       setLoading(false);
       setCroppedFile(undefined);
       setPreview(undefined);
@@ -95,7 +95,7 @@ const CreateJobPage = ({ loading, setLoading, resources }) => {
       /**
        * @todo update navigate
        */
-      navigate(`/business`);
+      navigate(`/business/${response.data.business.id}`);
     }).catch((error) => {
       setError(error.response.data.message);
       setLoading(false);

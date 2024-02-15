@@ -4,6 +4,8 @@ import { Stack } from '@mui/material';
 import CurrentJobCard from '../components/JobPage/CurrentJobCard';
 import BusinessesTable from '../components/JobPage/BusinessesTable';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const JobPage = ({ user }) => {
   return (
@@ -12,7 +14,11 @@ const JobPage = ({ user }) => {
         <Stack spacing={2} direction={'row'}>
           <CurrentJobCard />
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', width: '60%' }}>
-
+            <Button fullWidth>
+              <Link to={'/job/create'}>
+                Start new business
+              </Link>
+            </Button>
           </Paper>
         </Stack>
         <BusinessesTable />
