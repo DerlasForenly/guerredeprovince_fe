@@ -9,6 +9,7 @@ import { articleReducer } from './article/reducer';
 import { commentsReducer } from './comments/reducer';
 import { userReducer } from './user/reducer';
 import { worldMapReducer } from './worldMap/reducer';
+import { storageReducer } from './storage/reducer';
 
 export const rootReducer = combineReducers({
   app: appReducer,
@@ -21,4 +22,5 @@ export const rootReducer = combineReducers({
   comments: commentsReducer,
   routing: routerReducer,
   worldMap: worldMapReducer,
+  storage: storageReducer,
 });
