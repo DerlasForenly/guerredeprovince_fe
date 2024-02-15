@@ -47,6 +47,7 @@ const ProfilePage = () => {
       <Paper sx={{ p: 2, width: '100%' }}>
         <Stack direction={'row'} spacing={2}>
           <Avatar
+            variant={'square'}
             src={`${process.env.REACT_APP_API}/${user.avatar}`}
             alt={'user-avatar'}
             sx={{ width: 128, height: 128 }}

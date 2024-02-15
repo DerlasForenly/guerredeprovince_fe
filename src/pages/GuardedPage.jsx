@@ -20,7 +20,7 @@ import { AppBar, Drawer } from '../components/baseComponents/AppBar';
 import UserPanel from '../components/BasePage/UserPanel';
 import backgroundGif from '../assets/background.gif';
 import { secondaryListItems } from '../components/BasePage/SecondaryListItems';
-import { mainListItems } from '../components/BasePage/MainListItems';
+import MainListItems from '../components/BasePage/MainListItems';
 import { AppBarBreadcrumbs } from '../components/BasePage/AppBarBreadcrumbs';
 import { me, clearUser } from '../redux/auth/actions';
 import SimpleBackdrop from '../components/BasePage/SimpleBackdrop';
@@ -126,7 +126,7 @@ function GuardedPage ({ me, element, clearUser, primaryColor, user, loading }) {
             </Toolbar>
             <Divider />
             <List component="nav">
-              {mainListItems}
+              <MainListItems />
               <Divider sx={{ my: 1 }} />
               {secondaryListItems}
             </List>

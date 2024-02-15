@@ -15,7 +15,9 @@ import MyBusinessTable from './MyBusinessTable';
 function BusinessesTable ({ user }) {
   const [value, setValue] = useState('1');
   const [loading, setLoading] = useState(true);
-  const [businesses, setBusinesses] = useState();
+  const [businesses, setBusinesses] = useState([]);
+  const [myBusinesses, setMyBusinesses] = useState([]);
+  const [regionalBusinesses, setRegionalBusinesses] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -28,11 +30,13 @@ function BusinessesTable ({ user }) {
       }
     }).then((response) => {
       setBusinesses(response.data);
+      setMyBusinesses(response.data.filter(business => business.owner.id === user.id))
+      setRegionalBusinesses(response.data.filter(business => business.region.id === user.current_region.id))
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
     });
-  }, []);
+  }, [user.current_region.id, user.id]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,10 +64,10 @@ function BusinessesTable ({ user }) {
           <WorldTable businesses={businesses}/>
         </TabPanel>
         <TabPanel value="2" sx={{ p: 1 }}>
-          <RegionTable />
+          <RegionTable businesses={myBusinesses}/>
         </TabPanel>
         <TabPanel value="3" sx={{ p: 1 }}>
-          <MyBusinessTable />
+          <MyBusinessTable businesses={regionalBusinesses}/>
         </TabPanel>
       </TabContext>
     </Paper>

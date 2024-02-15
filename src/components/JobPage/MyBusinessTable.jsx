@@ -23,8 +23,8 @@ function MyBusinessTable ({ user, businesses }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {businesses?.map((business) => (
-          <BusinessTableItem business={business}/>
+        {businesses?.map((business, index) => (
+          <BusinessTableItem business={business} key={index}/>
         ))}
       </TableBody>
     </Table>

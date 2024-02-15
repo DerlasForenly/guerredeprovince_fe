@@ -7,6 +7,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { setUserJob } from '../../redux/auth/actions';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function BusinessTableItem ({ user, business, setUserJob }) {
   const [loading, setLoading] = useState(false);
@@ -41,8 +42,12 @@ function BusinessTableItem ({ user, business, setUserJob }) {
             alt={'business-avatar'}
           />
           <Stack>
-            <div>{business.name}</div>
-            <div>{business.owner.nickname}</div>
+            <Link to={`/business/${business.id}`}>
+              <div>{business.name}</div>
+            </Link>
+            <Link to={`/user/${business.owner.id}`}>
+              <div>{business.owner.nickname}</div>
+            </Link>
           </Stack>
         </Stack>
       </TableCell>

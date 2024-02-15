@@ -25,9 +25,11 @@ import NewspaperStaffPage from './pages/NewspaperStaffPage';
 import SettingsPage from './pages/SettingsPage';
 import CreateJobPage from './pages/CreateJobPage';
 import BusinessPage from './pages/BusinessPage';
+import PartyPage from './pages/PartyPage';
+import WarsPage from './pages/WarsPage';
+import EditArticlePage from './pages/EditArticlePage';
 
 import { loadResources, setLoading } from './redux/app/actions';
-
 
 function App ({ resources, loadResources, loading, setLoading }) {
   useEffect(() => {
@@ -94,11 +96,11 @@ function App ({ resources, loadResources, loading, setLoading }) {
           exact
           element={<GuardedPage element={<CreateArticlePage />} />}
         />
-        {/*<Route*/}
-        {/*  path="/article/edit"*/}
-        {/*  exact*/}
-        {/*  element={<GuardedPage element={<EditArticlePage />} />}*/}
-        {/*/>*/}
+        <Route
+          path="/article/edit"
+          exact
+          element={<GuardedPage element={<EditArticlePage />} />}
+        />
         <Route
           path="/world"
           exact
@@ -112,7 +114,7 @@ function App ({ resources, loadResources, loading, setLoading }) {
         <Route
           path="/wars"
           exact
-          element={<GuardedPage element={<MarketPage />} />}
+          element={<GuardedPage element={<WarsPage />} />}
         />
         <Route
           path="/user/:id"
@@ -120,7 +122,7 @@ function App ({ resources, loadResources, loading, setLoading }) {
           element={<GuardedPage element={<ProfilePage />} />}
         />
         <Route
-          path="/region"
+          path="/region/:id"
           exact
           element={<GuardedPage element={<RegionPage />} />}
         />
@@ -132,7 +134,7 @@ function App ({ resources, loadResources, loading, setLoading }) {
         <Route
           path="/party"
           exact
-          element={<GuardedPage element={<MarketPage />} />}
+          element={<GuardedPage element={<PartyPage />} />}
         />
         <Route
           path="/job"

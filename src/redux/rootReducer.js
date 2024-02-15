@@ -10,6 +10,7 @@ import { commentsReducer } from './comments/reducer';
 import { userReducer } from './user/reducer';
 import { worldMapReducer } from './worldMap/reducer';
 import { storageReducer } from './storage/reducer';
+import { businessReducer } from './business/reducer';
 
 export const rootReducer = combineReducers({
   app: appReducer,
@@ -23,4 +24,5 @@ export const rootReducer = combineReducers({
   routing: routerReducer,
   worldMap: worldMapReducer,
   storage: storageReducer,
+  business: businessReducer
 });
