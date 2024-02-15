@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
-import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Title from '../components/baseComponents/Title';
+import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Typography from '@mui/material/Typography';
 
-const RegionPage = ({ user }) => {
+const CountryPage = ({ user }) => {
   const [loading, setLoading] = useState(false);
-  const [region, setRegion] = useState(false);
+  const [country, setCountry] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,12 +21,12 @@ const RegionPage = ({ user }) => {
 
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API}/api/regions/${id}`,
+      url: `${process.env.REACT_APP_API}/api/countries/${id}`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-      setRegion(response.data);
+      setCountry(response.data);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -38,11 +37,13 @@ const RegionPage = ({ user }) => {
     return <div></div>
   }
 
-  return <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-    <Paper sx={{ p: 2, height: 'fit-content', width: '100%' }}>
-      <Typography component={'h2'} variant={'body1'}>{region.name}</Typography>
-    </Paper>
-  </Container>;
+  return (
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <Paper sx={{ p: 2, width: '100%' }}>
+        <Typography component={'h2'} variant={'body1'}>{country.name}</Typography>
+      </Paper>
+    </Container>
+  );
 };
 
 const mapDispatchToProps = {};
@@ -53,4 +54,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegionPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CountryPage);

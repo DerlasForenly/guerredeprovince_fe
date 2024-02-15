@@ -53,9 +53,9 @@ function BusinessTableItem ({ user, business, setUserJob }) {
       </TableCell>
       <TableCell align="right">{business.corporation?.name ? business.corporation?.name : 'None'}</TableCell>
       <TableCell align="right">{business.lvl}</TableCell>
-      <TableCell align="right">{business.resource.id}</TableCell>
+      <TableCell align="right">{business.resource.name}</TableCell>
       <TableCell align="right">{business.salary}</TableCell>
-      <TableCell align="right">{business.expected_salary}</TableCell>
+      <TableCell align="right">{business.expected_salary}/m</TableCell>
       <TableCell align="center">
         <Button size={'small'} onClick={onJoinButtonClick} disabled={user.job_business_id || loading}>Join</Button>
       </TableCell>

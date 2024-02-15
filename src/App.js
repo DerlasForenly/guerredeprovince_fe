@@ -28,6 +28,7 @@ import BusinessPage from './pages/BusinessPage';
 import PartyPage from './pages/PartyPage';
 import WarsPage from './pages/WarsPage';
 import EditArticlePage from './pages/EditArticlePage';
+import CountryPage from './pages/CountryPage';
 
 import { loadResources, setLoading } from './redux/app/actions';
 
@@ -90,6 +91,16 @@ function App ({ resources, loadResources, loading, setLoading }) {
           path="/article/:id"
           exact
           element={<GuardedPage element={<ArticlePage />} />}
+        />
+        <Route
+          path="/country/create"
+          exact
+          element={<GuardedPage element={<HomePage />} />}
+        />
+        <Route
+          path="/country/:id"
+          exact
+          element={<GuardedPage element={<CountryPage />} />}
         />
         <Route
           path="/article/create"

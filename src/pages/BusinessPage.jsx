@@ -28,13 +28,12 @@ const BusinessPage = ({business, user, loadBusiness, updateBusiness}) => {
         Authorization: `Bearer` + Cookies.get('access_token')
       }
     }).then((response) => {
-      console.log(response.data)
       loadBusiness(response.data);
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
     });
-  }, [id, loadBusiness, user]);
+  }, [id, loadBusiness, updateBusiness, user]);
 
   if (loading) {
     return <div></div>

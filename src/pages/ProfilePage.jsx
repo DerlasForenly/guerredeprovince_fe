@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { LinearProgress, Stack } from '@mui/material';
 import Title from '../components/baseComponents/Title';
+import Typography from '@mui/material/Typography';
 
 const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,11 @@ const ProfilePage = () => {
           />
           <Stack>
             <Title>{user.nickname}</Title>
+            <Typography component={'h2'} variant={'body1'}>Level: {user.level}</Typography>
+            <Typography component={'h2'} variant={'body1'}>EXP: {user.exp}</Typography>
+            <Typography component={'h2'} variant={'body1'}>Premium: {user.premium}</Typography>
+            <Typography component={'h2'} variant={'body1'}>Role: {user.role_id}</Typography>
+            <Typography component={'h2'} variant={'body1'}>Nation: {user?.nation?.name}</Typography>
           </Stack>
         </Stack>
       </Paper>

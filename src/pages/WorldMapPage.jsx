@@ -10,6 +10,7 @@ import SvgMap from '../components/WorldMapPage/SvgMap';
 
 import MoveForm from '../components/WorldMapPage/MoveForm';
 import Timer from '../components/WorldMapPage/Timer';
+import { Link } from 'react-router-dom';
 
 const WorldMapPage = ({ user, selectedRegion, moveToRegion }) => {
   return (
@@ -29,8 +30,12 @@ const WorldMapPage = ({ user, selectedRegion, moveToRegion }) => {
                       sx={{ height: 56, width: 56 }}
                     />
                     <Stack>
-                      <Typography component={'h2'} variant={'body1'}>{user?.current_region?.country?.name}</Typography>
-                      <Typography component={'h2'} variant={'body1'}>{user?.current_region?.name}</Typography>
+                      <Link to={`/country/${user?.current_region?.country?.id}`}>
+                        <Typography component={'h2'} variant={'body1'}>{user?.current_region?.country?.name}</Typography>
+                      </Link>
+                      <Link to={`/region/${user?.current_region?.id}`}>
+                        <Typography component={'h2'} variant={'body1'}>{user?.current_region?.name}</Typography>
+                      </Link>
                     </Stack>
                   </Stack>
                 </Stack>

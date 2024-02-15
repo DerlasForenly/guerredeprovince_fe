@@ -36,7 +36,7 @@ function BusinessesTable ({ user }) {
     }).catch((error) => {
       setLoading(false);
     });
-  }, [user.current_region.id, user.id]);
+  }, [user]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
