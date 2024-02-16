@@ -38,7 +38,7 @@ function ThemeSettings ({ setPrimaryColor, primaryColor, setSecondaryColor, seco
 
 
   return (
-    <Paper sx={{ p: 2, width: 500 }}>
+    <Paper sx={{ p: 2, width: '100%' }}>
       <Stack spacing={2}>
         <Title>Theme</Title>
         <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>

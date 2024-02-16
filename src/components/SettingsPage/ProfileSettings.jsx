@@ -98,7 +98,7 @@ function ProfileSettings ({ user }) {
   }
 
   return (
-    <Paper sx={{ p: 2, width: 500 }}>
+    <Paper sx={{ p: 2, width: '100%' }}>
       <Stack>
         <Title>Profile</Title>
         <form onSubmit={submitHandler}>

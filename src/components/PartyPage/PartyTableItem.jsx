@@ -51,8 +51,16 @@ function PartyTableItem ({ user, party }) {
           </Stack>
         </Stack>
       </TableCell>
-      <TableCell align="right">{party.country.name}</TableCell>
-      <TableCell align="right">{party.members}</TableCell>
+      <TableCell align="right">
+        <Link to={`/country/${party.country.id}`}>
+          {party.country.name}
+        </Link>
+      </TableCell>
+      <TableCell align="right">
+        <Link to={`/party/${party.id}/staff`}>
+          {party.members}
+        </Link>
+      </TableCell>
       <TableCell align="right">
         <Link to={`/user/${party.leader.id}`}>
           {party.leader.nickname}

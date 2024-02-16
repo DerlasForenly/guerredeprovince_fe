@@ -16,7 +16,7 @@ function SettingsPage ({ user }) {
     <Container sx={{ mt: 4, mb: 4 }}>
       <Stack direction={'column'} spacing={2}>
         <ProfileSettings />
-        <Paper sx={{ p: 2, width: '500px' }}>
+        <Paper sx={{ p: 2, width: '100%' }}>
           <Stack spacing={2}>
             <Title>General</Title>
             <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>

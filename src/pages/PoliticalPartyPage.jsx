@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import Typography from '@mui/material/Typography';
 
 const PoliticalPartyPage = ({ user }) => {
   const [loading, setLoading] = useState(false);
