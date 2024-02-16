@@ -105,7 +105,7 @@ const UserPanel = ({ user, clearUser }) => {
       <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
     <Stack>
-      <Typography variant={'body1'} component={'h2'} fontWeight={'bold'} noWrap>LVL: 98</Typography>
+      <Typography variant={'body1'} component={'h2'} fontWeight={'bold'} noWrap>LVL: {user.level}</Typography>
       <BorderLinearProgress variant="determinate" value={50} />
     </Stack>
   </Stack>;

@@ -64,10 +64,10 @@ function BusinessesTable ({ user }) {
           <WorldTable businesses={businesses}/>
         </TabPanel>
         <TabPanel value="2" sx={{ p: 1 }}>
-          <RegionTable businesses={myBusinesses}/>
+          <RegionTable businesses={regionalBusinesses}/>
         </TabPanel>
         <TabPanel value="3" sx={{ p: 1 }}>
-          <MyBusinessTable businesses={regionalBusinesses}/>
+          <MyBusinessTable businesses={myBusinesses}/>
         </TabPanel>
       </TabContext>
     </Paper>
