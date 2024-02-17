@@ -55,6 +55,7 @@ const ProfilePage = () => {
           />
           <Stack>
             <Title>{user.nickname}</Title>
+            <H2b1>Level: {user.level}</H2b1>
             <Typography component={'h2'} variant={'body1'}>Level: {user.level}</Typography>
             <Typography component={'h2'} variant={'body1'}>EXP: {user.exp}</Typography>
             <Typography component={'h2'} variant={'body1'}>Premium: {user.premium}</Typography>

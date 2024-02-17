@@ -13,13 +13,13 @@ function RequestsTableItem ({ request }) {
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
 
-  const onAccept = e => {
+  const onAccept = (e) => {
     setLoading(true);
     dispatch(acceptJoinRequest(id, request.id)).finally(() => setLoading(false));
 
   }
 
-  const onDecline = e => {
+  const onDecline = (e) => {
     setLoading(true);
     dispatch(declineJoinRequest(id, request.id)).finally(() => setLoading(false));
   }
@@ -45,6 +45,9 @@ function RequestsTableItem ({ request }) {
       </TableCell>
       <TableCell align="right">
         {request.user.level}
+      </TableCell>
+      <TableCell align="right">
+        {request.created_at}
       </TableCell>
       <TableCell align="right">
         <ButtonGroup size={'small'} variant={'text'} aria-label="text button group" disabled={loading}>

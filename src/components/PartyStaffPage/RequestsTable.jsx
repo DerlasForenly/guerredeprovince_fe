@@ -25,6 +25,7 @@ function RequestsTable ({ user, requests, loading }) {
         <TableRow>
           <TableCell>Name</TableCell>
           <TableCell align="right">Level</TableCell>
+          <TableCell align="right">Created at</TableCell>
           <TableCell align="right">Actions</TableCell>
         </TableRow>
       </TableHead>

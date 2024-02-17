@@ -1,4 +1,4 @@
-import { LOAD_STAFF, LOAD_PARTIES, LOAD_REQUESTS, SET_LOADING, ACCEPT_REQUEST, DECLINE_REQUEST } from './types';
+import { LOAD_STAFF, LOAD_PARTIES, LOAD_REQUESTS, SET_LOADING } from './types';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -90,6 +90,7 @@ export function loadRequests(party_id) {
 /**
  * @TODO Update to work with state itself instead of just refreshing data
  *
+ * @param party_id
  * @param request_id
  * @returns {(function(*): Promise<void>)|*}
  */
@@ -98,6 +99,7 @@ export function acceptJoinRequest(party_id, request_id) {
     try {
       await axios.post(
         `${process.env.REACT_APP_API}/api/requests/${request_id}/accept`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${Cookies.get('access_token')}`
@@ -117,6 +119,7 @@ export function acceptJoinRequest(party_id, request_id) {
 /**
  * @TODO Update to work with state itself instead of just refreshing data
  *
+ * @param party_id
  * @param request_id
  * @returns {(function(*): Promise<void>)|*}
  */
@@ -125,6 +128,7 @@ export function declineJoinRequest(party_id, request_id) {
     try {
       await axios.post(
         `${process.env.REACT_APP_API}/api/requests/${request_id}/decline`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${Cookies.get('access_token')}`
