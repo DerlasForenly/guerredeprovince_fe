@@ -1,23 +1,18 @@
 import { connect, useDispatch } from 'react-redux';
 import { LinearProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import StaffTableItem from './StaffTableItem';
 import { loadStaff } from '../../redux/politicalParty/actions';
 
-function StaffTable ({ user, staff }) {
+function StaffTable ({ user, staff, loading }) {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
-
   const {id} = useParams();
 
   useEffect(() => {
-    if (!user) {
-      return;
+    if (user) {
+      dispatch(loadStaff(id)).then(r => {});
     }
-
-    setLoading(true);
-    dispatch(loadStaff(id)).finally(() => setLoading(false));
   }, [dispatch, id, user]);
 
   if (loading) {
@@ -46,12 +41,14 @@ function StaffTable ({ user, staff }) {
   );
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+}
 
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    staff: state.party.staff,
+    staff: state.party.staff.data,
+    loading: state.party.staff.loading,
   };
 };
 

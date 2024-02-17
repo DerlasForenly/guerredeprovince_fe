@@ -78,11 +78,13 @@ const PartyPage = ({ user }) => {
   );
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+};
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    loading: state.party.parties.loading
   };
 };
 

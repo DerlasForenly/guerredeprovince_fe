@@ -1,22 +1,18 @@
 import { connect, useDispatch } from 'react-redux';
 import { LinearProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import RequestsTableItem from './RequestsTableItem';
 import { loadRequests } from '../../redux/politicalParty/actions';
 
-function RequestsTable ({ user, requests }) {
+function RequestsTable ({ user, requests, loading }) {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const {id} = useParams();
 
   useEffect(() => {
-    if (!user) {
-      return;
+    if (user) {
+      dispatch(loadRequests(id)).then(r => {});
     }
-
-    setLoading(true);
-    dispatch(loadRequests(id)).finally(() => setLoading(false));
   }, [dispatch, id, user]);
 
   if (loading) {
@@ -43,12 +39,14 @@ function RequestsTable ({ user, requests }) {
   );
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+}
 
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    requests: state.party.requests
+    requests: state.party.requests.data,
+    loading: state.party.requests.loading,
   };
 };
 

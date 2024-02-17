@@ -1,48 +1,27 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { ButtonGroup, Stack, TableCell, TableRow } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import picturePlaceholder from '../../assets/picture-placeholder.jpg';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { acceptJoinRequest, declineJoinRequest } from '../../redux/politicalParty/actions';
+import { useParams } from 'react-router';
 
-function RequestsTableItem ({ user, request }) {
+function RequestsTableItem ({ request }) {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const {id} = useParams();
 
   const onAccept = e => {
     setLoading(true);
+    dispatch(acceptJoinRequest(id, request.id)).finally(() => setLoading(false));
 
-    axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/parties/${request.party_id}/requests/${request.id}/accept`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      console.log(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
   }
 
   const onDecline = e => {
     setLoading(true);
-
-    axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/parties/${request.party_id}/requests/${request.id}/decline`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      console.log(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
+    dispatch(declineJoinRequest(id, request.id)).finally(() => setLoading(false));
   }
 
   return (
@@ -68,11 +47,11 @@ function RequestsTableItem ({ user, request }) {
         {request.user.level}
       </TableCell>
       <TableCell align="right">
-        <ButtonGroup size={'small'} variant={'text'} aria-label="text button group">
-          <Button fullWidth onClick={onAccept} disabled={loading}>
+        <ButtonGroup size={'small'} variant={'text'} aria-label="text button group" disabled={loading}>
+          <Button fullWidth onClick={onAccept}>
             Accept
           </Button>
-          <Button fullWidth onClick={onDecline} disabled={loading}>
+          <Button fullWidth onClick={onDecline}>
             Decline
           </Button>
         </ButtonGroup>

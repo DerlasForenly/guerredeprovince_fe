@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { LinearProgress, Tab, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
@@ -6,33 +6,18 @@ import TabList from '@mui/lab/TabList';
 import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
 import TabPanel from '@mui/lab/TabPanel';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import PartyTableItem from './PartyTableItem';
+import { setLoading, loadParties } from '../../redux/politicalParty/actions';
 
-function PartiesTable ({ user }) {
+function PartiesTable ({ user, parties, loading, setLoading }) {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('1');
-  const [loading, setLoading] = useState(true);
-  const [parties, setParties] = useState([]);
-  const [countryParties, setCountryParties] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-
-    axios({
-      method: 'GET',
-      url: `${process.env.REACT_APP_API}/api/parties`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      setParties(response.data);
-      setCountryParties(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
-  }, [user]);
+    if (user) {
+      dispatch(loadParties()).then(r => {});
+    }
+  }, [dispatch, setLoading, user]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -69,7 +54,7 @@ function PartiesTable ({ user }) {
             <TableBody>
               {
                 parties.map((party, index) => (
-                  <PartyTableItem party={party} key={index}/>
+                  <PartyTableItem party={party} key={index} />
                 ))
               }
             </TableBody>
@@ -89,7 +74,7 @@ function PartiesTable ({ user }) {
             <TableBody>
               {
                 parties.map((party, index) => (
-                  <PartyTableItem party={party} key={index}/>
+                  <PartyTableItem party={party} key={index} />
                 ))
               }
             </TableBody>
@@ -100,10 +85,16 @@ function PartiesTable ({ user }) {
   );
 }
 
+const mapDispatchToProps = {
+  setLoading
+};
+
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    loading: state.party.parties.loading,
+    parties: state.party.parties.data
   };
 };
 
-export default connect(mapStateToProps, null)(PartiesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(PartiesTable);
