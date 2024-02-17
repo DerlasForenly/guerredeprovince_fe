@@ -1,14 +1,13 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { LinearProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useParams } from 'react-router';
 import StaffTableItem from './StaffTableItem';
+import { loadStaff } from '../../redux/politicalParty/actions';
 
-function StaffTable ({ user }) {
+function StaffTable ({ user, staff }) {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [staff, setStaff] = useState([]);
 
   const {id} = useParams();
 
@@ -16,21 +15,10 @@ function StaffTable ({ user }) {
     if (!user) {
       return;
     }
-    setLoading(true);
 
-    axios({
-      method: 'GET',
-      url: `${process.env.REACT_APP_API}/api/parties/${id}/staff`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      setStaff(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
-  }, [id, user]);
+    setLoading(true);
+    dispatch(loadStaff(id)).finally(() => setLoading(false));
+  }, [dispatch, id, user]);
 
   if (loading) {
     return <LinearProgress />;
@@ -58,10 +46,13 @@ function StaffTable ({ user }) {
   );
 }
 
+const mapDispatchToProps = {}
+
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    staff: state.party.staff,
   };
 };
 
-export default connect(mapStateToProps, null)(StaffTable);
+export default connect(mapStateToProps, mapDispatchToProps)(StaffTable);

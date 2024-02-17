@@ -4,8 +4,47 @@ import Avatar from '@mui/material/Avatar';
 import picturePlaceholder from '../../assets/picture-placeholder.jpg';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function RequestsTableItem ({ user, request }) {
+  const [loading, setLoading] = useState(false);
+
+  const onAccept = e => {
+    setLoading(true);
+
+    axios({
+      method: 'POST',
+      url: `${process.env.REACT_APP_API}/api/parties/${request.party_id}/requests/${request.id}/accept`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      console.log(response.data);
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+    });
+  }
+
+  const onDecline = e => {
+    setLoading(true);
+
+    axios({
+      method: 'POST',
+      url: `${process.env.REACT_APP_API}/api/parties/${request.party_id}/requests/${request.id}/decline`,
+      headers: {
+        Authorization: `Bearer` + Cookies.get('access_token')
+      }
+    }).then((response) => {
+      console.log(response.data);
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+    });
+  }
+
   return (
     <TableRow
       key={request.id}
@@ -30,10 +69,10 @@ function RequestsTableItem ({ user, request }) {
       </TableCell>
       <TableCell align="right">
         <ButtonGroup size={'small'} variant={'text'} aria-label="text button group">
-          <Button fullWidth>
+          <Button fullWidth onClick={onAccept} disabled={loading}>
             Accept
           </Button>
-          <Button fullWidth>
+          <Button fullWidth onClick={onDecline} disabled={loading}>
             Decline
           </Button>
         </ButtonGroup>
