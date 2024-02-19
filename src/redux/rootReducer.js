@@ -12,6 +12,7 @@ import { worldMapReducer } from './worldMap/reducer';
 import { storageReducer } from './storage/reducer';
 import { businessReducer } from './business/reducer';
 import { politicalPartyReducer } from './politicalParty/reducer';
+import { countryReducer } from './country/reducer';
 
 export const rootReducer = combineReducers({
   app: appReducer,
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
   storage: storageReducer,
   business: businessReducer,
   party: politicalPartyReducer,
+  country: countryReducer,
 });

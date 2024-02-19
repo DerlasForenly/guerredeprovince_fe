@@ -32,6 +32,7 @@ import CountryPage from './pages/CountryPage';
 import CreatePartyPage from './pages/CreatePartyPage';
 import PoliticalPartyPage from './pages/PoliticalPartyPage';
 import PartyStaffPage from './pages/PartyStaffPage';
+import ParliamentPage from './pages/ParliamentPage';
 
 import { loadResources, setLoading } from './redux/app/actions';
 
@@ -99,6 +100,11 @@ function App ({ resources, loadResources, loading, setLoading }) {
           path="/country/create"
           exact
           element={<GuardedPage element={<HomePage />} />}
+        />
+        <Route
+          path="/country/:id/parliament"
+          exact
+          element={<GuardedPage element={<ParliamentPage />} />}
         />
         <Route
           path="/party/create"

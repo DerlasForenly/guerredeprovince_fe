@@ -1,8 +1,8 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import App from './App';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { rootReducer } from './redux/rootReducer';
 import axios from 'axios';
@@ -22,5 +22,10 @@ const app = (
 );
 
 const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(app);
+
+ReactDOM.render(
+  <React.StrictMode>
+    {app}
+  </React.StrictMode>,
+  container
+);
