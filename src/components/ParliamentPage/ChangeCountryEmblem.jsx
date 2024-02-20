@@ -84,7 +84,7 @@ const ChangeCountryEmblem = ({ user, lawTypeId }) => {
       setPreview(undefined);
       setSelectedFile(undefined);
 
-      navigate(`/country/${id}`);
+      navigate(`/country/${id}/parliament`);
     }).catch((error) => {
       setError(error.response.data.message);
       setLoading(false);

@@ -35,6 +35,7 @@ import PartyStaffPage from './pages/PartyStaffPage';
 import ParliamentPage from './pages/ParliamentPage';
 
 import { loadResources, setLoading } from './redux/app/actions';
+import CreateLawPage from './pages/CreateLawPage';
 
 function App ({ resources, loadResources, loading, setLoading }) {
   useEffect(() => {
@@ -105,6 +106,11 @@ function App ({ resources, loadResources, loading, setLoading }) {
           path="/country/:id/parliament"
           exact
           element={<GuardedPage element={<ParliamentPage />} />}
+        />
+        <Route
+          path="/country/:id/parliament/create-new-law-project"
+          exact
+          element={<GuardedPage element={<CreateLawPage />} />}
         />
         <Route
           path="/party/create"

@@ -1,41 +1,25 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import Typography from '@mui/material/Typography';
 import Title from '../components/baseComponents/Title';
 import { ButtonGroup, LinearProgress, Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { loadCountry} from '../redux/country/actions';
 
-const CountryPage = ({ user }) => {
-  const [loading, setLoading] = useState(true);
-  const [country, setCountry] = useState(false);
+const CountryPage = ({ user, loading, country }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
-    if (user === false) {
-      return;
+    if (user) {
+      dispatch(loadCountry(id)).finally(() => {});
     }
-    setLoading(true);
-
-    axios({
-      method: 'GET',
-      url: `${process.env.REACT_APP_API}/api/countries/${id}`,
-      headers: {
-        Authorization: `Bearer` + Cookies.get('access_token')
-      }
-    }).then((response) => {
-      setCountry(response.data);
-      setLoading(false);
-    }).catch((error) => {
-      setLoading(false);
-    });
-  }, [id, user]);
+  }, [dispatch, id, user]);
 
   if (loading) {
     return <Container sx={{ mt: 4, mb: 4 }}>
@@ -118,7 +102,9 @@ const mapDispatchToProps = {};
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    country: state.country.country.data,
+    loading: state.country.country.loading,
   };
 };
 

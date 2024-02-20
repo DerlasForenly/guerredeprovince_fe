@@ -1,20 +1,8 @@
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { LinearProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { useEffect } from 'react';
-import { useParams } from 'react-router';
 import RequestsTableItem from './RequestsTableItem';
-import { loadRequests } from '../../redux/politicalParty/actions';
 
-function RequestsTable ({ user, requests, loading }) {
-  const dispatch = useDispatch();
-  const {id} = useParams();
-
-  useEffect(() => {
-    if (user) {
-      dispatch(loadRequests(id)).then(r => {});
-    }
-  }, [dispatch, id, user]);
-
+function RequestsTable ({ requests, loading }) {
   if (loading) {
     return <LinearProgress />;
   }

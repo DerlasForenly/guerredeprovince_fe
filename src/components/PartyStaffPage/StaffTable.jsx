@@ -26,6 +26,7 @@ function StaffTable ({ user, staff, loading }) {
           <TableCell>Name</TableCell>
           <TableCell align="right">Level</TableCell>
           <TableCell align="right">Position</TableCell>
+          <TableCell align="right">In parliament</TableCell>
           <TableCell align="right">Joined at</TableCell>
           <TableCell align="center">Actions</TableCell>
         </TableRow>

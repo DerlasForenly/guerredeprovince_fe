@@ -18,7 +18,7 @@ const WorldMapPage = ({ user, selectedRegion, moveToRegion }) => {
       <Stack spacing={2}>
         <Paper sx={{ p: 3, display: 'flex', flexDirection: 'column' }}>
           <Stack spacing={3}>
-            <Stack spacing={4} mb={5} verticalAlign={'center'}>
+            <Stack spacing={4} mb={5}>
               <Stack direction={'row'} justifyContent={'space-between'} >
                 <Stack direction={'column'} width={300} spacing={1}>
                   <Title>Current location</Title>

@@ -32,6 +32,9 @@ function StaffTableItem ({ user, staffMember }) {
         {staffMember.position.name}
       </TableCell>
       <TableCell align="right">
+        {staffMember.in_parliament}
+      </TableCell>
+      <TableCell align="right">
         {staffMember.created_at}
       </TableCell>
       <TableCell align="center">

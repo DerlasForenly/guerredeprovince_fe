@@ -1,41 +1,37 @@
 import { connect, useDispatch } from 'react-redux';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-import Title from '../components/baseComponents/Title';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { useEffect, useRef, useState } from 'react';
 import { LinearProgress, Stack } from '@mui/material';
-import { loadLawTypes } from '../redux/country/actions';
+import Title from '../components/baseComponents/Title';
+import { useEffect, useState } from 'react';
+import { loadCountry, loadParliamentarians } from '../redux/country/actions';
+import { useParams } from 'react-router';
+import Avatar from '@mui/material/Avatar';
+import picturePlaceholder from '../assets/picture-placeholder.jpg';
+import avatarPlaceholder from '../assets/avatar-placeholder.jpg';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
-import ChangeCountryEmblem from '../components/ParliamentPage/ChangeCountryEmblem';
-import ChangeCountryName from '../components/ParliamentPage/ChangeCountryName';
-
-const ParliamentPage = ({ user, lawTypes, loading }) => {
-  const lawTypeIdInput = useRef();
-  const dispatch = useDispatch();
-  const [slot, setSlot] = useState(<ChangeCountryName lawTypeId={1} />);
+const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
+  const dispatch = useDispatch()
+  const { id } = useParams();
+  const [seats, setSeats] = useState([]);
 
   useEffect(() => {
+    if (country.id !== id) {
+      dispatch(loadCountry(id)).finally(() => {});
+    }
+
     if (user) {
-      dispatch(loadLawTypes()).finally(() => {});
+      dispatch(loadParliamentarians(id)).finally(() => {
+        setSeats(new Array(country.parliament_size).fill(null))
+      });
     }
-  }, [dispatch, user]);
+  }, [country.id, country.parliament_size, dispatch, id, user]);
 
-  const onChangeHandler = e => {
-    switch (e.target.value) {
-      case 1:
-        setSlot(<ChangeCountryName lawTypeId={e.target.value} />)
-        break;
-      case 2:
-        setSlot(<ChangeCountryEmblem lawTypeId={e.target.value} />)
-        break;
-      default:
-        setSlot(<div />);
-    }
-  };
-
-  if (loading) {
+  if (loading || !country) {
     return <Container sx={{ mt: 4, mb: 4 }}>
       <Paper sx={{ p: 2, width: '100%' }}>
         <LinearProgress />
@@ -47,27 +43,53 @@ const ParliamentPage = ({ user, lawTypes, loading }) => {
     <Container sx={{ mt: 4, mb: 4 }}>
       <Stack spacing={2}>
         <Paper sx={{ p: 2, width: '100%' }}>
-          <Title>New law project</Title>
-          <TextField
-            variant={'standard'}
-            sx={{ width: '100%' }}
-            name={'lawTypeId'}
-            inputRef={lawTypeIdInput}
-            required
-            select
-            label="Law type"
-            defaultValue={1}
-            disabled={loading}
-            onChange={onChangeHandler}
-          >
+          <Stack direction={'row'} justifyContent={'space-between'}>
+            <Title>{country.political_system.name}</Title>
+            <Link to={`/country/${id}/parliament/create-new-law-project`}>
+              <Button variant={'outlined'}>Create new law project</Button>
+            </Link>
+          </Stack>
+          <Grid container sx={{ padding: 2 }}>
             {
-              lawTypes.map((type, index) => {
-                return <MenuItem key={index} value={parseInt(type.id)}>{type.name}</MenuItem>;
+              seats.map((seat, index) => {
+                const parliamentarian = parliamentarians[index]?.user_id ? parliamentarians[index] : null;
+
+                if (parliamentarian) {
+                  return <Link to={`/user/${parliamentarians[index].user_id}`} key={index}>
+                    <Avatar
+                      variant={'circular'}
+                      src={avatarPlaceholder}
+                      alt={'user-avatar'}
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        m: '2px',
+                        border: `3px solid ${parliamentarians[index].color}`,
+                      }}
+                    />
+                  </Link>
+                } else {
+                  return <Avatar
+                    key={index}
+                    variant={'circular'}
+                    src={picturePlaceholder}
+                    alt={'user-avatar'}
+                    sx={{
+                      width: 36,
+                      height: 36,
+                      m: '2px',
+                      border: `3px solid white`,
+                    }}
+                  />
+                }
               })
             }
-          </TextField>
+          </Grid>
+          <Typography component={'h2'} variant={'body1'}>Seats: {parliamentarians.length}/{country.parliament_size}</Typography>
         </Paper>
-        {slot}
+        <Paper sx={{ p: 2, width: '100%' }}>
+          <Title>Bills on the agenda</Title>
+        </Paper>
       </Stack>
     </Container>
   );
@@ -79,8 +101,8 @@ const mapStateToProps = state => {
   return {
     user: state.auth.user,
     country: state.country.country.data,
-    lawTypes: state.country.lawTypes.data,
-    loading: state.country.lawTypes.loading,
+    loading: state.country.parliamentarians.loading,
+    parliamentarians: state.country.parliamentarians.data
   };
 };
 
