@@ -1,4 +1,11 @@
-import { LOAD_COUNTRY, LOAD_ELECTIONS, LOAD_LAW_TYPES, LOAD_PARLIAMENTARIANS, SET_LOADING } from './types';
+import {
+  LOAD_ACTIVE_LAWS,
+  LOAD_COUNTRY,
+  LOAD_ELECTIONS,
+  LOAD_LAW_TYPES,
+  LOAD_PARLIAMENTARIANS,
+  SET_LOADING
+} from './types';
 
 const initialState = {
   country: {
@@ -6,6 +13,10 @@ const initialState = {
     data: false,
   },
   lawTypes: {
+    loading: true,
+    data: [],
+  },
+  activeLaws: {
     loading: true,
     data: [],
   },
@@ -26,6 +37,14 @@ export const countryReducer = (state = initialState, action) => {
         ...state,
         lawTypes: {
           ...state.lawTypes,
+          data: action.payload
+        },
+      };
+    case LOAD_ACTIVE_LAWS:
+      return {
+        ...state,
+        activeLaws: {
+          ...state.activeLaws,
           data: action.payload
         },
       };

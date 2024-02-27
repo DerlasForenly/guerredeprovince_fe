@@ -1,10 +1,54 @@
 import {
+  LOAD_ACTIVE_LAWS,
   LOAD_COUNTRY, LOAD_ELECTIONS, LOAD_LAW_TYPES, LOAD_PARLIAMENTARIANS, SET_LOADING
 } from './types';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export function setLoading (key, value) {
+const mapKeyAndType = {
+  country: LOAD_COUNTRY,
+  activeLaws: LOAD_ACTIVE_LAWS,
+  elections: LOAD_ELECTIONS,
+  parliamentarians: LOAD_PARLIAMENTARIANS,
+  lawTypes: LOAD_LAW_TYPES,
+};
+
+export function loadCountry (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/countries/${id}`,
+    'country'
+  )
+}
+
+export function loadActiveLaws (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/laws?country=${id}&status=3`,
+    'activeLaws'
+  )
+}
+
+export function loadActiveElections (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/elections?country=${id}&status=3`,
+    'elections'
+  )
+}
+
+export function loadParliamentarians (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/countries/${id}/parliamentarians`,
+    'parliamentarians'
+  )
+}
+
+export function loadLawTypes () {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/law-types`,
+    'lawTypes'
+  )
+}
+
+function setLoading (key, value) {
   return {
     type: SET_LOADING,
     payload: {
@@ -14,7 +58,7 @@ export function setLoading (key, value) {
   }
 }
 
-function loadItem(url, key, type) {
+function loadItem(url, key) {
   return async (dispatch) => {
     try {
       dispatch(setLoading(key, true));
@@ -28,7 +72,7 @@ function loadItem(url, key, type) {
       );
 
       dispatch({
-        type: type,
+        type: mapKeyAndType[key],
         payload: response.data,
       });
     } catch (error) {
@@ -38,88 +82,3 @@ function loadItem(url, key, type) {
     }
   };
 }
-
-export function loadCountry (id) {
-  return async (dispatch) => {
-    try {
-      dispatch(setLoading('country', true));
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/countries/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('access_token')}`
-          }
-        }
-      );
-
-      dispatch({
-        type: LOAD_COUNTRY,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error('Error fetching requests:', error);
-    } finally {
-      dispatch(setLoading('country', false));
-    }
-  };
-}
-
-export function loadActiveElections (id) {
-  return loadItem(
-    `${process.env.REACT_APP_API}/api/countries/${id}/elections`,
-    'elections',
-    LOAD_ELECTIONS
-  )
-}
-
-export function loadParliamentarians (id) {
-  return async (dispatch) => {
-    try {
-      dispatch(setLoading('parliamentarians', true));
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/countries/${id}/parliamentarians`,
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('access_token')}`
-          }
-        }
-      );
-
-      dispatch({
-        type: LOAD_PARLIAMENTARIANS,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error('Error fetching requests:', error);
-    } finally {
-      dispatch(setLoading('parliamentarians', false));
-    }
-  };
-}
-
-export function loadLawTypes () {
-  return async (dispatch) => {
-    try {
-      dispatch(setLoading('lawTypes', true));
-      const response = await axios.get(
-        `${process.env.REACT_APP_API}/api/law-types`,
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get('access_token')}`
-          }
-        }
-      );
-
-      dispatch({
-        type: LOAD_LAW_TYPES,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error('Error fetching requests:', error);
-    } finally {
-      dispatch(setLoading('lawTypes', false));
-    }
-  };
-}
-
-

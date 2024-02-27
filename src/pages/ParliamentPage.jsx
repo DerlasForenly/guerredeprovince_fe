@@ -13,25 +13,29 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import BillsOnAgendaTable from '../components/ParliamentPage/BillsOnAgendaTable';
+import Box from '@mui/material/Box';
 
 const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [seats, setSeats] = useState([]);
 
   useEffect(() => {
-    if (country.id !== id) {
-      dispatch(loadCountry(id)).finally(() => {});
-    }
-
     if (user) {
-      dispatch(loadParliamentarians(id)).finally(() => {
-        setSeats(new Array(country.parliament_size).fill(null))
-      });
-    }
-  }, [country.id, country.parliament_size, dispatch, id, user]);
+      if (!country) {
+        dispatch(loadCountry(id)).finally(() => {});
+      }
 
-  if (loading || !country) {
+      if (country) {
+        dispatch(loadParliamentarians(id)).finally(() => {
+          setSeats(new Array(country.parliament_size).fill(null));
+        });
+      }
+    }
+  }, [country, dispatch, id, user]);
+
+  if (loading) {
     return <Container sx={{ mt: 4, mb: 4 }}>
       <Paper sx={{ p: 2, width: '100%' }}>
         <LinearProgress />
@@ -55,19 +59,23 @@ const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
                 const parliamentarian = parliamentarians[index]?.user_id ? parliamentarians[index] : null;
 
                 if (parliamentarian) {
-                  return <Link to={`/user/${parliamentarians[index].user_id}`} key={index}>
-                    <Avatar
-                      variant={'circular'}
-                      src={avatarPlaceholder}
-                      alt={'user-avatar'}
-                      sx={{
-                        width: 36,
-                        height: 36,
-                        m: '2px',
-                        border: `3px solid ${parliamentarians[index].color}`,
-                      }}
-                    />
-                  </Link>
+                  return (
+                    <Box sx={{ background: `linear-gradient(to bottom, white, ${parliamentarians[index].color})` }}>
+                      <Link to={`/user/${parliamentarians[index].user_id}`} key={index}>
+                        <Avatar
+                          variant={'circular'}
+                          src={avatarPlaceholder}
+                          alt={'user-avatar'}
+                          sx={{
+                            width: 36,
+                            height: 36,
+                            m: '2px',
+                            border: `3px solid ${parliamentarians[index].color}`,
+                          }}
+                        />
+                      </Link>
+                    </Box>
+                  );
                 } else {
                   return <Avatar
                     key={index}
@@ -80,15 +88,20 @@ const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
                       m: '2px',
                       border: `3px solid white`,
                     }}
-                  />
+                  />;
                 }
               })
             }
           </Grid>
-          <Typography component={'h2'} variant={'body1'}>Seats: {parliamentarians.length}/{country.parliament_size}</Typography>
+          <Typography component={'h2'}
+                      variant={'body1'}>Seats: {parliamentarians.length}/{country.parliament_size}</Typography>
         </Paper>
         <Paper sx={{ p: 2, width: '100%' }}>
-          <Title>Bills on the agenda</Title>
+          <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
+            <Title>Bills on the agenda</Title>
+            <Button variant={'outlined'}>Go to history</Button>
+          </Stack>
+          <BillsOnAgendaTable />
         </Paper>
       </Stack>
     </Container>
