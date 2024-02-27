@@ -60,8 +60,8 @@ const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
 
                 if (parliamentarian) {
                   return (
-                    <Box sx={{ background: `linear-gradient(to bottom, white, ${parliamentarians[index].color})` }}>
-                      <Link to={`/user/${parliamentarians[index].user_id}`} key={index}>
+                    <Box sx={{ background: `linear-gradient(to bottom, white, ${parliamentarians[index].color})` }} key={index}>
+                      <Link to={`/user/${parliamentarians[index].user_id}`}>
                         <Avatar
                           variant={'circular'}
                           src={avatarPlaceholder}
