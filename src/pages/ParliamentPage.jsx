@@ -60,17 +60,18 @@ const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
 
                 if (parliamentarian) {
                   return (
-                    <Box sx={{ background: `linear-gradient(to bottom, white, ${parliamentarians[index].color})` }} key={index}>
+                    <Box key={index}>
                       <Link to={`/user/${parliamentarians[index].user_id}`}>
                         <Avatar
                           variant={'circular'}
                           src={avatarPlaceholder}
                           alt={'user-avatar'}
                           sx={{
-                            width: 36,
-                            height: 36,
-                            m: '2px',
-                            border: `3px solid ${parliamentarians[index].color}`,
+                            width: 30,
+                            height: 30,
+                            m: '4px',
+                            //border: `3px solid ${parliamentarians[index].color}`,
+                            boxShadow: `0px 0px 5px 3px ${parliamentarians[index].color}`
                           }}
                         />
                       </Link>
@@ -83,10 +84,9 @@ const ParliamentPage = ({ country, loading, user, parliamentarians }) => {
                     src={picturePlaceholder}
                     alt={'user-avatar'}
                     sx={{
-                      width: 36,
-                      height: 36,
-                      m: '2px',
-                      border: `3px solid white`,
+                      width: 30,
+                      height: 30,
+                      m: '4px',
                     }}
                   />;
                 }

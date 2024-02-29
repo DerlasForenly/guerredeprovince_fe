@@ -1,16 +1,15 @@
 import { connect, useDispatch } from 'react-redux';
 import { LinearProgress, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { useEffect } from 'react';
-import { loadActivePresidentElection } from '../../redux/country/actions';
-import ElectionTableItem from './ElectionTableItem';
+import { loadActiveParliamentElection } from '../../redux/country/actions';
+import ParliamentElectionTableItem from './ParliamentElectionTableItem';
 import Typography from '@mui/material/Typography';
-
-function ElectionTable ({ user, election, loading }) {
+function ParliamentElectionTable ({ user, election, loading }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
-      dispatch(loadActivePresidentElection(user.citizenship.id)).finally(() => {});
+      dispatch(loadActiveParliamentElection(user.citizenship.id)).finally(() => {});
     }
   }, [dispatch, user]);
 
@@ -29,14 +28,14 @@ function ElectionTable ({ user, election, loading }) {
       <TableHead>
         <TableRow>
           <TableCell>Name</TableCell>
-          <TableCell align="right">Level</TableCell>
+          <TableCell align="right">Members</TableCell>
           <TableCell align="center">Actions</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {
           election.candidates.map((user, index) => {
-            return <ElectionTableItem candidate={user} key={index} />
+            return <ParliamentElectionTableItem candidate={user} key={index} />
           })
         }
       </TableBody>
@@ -50,9 +49,9 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    election: state.country.presidentElection.data,
-    loading: state.country.presidentElection.loading,
+    election: state.country.parliamentElection.data,
+    loading: state.country.parliamentElection.loading,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ElectionTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ParliamentElectionTable);

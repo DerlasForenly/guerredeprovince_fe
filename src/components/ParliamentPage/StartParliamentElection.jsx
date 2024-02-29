@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 import { useSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router';
 
-const StartPresidentElection = ({ lawTypeId }) => {
+const StartParliamentElection = ({ lawTypeId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -48,7 +48,7 @@ const StartPresidentElection = ({ lawTypeId }) => {
   return (
     <form onSubmit={onSubmitHandler}>
       <Paper sx={{ p: 2, width: '100%' }}>
-        <Title>Start president election</Title>
+        <Title>Start parliament election</Title>
         <Stack direction={'row'} justifyContent={'space-between'}>
           <Typography variant={'body1'} component={'h2'} color={'red'}>
             {error}
@@ -69,4 +69,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StartPresidentElection);
+export default connect(mapStateToProps, mapDispatchToProps)(StartParliamentElection);

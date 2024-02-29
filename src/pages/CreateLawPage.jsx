@@ -11,6 +11,7 @@ import { loadLawTypes } from '../redux/country/actions';
 import ChangeCountryEmblem from '../components/ParliamentPage/ChangeCountryEmblem';
 import ChangeCountryName from '../components/ParliamentPage/ChangeCountryName';
 import StartPresidentElection from '../components/ParliamentPage/StartPresidentElection';
+import StartParliamentElection from '../components/ParliamentPage/StartParliamentElection';
 
 const CreateLawPage = ({ user, lawTypes, loading }) => {
   const lawTypeIdInput = useRef();
@@ -28,6 +29,7 @@ const CreateLawPage = ({ user, lawTypes, loading }) => {
       1: <ChangeCountryName lawTypeId={e.target.value} />,
       2: <ChangeCountryEmblem lawTypeId={e.target.value} />,
       3: <StartPresidentElection lawTypeId={e.target.value} />,
+      4: <StartParliamentElection lawTypeId={e.target.value} />,
     }[e.target.value];
 
     setSlot(switcher ?? switcher);

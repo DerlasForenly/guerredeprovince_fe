@@ -1,6 +1,12 @@
 import {
   LOAD_ACTIVE_LAWS,
-  LOAD_COUNTRY, LOAD_LAW_TYPES, LOAD_PARLIAMENTARIANS, LOAD_PRESIDENT_ELECTION, SET_LOADING
+  LOAD_COUNTRY,
+  LOAD_LAW_TYPES,
+  LOAD_PARLIAMENT_ELECTION,
+  LOAD_PARLIAMENTARIANS,
+  LOAD_PARTY_ELECTION,
+  LOAD_PRESIDENT_ELECTION,
+  SET_LOADING
 } from './types';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -11,6 +17,8 @@ const mapKeyAndType = {
   presidentElection: LOAD_PRESIDENT_ELECTION,
   parliamentarians: LOAD_PARLIAMENTARIANS,
   lawTypes: LOAD_LAW_TYPES,
+  partyElection: LOAD_PARTY_ELECTION,
+  parliamentElection: LOAD_PARLIAMENT_ELECTION,
 };
 
 export function loadCountry (id) {
@@ -31,6 +39,20 @@ export function loadActivePresidentElection (id) {
   return loadItem(
     `${process.env.REACT_APP_API}/api/elections?country=${id}&status=3&type=1`,
     'presidentElection'
+  )
+}
+
+export function loadActivePartyElection (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/elections?party=${id}&status=3&type=2`,
+    'partyElection'
+  )
+}
+
+export function loadActiveParliamentElection (id) {
+  return loadItem(
+    `${process.env.REACT_APP_API}/api/elections?country=${id}&status=3&type=3`,
+    'parliamentElection'
   )
 }
 

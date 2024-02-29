@@ -1,8 +1,8 @@
 import {
   LOAD_ACTIVE_LAWS,
   LOAD_COUNTRY,
-  LOAD_LAW_TYPES,
-  LOAD_PARLIAMENTARIANS, LOAD_PRESIDENT_ELECTION,
+  LOAD_LAW_TYPES, LOAD_PARLIAMENT_ELECTION,
+  LOAD_PARLIAMENTARIANS, LOAD_PARTY_ELECTION, LOAD_PRESIDENT_ELECTION,
   SET_LOADING
 } from './types';
 
@@ -24,6 +24,10 @@ const initialState = {
     data: [],
   },
   presidentElection: {
+    loading: true,
+    data: false,
+  },
+  parliamentElection: {
     loading: true,
     data: false,
   },
@@ -59,6 +63,14 @@ export const countryReducer = (state = initialState, action) => {
           data: action.payload
         }
       };
+    case LOAD_PARTY_ELECTION:
+      return {
+        ...state,
+        partyElection: {
+          ...state.partyElection,
+          data: action.payload
+        }
+      };
     case LOAD_PARLIAMENTARIANS:
       return {
         ...state,
@@ -68,17 +80,19 @@ export const countryReducer = (state = initialState, action) => {
         }
       };
     case LOAD_PRESIDENT_ELECTION:
-      let data = action.payload[0];
-
-      if (data === [] || data === {} || !data) {
-        data = false;
-      }
-
       return {
         ...state,
         presidentElection: {
           ...state.presidentElection,
-          data: data
+          data: action.payload
+        }
+      };
+    case LOAD_PARLIAMENT_ELECTION:
+      return {
+        ...state,
+        parliamentElection: {
+          ...state.parliamentElection,
+          data: action.payload
         }
       };
     case SET_LOADING:

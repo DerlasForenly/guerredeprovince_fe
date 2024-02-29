@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { loadActivePresidentElection } from '../../redux/country/actions';
 import { useState } from 'react';
 
-function ElectionTableItem ({ user, candidate, election }) {
+function PresidentElectionTableItem ({ user, candidate, election }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -78,4 +78,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ElectionTableItem);
+export default connect(mapStateToProps, mapDispatchToProps)(PresidentElectionTableItem);
