@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { loadTradeOffers, loadUserStorage } from '../../redux/storage/actions';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { clearUser, me } from '../../redux/auth/actions';
 
@@ -18,6 +18,11 @@ function OffersTable ({ user, tradeOffers, me, clearUser }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [filteredTradeOffers, setFilteredTradeOffers] = useState([]);
+
+  useEffect(() => {
+    setFilteredTradeOffers(tradeOffers.filter(offer => offer.user.id !== user.id))
+  }, [tradeOffers, user.id]);
 
   const onTrade = e => {
     e.preventDefault();
@@ -70,7 +75,7 @@ function OffersTable ({ user, tradeOffers, me, clearUser }) {
       </TableHead>
       <TableBody>
         {
-          tradeOffers.map((offer, index) => (
+          filteredTradeOffers.map((offer, index) => (
             <TableRow
               key={offer.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -113,7 +118,7 @@ function OffersTable ({ user, tradeOffers, me, clearUser }) {
                       type={'submit'}
                       disabled={loading}
                     >
-                      {offer.isBuying ? 'Sell' : 'Buy'}
+                      {offer.is_buying ? 'Sell' : 'Buy'}
                     </Button>
                   </Stack>
                 </form>

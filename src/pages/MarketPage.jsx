@@ -27,7 +27,7 @@ const MarketPage = ({ user, storage, storageLoading, tradeOffersLoading, tradeOf
       let total = 0;
 
       tradeOffers.forEach((offer, index) => {
-        if (offer.user.id === user.id) {
+        if (offer.user.id === user.id && offer.is_buying) {
           total += offer.price * offer.quantity
         }
       })
@@ -69,7 +69,7 @@ const MarketPage = ({ user, storage, storageLoading, tradeOffersLoading, tradeOf
                 <Tab label={'World'} value={'1'} />
                 <Tab label={'My'} value={'2'} />
               </TabList>
-              <Typography component={'h2'} variant={'body1'}>Your offers for: {bank} money</Typography>
+              <Typography component={'h2'} variant={'body1'}>Your buy requests on total of {bank} money</Typography>
             </Stack>
           </Box>
           <TabPanel value={'1'} sx={{ p: 1 }}>
