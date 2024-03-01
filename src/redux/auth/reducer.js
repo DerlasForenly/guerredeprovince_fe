@@ -11,7 +11,10 @@ import {
 } from './types';
 
 const initialState = {
-  user: false, tokenType: false, expiresIn: false, errorMessage: null,
+  user: false,
+  tokenType: false,
+  expiresIn: false,
+  errorMessage: null,
 };
 
 export const authReducer = (state = initialState, action) => {

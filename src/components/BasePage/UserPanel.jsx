@@ -65,7 +65,7 @@ const UserPanel = ({ user, clearUser }) => {
     <Paper sx={{ p: 0.5, width: 'fit-content', boxShadow: 'inset 0 0 3px', minWidth: 220 }} elevation={0}>
       <Stack alignItems={'flex-end'}>
         <Stack direction={'row'} spacing={1} alignItems={'center'}>
-          <Typography fontSize={'small'} noWrap>{user.gold}</Typography>
+          <Typography fontSize={'small'} noWrap>{user.money}</Typography>
           <MonetizationOnIcon fontSize={'small'} />
           {/*<Typography variant={'body2'} fontWeight={'bold'}>G</Typography>*/}
         </Stack>

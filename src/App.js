@@ -36,6 +36,7 @@ import ParliamentPage from './pages/ParliamentPage';
 
 import { loadResources, setLoading } from './redux/app/actions';
 import CreateLawPage from './pages/CreateLawPage';
+import CreateOffer from './pages/CreateOffer';
 
 function App ({ resources, loadResources, loading, setLoading }) {
   useEffect(() => {
@@ -171,6 +172,11 @@ function App ({ resources, loadResources, loading, setLoading }) {
           path="/market"
           exact
           element={<GuardedPage element={<MarketPage />} />}
+        />
+        <Route
+          path="/market/create-offer"
+          exact
+          element={<GuardedPage element={<CreateOffer />} />}
         />
         <Route
           path="/party"
