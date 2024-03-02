@@ -16,7 +16,7 @@ function PartyTableItem ({ user, party }) {
 
     axios({
       method: 'POST',
-      url: `${process.env.REACT_APP_API}/api/parties/${party.id}/requests`,
+      url: `${process.env.REACT_APP_API}/api/requests/parties/${party.id}`,
       headers: {
         Authorization: `Bearer` + Cookies.get('access_token')
       }

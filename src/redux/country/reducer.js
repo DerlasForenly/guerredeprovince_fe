@@ -68,7 +68,7 @@ export const countryReducer = (state = initialState, action) => {
         ...state,
         partyElection: {
           ...state.partyElection,
-          data: action.payload
+          data: action.payload[0]
         }
       };
     case LOAD_PARLIAMENTARIANS:
@@ -84,7 +84,7 @@ export const countryReducer = (state = initialState, action) => {
         ...state,
         presidentElection: {
           ...state.presidentElection,
-          data: action.payload
+          data: action.payload[0]
         }
       };
     case LOAD_PARLIAMENT_ELECTION:
@@ -92,7 +92,7 @@ export const countryReducer = (state = initialState, action) => {
         ...state,
         parliamentElection: {
           ...state.parliamentElection,
-          data: action.payload
+          data: action.payload[0]
         }
       };
     case SET_LOADING:

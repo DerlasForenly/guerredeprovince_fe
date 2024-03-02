@@ -8,10 +8,10 @@ function ParliamentElectionTable ({ user, election, loading }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user?.citizenship?.id) {
+    if (user && user?.citizenship?.id) {
       dispatch(loadActiveParliamentElection(user.citizenship.id)).finally(() => {});
     }
-  }, [dispatch, user.citizenship.id]);
+  }, [dispatch, user, user?.citizenship?.id]);
 
   if (loading) {
     return <LinearProgress />;

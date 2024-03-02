@@ -8,10 +8,10 @@ function PartyElectionTable ({ user, election, loading }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user?.political_party?.id) {
+    if (user && user?.political_party?.id) {
       dispatch(loadActivePartyElection(user.political_party.id)).finally(() => {});
     }
-  }, [dispatch, user.political_party.id]);
+  }, [dispatch, user]);
 
   if (loading) {
     return <LinearProgress />;
