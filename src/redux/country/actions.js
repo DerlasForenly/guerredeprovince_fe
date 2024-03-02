@@ -37,7 +37,7 @@ export function loadActiveLaws (id) {
 
 export function loadActivePresidentElection (id) {
   return loadItem(
-    url,
+    `${process.env.REACT_APP_API}/api/elections?country=${id}&status=3&type=1`,
     'presidentElection'
   )
 }
