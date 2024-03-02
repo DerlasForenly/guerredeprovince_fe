@@ -3,8 +3,6 @@ import Paper from '@mui/material/Paper';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
 
 function NoJobCard ({ user }) {
