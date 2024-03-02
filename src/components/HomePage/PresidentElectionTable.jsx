@@ -9,10 +9,10 @@ function PresidentElectionTable ({ user, election, loading }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user) {
+    if (user?.citizenship?.id) {
       dispatch(loadActivePresidentElection(user.citizenship.id)).finally(() => {});
     }
-  }, [dispatch, user]);
+  }, [dispatch, user.citizenship.id]);
 
   if (loading) {
     return <LinearProgress />;

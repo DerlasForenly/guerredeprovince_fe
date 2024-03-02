@@ -25,7 +25,9 @@ function ParliamentElectionTableItem ({ user, candidate, election }) {
       },
     }).then((response) => {
       console.log(response.data);
-      dispatch(loadActiveParliamentElection(user.citizenship.id)).finally(() => {})
+      if (user?.citizenship?.id) {
+        dispatch(loadActiveParliamentElection(user.citizenship.id)).finally(() => {})
+      }
     }).catch((error) => {
 
     }).finally(() => {

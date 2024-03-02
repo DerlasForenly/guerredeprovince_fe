@@ -25,7 +25,9 @@ function PresidentElectionTableItem ({ user, candidate, election }) {
       },
     }).then((response) => {
       console.log(response.data);
-      dispatch(loadActivePresidentElection(user.citizenship.id)).finally(() => {})
+      if (user?.citizenship?.id) {
+        dispatch(loadActivePresidentElection(user.citizenship.id)).finally(() => {})
+      }
     }).catch((error) => {
 
     }).finally(() => {

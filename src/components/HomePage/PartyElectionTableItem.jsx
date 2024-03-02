@@ -25,7 +25,9 @@ function PartyElectionTableItem ({ user, candidate, election }) {
       },
     }).then((response) => {
       console.log(response.data);
-      dispatch(loadActivePartyElection(user.political_party.id)).finally(() => {})
+      if (user?.political_party?.id) {
+        dispatch(loadActivePartyElection(user.political_party.id)).finally(() => {})
+      }
     }).catch((error) => {
 
     }).finally(() => {
