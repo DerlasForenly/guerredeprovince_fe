@@ -44,8 +44,7 @@ const PartyPage = ({ user }) => {
             user.political_party || loading === false ?
               <Stack>
                 <Title>My party</Title>
-                <Typography component={'h2'} variant={'body1'}>{politicalParty.name}</Typography>
-                <Typography component={'h2'} variant={'body1'}>{politicalParty.tag}</Typography>
+                <Typography component={'h2'} variant={'body1'}>[{politicalParty.tag}] {politicalParty.name}</Typography>
                 <Typography component={'h2'} variant={'body1'}>{politicalParty.description}</Typography>
                 <ButtonGroup variant="text" aria-label="text button group">
                   <Button fullWidth>
