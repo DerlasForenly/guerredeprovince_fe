@@ -22,8 +22,6 @@ function PresidentElectionTable ({ user, election, loading }) {
     return <Typography component={'h2'} variant={'body2'}>There is no active election</Typography>
   }
 
-  console.log(election)
-
   return (
     <Table sx={{ width: '100%' }} size="small" aria-label="simple table">
       <TableHead>

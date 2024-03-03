@@ -70,7 +70,7 @@ export function loadLawTypes () {
   )
 }
 
-function setLoading (key, value) {
+export function setLoading (key, value) {
   return {
     type: SET_LOADING,
     payload: {
